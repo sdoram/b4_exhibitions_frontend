@@ -1,23 +1,32 @@
-<nav class="navbar navbar-expand-lg bg-light mb-5">
+<head>
+  <!-- 나중에 js를 통해서 다른 html의 head에 집어 넣기 -->
+  <!--내비바 아이콘 css -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <!--내비바 css  -->
+  <link rel="stylesheet" href="./static/css/navbar.css">
+</head>
+
+<nav class="navbar navbar-expand-lg mb-5" style="background-color: #6358DC;">
+
     <div class="container-fluid">
-        <img src='static/img/logo.png'
-      <a class="navbar-brand" href="/">지금은 전시상황</a>
+      <img src='static/img/logo.png'  class="logo">
+      <span class="fw-bold ms-2 text-gradient navbar-brand ">지금은 전시상황</span>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-left">
         </ul>
         <ul class="navbar-nav ml-auto" id="navbar-right">
             <li class="nav-item" id="login-button">
-                <a class="nav-link" id="category-button">카테고리</a>
+                <button class="text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined" id="category-button">list 카테고리</button>
             </li>
             <li class="nav-item" id="login-button">
-              <a class="nav-link" href="../templates/signin.html" id="login-button">로그인</a>
+              <button class="text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined" href="../templates/signin.html" id="login-button">person 로그인</button>
             </li>
             <li class="nav-item" id="signup-button">
-                <a class="nav-link" href="../templates/signup.html" id="signup-button">회원가입</a>
+                <button class="text-warning ms-5 me-5 btn btn-light shadow-warning material-symbols-outlined" href="../templates/signup.html" id="signup-button">person 회원가입</button>
             </li>
         </ul>
       </div>
