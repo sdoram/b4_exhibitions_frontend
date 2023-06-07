@@ -1,0 +1,1 @@
+console.log('exhibition-posting 연결')

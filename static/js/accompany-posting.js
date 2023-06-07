@@ -1,0 +1,1 @@
+console.log('accompany-posting 연결')

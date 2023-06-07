@@ -1,0 +1,1 @@
+console.log('exhibition-detail 연결')
