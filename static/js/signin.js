@@ -3,7 +3,7 @@ async function handleSignIn() {
     console.log('로그인 버튼')
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const response = await fetch(`${backend_base_url}/users/signin/`, {
+    const response = await fetch(`${backendBaseUrl}/users/signin/`, {
         headers: {
             'content-type': 'application/json',
         },
