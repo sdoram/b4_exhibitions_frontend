@@ -1,32 +1,26 @@
-<head>
-  <!-- 나중에 js를 통해서 다른 html의 head에 집어 넣기 -->
-  <!--내비바 아이콘 css -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <!--내비바 css  -->
-  <link rel="stylesheet" href="./static/css/navbar.css">
-</head>
-
 <nav class="navbar navbar-expand-lg mb-5" style="background-color: #6358DC;">
 
     <div class="container-fluid">
-      <img src='static/img/logo.png'  class="logo">
+    <a href='/'>
+      <img src='https://github.com/sdoram/sdoram/assets/108051577/8a33de4f-3320-4f9a-87bf-0e05336733a5' class="logo">
       <span class="fw-bold ms-2 text-gradient navbar-brand ">지금은 전시상황</span>
+    </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-left">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbarLeft">
         </ul>
-        <ul class="navbar-nav ml-auto" id="navbar-right">
-            <li class="nav-item" id="login-button">
-                <button class="text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined" id="category-button">list 카테고리</button>
+        <ul class="navbar-nav ml-auto" id="navbarRight">
+            <li class="nav-item">
+                <a class="text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined" id="categoryButton">list 카테고리</a>
             </li>
-            <li class="nav-item" id="login-button">
-              <button class="text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined" href="../templates/signin.html" id="login-button">person 로그인</button>
+            <li class="nav-item">
+              <a class="text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined" href="../templates/signin.html" id="signInButton">person 로그인</a>
             </li>
-            <li class="nav-item" id="signup-button">
-                <button class="text-warning ms-5 me-5 btn btn-light shadow-warning material-symbols-outlined" href="../templates/signup.html" id="signup-button">person 회원가입</button>
+            <li class="nav-item">
+                <a class="text-warning ms-5 me-5 btn btn-light shadow-warning material-symbols-outlined" href="../templates/signup.html" id="signUpButton">person 회원가입</a>
             </li>
         </ul>
       </div>
