@@ -21,3 +21,16 @@ export async function signUpAPI(data) {
     return { response, responseJson };
 }
 
+// 로그인 API
+export async function signInAPI(data) {
+    const response = await fetch(`${backendBaseURL}/users/signin/`, {
+        headers: {
+            'content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(data)
+    });
+    console.log(response, 'signInAPI');
+    const responseJson = await response.json();
+    return { response, responseJson };
+}
