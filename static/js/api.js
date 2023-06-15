@@ -1,7 +1,7 @@
 console.log('api 연결')
 
 export const frontendBaseURL = "http://127.0.0.1:5500";
-const backendBaseURL = "http://127.0.0.1:8000/api";
+export const backendBaseURL = "http://127.0.0.1:8000/api";
 
 export const payload = localStorage.getItem("payload")
 const payloadParse = JSON.parse(payload);
@@ -33,4 +33,23 @@ export async function signInAPI(data) {
     console.log(response, 'signInAPI');
     const responseJson = await response.json();
     return { response, responseJson };
+}
+
+// 구글 로그인 API
+export async function googleAPI(google_token) {
+    if (google_token == undefined) {
+        const response = await fetch(`${backendBaseURL}/users/google/`, { method: 'GET' })
+        const responseJson = await response.json();
+        return responseJson;
+    } else {
+	    const response = await fetch(`${backendBaseURL}/users/google/`, {
+		    method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ access_token: google_token })
+	    });
+        const responseJson = await response.json();
+        return { response, responseJson };
+    }
 }
