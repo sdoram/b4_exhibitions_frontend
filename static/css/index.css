@@ -1,17 +1,17 @@
 /* 웰컴세트 */
-.welcome_set {
+.welcome-set {
     margin-left: 60px;
 }
-.welcome_greeting {
+.welcome-greeting {
     font-weight: bold;
 }
-.welcome_title {
+.welcome-title {
     font-weight: bold;
     color: #6358DC;
 }
 
 /* 돋보기와 검색창 */
-.searching_set {
+.searching-set {
     margin-top: 40px;
     display: flex;
     flex-direction: row;
@@ -28,7 +28,7 @@
     background-position: center;
     margin-right: 10px;
 }
-.searching_bar {
+.searching-bar {
     border: 5px solid #6358DC;
     border-radius: 10px;
     width: 350px;
@@ -38,21 +38,21 @@
 }
 
 /* 전시회 부분 */
-.all_exhibitions_organizer {
+.all-exhibitions-organizer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 0 50px 0 50px;
     justify-content: flex-start;
 }
-.exhibition_set {
+.exhibition-set {
     margin-top: 100px;
     margin-right: 50px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
 }
-.exhibition_img_box {
+.exhibition-img-box {
     width:350px;
     height:350px;
     overflow:hidden;
@@ -60,17 +60,17 @@
     border: 1px solid #6358DC;
     border-radius: 10px;
 }
-.exhibition_img {
+.exhibition-img {
     width:100%;
     height:100%;
     object-fit:cover;
 }
-.exhibition_info_box {
+.exhibition-info-box {
     color: #6358DC;
     font-weight: bold;
     width: 350px;
 }
-.exhibition_info_box > span {
+.exhibition-info-box > span {
     display: flex;
     flex-direction: column;
     margin-top: 5px;
@@ -78,7 +78,7 @@
     overflow: hidden;
     white-space: nowrap;
 }
-.heart_set {
+.heart-set {
     display: flex;
     flex-direction: row;
     margin-top: 5px;
@@ -92,11 +92,11 @@
     margin-right: 7px;
     filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
 }
-.sign_set {
+.sign-set {
     display: flex;
     flex-direction: row;
 }
-.sign_set > * {
+.sign-set > * {
     margin-top: 10px;
     margin-right: 7px;
     width: 147px;
@@ -106,9 +106,9 @@
     border: 0px solid;
     border-radius: 10px;
 }
-.detail_button:hover {
+.detail-button:hover {
     background-color: gray;
 }
-.reserve_button:hover {
+.reserve-button:hover {
     background-color: gray;
 }
