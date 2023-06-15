@@ -1,7 +1,16 @@
 console.log('signin 연결')
-import { signInAPI, frontendBaseURL, payload } from "./api.js";
+import { signInAPI, googleAPI, frontendBaseURL, payload } from "./api.js";
 
+// 로그인 확인
+function checkSignIn() {
+    console.log('checkSignIn 연결 확인')
+    if (payload) {
+        window.location.replace(`${frontendBaseURL}/`)
+    }
+}
+checkSignIn()
 
+// 일반 로그인
 function handleSignIn() {
     console.log('로그인 버튼')
     const email = document.getElementById('email').value;
@@ -35,11 +44,14 @@ function handleSignIn() {
 // 로그인 function 실행
 document.getElementById("signInButton").addEventListener("click", handleSignIn);
 
-// 로그인 확인
-function checkSignIn() {
-    console.log('checkSignIn 연결 확인')
-    if (payload) {
-        window.location.replace(`${frontendBaseURL}/`)
-    }
+// 구글 로그인
+async function googleSignin() {
+    googleAPI().then((responseJson) => {
+        const google_id = responseJson
+        const scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+        const param = `scope=${scope}&include_granted_scopes=true&response_type=token&state=pass-through value&prompt=consent&client_id=${google_id}&redirect_uri=${frontendBaseURL}`
+        window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${param}`
+    })    
 }
-checkSignIn()
+// 구글 로그인 function 실행
+document.getElementById("googleSigninBtn").addEventListener("click", googleSignin);
