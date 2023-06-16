@@ -42,14 +42,23 @@ export async function googleAPI(google_token) {
         const responseJson = await response.json();
         return responseJson;
     } else {
-	    const response = await fetch(`${backendBaseURL}/users/google/`, {
-		    method: "POST",
+        const response = await fetch(`${backendBaseURL}/users/google/`, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ access_token: google_token })
-	    });
+        });
         const responseJson = await response.json();
         return { response, responseJson };
     }
+}
+
+// 메인 페이지 전시회 전체 조회 API
+export async function getExhibitionsAPI() {
+    const response = await fetch(`${backendBaseURL}/exhibitions/`, {
+    })
+    const responseJson = await response.json();
+    console.log(responseJson)
+    return { response, responseJson };
 }
