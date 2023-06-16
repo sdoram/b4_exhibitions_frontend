@@ -56,9 +56,20 @@ export async function googleAPI(google_token) {
 
 // 메인 페이지 전시회 전체 조회 API
 export async function getExhibitionsAPI() {
-    const response = await fetch(`${backendBaseURL}/exhibitions/`, {
-    })
+    const response = await fetch(`${backendBaseURL}/exhibitions/`)
     const responseJson = await response.json();
     console.log(responseJson)
+    return { response, responseJson };
+}
+
+
+// 전시회 좋아요 API
+export async function exhibitionLikeAPI(exhibition_id) {
+    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}/like/`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` }
+    })
+    const responseJson = await response.json();
+    console.log(response, responseJson)
     return { response, responseJson };
 }
