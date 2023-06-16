@@ -53,6 +53,7 @@ function heart(exhibition_id) {
 
 function exhibitionDetail(exhibition_id) {
     console.log('전시회 디테일', exhibition_id)
+    window.location.href = `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`
 }
 
 window.onload = function loadExhibitions() {
@@ -116,7 +117,7 @@ window.onload = function loadExhibitions() {
             exhibitionHeartNum.setAttribute("class", "heart-num")
             exhibitionHeartNum.setAttribute("id", `heartNum${exhibition.id}`)
             // 백엔드 정보로 수정 필요 
-            exhibitionHeartNum.innerText = '1'
+            exhibitionHeartNum.innerText = exhibition.likes
             exhibitionHeartSet.appendChild(exhibitionHeartNum)
 
             // 상세 & 예약 박스

@@ -62,6 +62,12 @@ export async function getExhibitionsAPI() {
     return { response, responseJson };
 }
 
+// 전시회 상세 페이지 API
+export async function getExhibitionAPI(exhibition_id) {
+    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}`)
+    const responseJson = await response.json();
+    return { response, responseJson };
+}
 
 // 전시회 좋아요 API
 export async function exhibitionLikeAPI(exhibition_id) {
@@ -71,5 +77,6 @@ export async function exhibitionLikeAPI(exhibition_id) {
     })
     const responseJson = await response.json();
     console.log(response, responseJson)
+
     return { response, responseJson };
 }
