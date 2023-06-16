@@ -12,10 +12,19 @@
 
 /* 돋보기와 검색창 */
 .searching-set {
-    margin-top: 40px;
+    margin-top: 80px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
+    padding: 0 0 0 60px;
+}
+.title-show-exh {
+    color: #6358DC;
+    font-size: 40px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .magnifier-img {
     width: 40px;
@@ -27,6 +36,7 @@
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 10px;
+    margin-left: auto;
 }
 .searching-bar {
     border: 5px solid #6358DC;
@@ -44,9 +54,10 @@
     flex-wrap: wrap;
     padding: 0 50px 0 50px;
     justify-content: flex-start;
+    margin-top: -50px;
 }
 .exhibition-set {
-    margin-top: 50px;
+    margin-top: 100px;
     margin-bottom: 50px;
     margin-right: 50px;
     display: flex;
@@ -112,4 +123,25 @@
 }
 .reserve-button:hover {
     background-color: gray;
+}
+.new-exh-button {
+    width: 20%;
+    height: 7%;
+    background-color: white;
+    border: 0.5vmin solid #6358DC;
+    border-radius: 2vmin;
+    color: #6358DC;
+    font-weight: bold;
+    font-size: 3vmin;
+
+    /* 스크롤 따라다니게 하는 코드 */
+    position:fixed;
+    display:inline-block;
+    right:40%; /* 창에서 오른쪽 길이 */
+    top:90%; /* 창에서 위에서 부터의 높이 */
+
+    /* 모바일창 좁으면 반응형 */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
