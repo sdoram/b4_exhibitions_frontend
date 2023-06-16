@@ -1,0 +1,136 @@
+.all-items-organizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* margin-right: 10%; */
+}
+
+/* 웰컴세트 */
+.welcome-set {
+}
+.welcome-greeting {
+    font-weight: bold;
+}
+.welcome-title {
+    font-weight: bold;
+    color: #6358DC;
+}
+
+/* 구글 로그인 버튼 */
+.google-btn {
+    margin-top: 50px;
+    width: 35%;
+    height: 100px;
+    border: 0px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px grey;
+}
+.google-btn-img {
+    width: 50%;
+}
+
+/* 구분선 */
+.sepline-wraper{
+    margin: 40px 0 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.sepline-wraper > span {
+    margin: 0 10px 0 10px;
+    color: #6358DC;
+    font-weight: bold;
+}
+.sepline {
+    flex:auto;
+    color: #6358DC;
+    height: 3px;
+    width: 200px;
+}
+
+/* 사용자 입력칸들 */
+.signup-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.writing-info {
+    color: red;
+    margin-left: 10px;
+    margin-right: auto;
+}
+.signup-inputs > * {
+    margin-bottom: 30px;
+}
+.signup-inputs > span {
+    margin-top: -7px;
+}
+.signup-inputs > input {
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    color: #6358DC;
+    width: 65vmin;
+    height: 8vmin;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.signup-inputs > input::placeholder {
+    color: #6358DC;
+    padding-left: 10px;
+    font-weight: bold;
+}
+.signup-bio {
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    color: #6358DC;
+    width: 65vmin;
+    height: 40vmin;
+}
+.signup-bio::placeholder {
+    color: #6358DC;
+    padding-left: 10px;
+    font-weight: bold;
+}
+.profile-image-info {
+    color: #6358DC;
+    font-weight: bold;
+    margin-bottom: 0px;
+    float: left;
+    margin-left: 10px;
+    margin-right: auto;
+}
+.select-gender-info {
+    color: #6358DC;
+    font-weight: bold;
+    margin-bottom: 0px;
+    float: left;
+    margin-left: 10px;
+    margin-right: auto;
+}
+.select-gender {
+    color: #6358DC;
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    width: 65vmin;
+    height: 8vmin;
+}
+.signup-inputs > button {
+    margin: 30px 0 200px 0;
+    background-color: #6358DC;
+    border: 0px solid;
+    border-radius: 1vmin;
+    width: 30vmin;
+    height: 8vmin;
+    color: white;
+    font-weight: bold;
+    font-size: 3vmin;
+}
+.signup-inputs > button:hover {
+    background-color: grey;
+}
+.signup-inputs > .input-bio {
+    height: 40vmin;
+}
