@@ -1,5 +1,5 @@
 console.log('index 연결')
-import { googleAPI, frontendBaseURL, payload, getExhibitionsAPI, backendBaseURL } from "./api.js";
+import { googleAPI, frontendBaseURL, payload, getExhibitionsAPI, exhibitionLikeAPI } from "./api.js";
 
 // 로컬 스토리지에 jwt 토큰 저장하기
 function setLocalStorage(responseJson) {
@@ -34,16 +34,20 @@ if (payload) {
 
 // 좋아요 하트 관련 코드
 let fullHeart = false;
-function heart() {
-    const heartElement = document.querySelector('#heart');
-    if (!fullHeart) {
-        heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
-        alert("좋아요!");
-    } else {
-        heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
-        alert("좋아요 취소!");
-    }
-    fullHeart = !fullHeart;
+function heart(exhibition_id) {
+    exhibitionLikeAPI(exhibition_id.split('like')[1]).then(({ response, responseJson }) => {
+        const heartElement = document.querySelector(`#${exhibition_id}`);
+        const heartNum = document.querySelector(`#heartNum${exhibition_id.split('like')[1]}`)
+        console.log(heartNum)
+        if (response.status == 201) {
+            heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+            heartNum.innerText = responseJson.likes
+        } else {
+            heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
+            heartNum.innerText = responseJson.likes
+        }
+        fullHeart = !fullHeart;
+    })
 }
 
 
@@ -110,6 +114,7 @@ window.onload = function loadExhibitions() {
 
             const exhibitionHeartNum = document.createElement("span")
             exhibitionHeartNum.setAttribute("class", "heart-num")
+            exhibitionHeartNum.setAttribute("id", `heartNum${exhibition.id}`)
             // 백엔드 정보로 수정 필요 
             exhibitionHeartNum.innerText = '1'
             exhibitionHeartSet.appendChild(exhibitionHeartNum)
