@@ -47,9 +47,9 @@ function heart() {
 }
 
 
-// function exhibitionDetail(exhibition_id) {
-//     console.log('전시회 디테일', exhibition_id)
-// }
+function exhibitionDetail(exhibition_id) {
+    console.log('전시회 디테일', exhibition_id)
+}
 
 window.onload = function loadExhibitions() {
     getExhibitionsAPI().then(({ response, responseJson }) => {
@@ -59,7 +59,6 @@ window.onload = function loadExhibitions() {
         exhibitionsDATA.forEach(exhibition => {
             const exhibitionSet = document.createElement("div");
             exhibitionSet.setAttribute("class", "exhibition-set");
-
 
             const exhibitionImgBox = document.createElement("div");
             exhibitionImgBox.setAttribute("class", "exhibition-img-box")
@@ -103,6 +102,10 @@ window.onload = function loadExhibitions() {
 
             const exhibitionHeart = document.createElement("div")
             exhibitionHeart.setAttribute("class", "heart")
+            exhibitionHeart.setAttribute("id", `like${exhibition.id}`)
+            exhibitionHeart.addEventListener("click", function () {
+                heart(this.id)
+            })
             exhibitionHeartSet.appendChild(exhibitionHeart)
 
             const exhibitionHeartNum = document.createElement("span")
@@ -118,6 +121,11 @@ window.onload = function loadExhibitions() {
 
             const exhibitionDetailButton = document.createElement("button")
             exhibitionDetailButton.setAttribute("class", "detail-button")
+            exhibitionDetailButton.setAttribute("exhibition-id", exhibition.id)
+            exhibitionDetailButton.setAttribute("id", exhibition.id)
+            exhibitionDetailButton.addEventListener("click", function () {
+                exhibitionDetail(this.id)
+            })
             exhibitionDetailButton.innerText = '전시상세'
             exhibitionSignSet.appendChild(exhibitionDetailButton)
 
