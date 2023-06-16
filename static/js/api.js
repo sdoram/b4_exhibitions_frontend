@@ -62,3 +62,10 @@ export async function getExhibitionsAPI() {
     console.log(responseJson)
     return { response, responseJson };
 }
+
+// 전시회 상세 페이지 API
+export async function getExhibitionAPI(exhibition_id) {
+    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}`)
+    const responseJson = await response.json();
+    return { response, responseJson };
+}
