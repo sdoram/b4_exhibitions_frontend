@@ -14,6 +14,7 @@
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!--내비바 css  -->
     <link rel="stylesheet" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="../static/css/my-page.css">
     <script type="module" src="../static/js/navbar.js"></script>
     <script type="module" src="../static/js/my-page.js"></script>
     <title>Document</title>
@@ -21,6 +22,132 @@
 
 <body>
     <header></header>
+    <h1 class="welcome-title">마이페이지</h1>
+    <div class="user-info-organizer">
+        <div class="profile-part">
+            <img class="profile-img" src="../static/img/default-img.jpg">
+        </div>
+        <div class="user-info-part">
+            <div class="nickname-box">
+                <span class="blue-words">유저아이디</span><span class="black-words">하얀솜사탕</span>
+            </div>
+            <div class="since-together-box">
+                <span class="blue-words">저희와 함께한 시간</span><span class="black-words">7452일</span>
+            </div>
+            <div class="bio-box">
+                <span class="blue-words">자기소개</span><span class="black-words">안녕하세요! 하얀솜사탕입니다! 스무살때부터 미술이 좋아서 아마추어 미술작가로 활동했어요!</span>
+            </div>
+        </div>
+        <div class="btns-part">
+            <button>회원정보 수정하기</button>
+            <button>회원 탈퇴하기</button>
+        </div>
+    </div>
+    <h2 class="title-for-exh">좋아요한 전시 목록</h2>
+    <div class="all-exhibitions-organizer" id="exhibitionList">
+        <div class="exhibition-set">
+            <div class="exhibition-img-box">
+                <img class="exhibition-img" src="" onerror="this.src='../static/img/default-img.jpg'">
+            </div>
+            <div class="exhibition-info-box">
+                <span class="exhibition-title">전시 이름</span>
+                <span class="exhibition-period">전시 기간</span>
+                <div class="heart-set">
+                    <div class="heart" id="heart" onclick='heart()'></div>
+                    <span class="heat-num">999</span>
+                </div>
+                <div class="sign-set">
+                    <button class="detail-button">전시상세</button>
+                    <button class="reserve-button">예약하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="exhibition-set">
+            <div class="exhibition-img-box">
+                <img class="exhibition-img" src="" onerror="this.src='../static/img/default-img.jpg'"></img>
+            </div>
+            <div class="exhibition-info-box">
+                <span class="exhibition-title">전시 이름</span>
+                <span class="exhibition-period">전시 기간</span>
+                <div class="heart-set">
+                    <div class="heart" id="heart" onclick='heart()'></div>
+                    <span class="heat-num">999</span>
+                </div>
+                <div class="sign-set">
+                    <button class="detail-button">전시상세</button>
+                    <button class="reserve-button">예약하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="exhibition-set">
+            <div class="exhibition-img-box">
+                <img class="exhibition-img" src="" onerror="this.src='../static/img/default-img.jpg'"></img>
+            </div>
+            <div class="exhibition-info-box">
+                <span class="exhibition-title">전시 이름</span>
+                <span class="exhibition-period">전시 기간</span>
+                <div class="heart-set">
+                    <div class="heart" id="heart" onclick='heart()'></div>
+                    <span class="heat-num">999</span>
+                </div>
+                <div class="sign-set">
+                    <button class="detail-button">전시상세</button>
+                    <button class="reserve-button">예약하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="exhibition-set">
+            <div class="exhibition-img-box">
+                <img class="exhibition-img" src="" onerror="this.src='../static/img/default-img.jpg'"></img>
+            </div>
+            <div class="exhibition-info-box">
+                <span class="exhibition-title">전시 이름</span>
+                <span class="exhibition-period">전시 기간</span>
+                <div class="heart-set">
+                    <div class="heart" id="heart" onclick='heart()'></div>
+                    <span class="heat-num">999</span>
+                </div>
+                <div class="sign-set">
+                    <button class="detail-button">전시상세</button>
+                    <button class="reserve-button">예약하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="exhibition-set">
+            <div class="exhibition-img-box">
+                <img class="exhibition-img" src="" onerror="this.src='../static/img/default-img.jpg'"></img>
+            </div>
+            <div class="exhibition-info-box">
+                <span class="exhibition-title">전시 이름</span>
+                <span class="exhibition-period">전시 기간</span>
+                <div class="heart-set">
+                    <div class="heart" id="heart" onclick='heart()'></div>
+                    <span class="heat-num">999</span>
+                </div>
+                <div class="sign-set">
+                    <button class="detail-button">전시상세</button>
+                    <button class="reserve-button">예약하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="exhibition-set">
+            <div class="exhibition-img-box">
+                <img class="exhibition-img" src="" onerror="this.src='../static/img/default-img.jpg'"></img>
+            </div>
+            <div class="exhibition-info-box">
+                <span class="exhibition-title">전시 이름</span>
+                <span class="exhibition-period">전시 기간</span>
+                <div class="heart-set">
+                    <div class="heart" id="heart" onclick='heart()'></div>
+                    <span class="heat-num">999</span>
+                </div>
+                <div class="sign-set">
+                    <button class="detail-button">전시상세</button>
+                    <button class="reserve-button">예약하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
