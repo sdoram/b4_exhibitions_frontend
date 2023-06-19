@@ -1,5 +1,5 @@
 console.log('index 연결')
-import { frontendBaseURL, getExhibitionsAPI, exhibitionLikeAPI } from "./api.js";
+import { frontendBaseURL, getExhibitionsAPI, exhibitionLikeAPI, myPageAPI, payload, payloadParse } from "./api.js";
 
 // 좋아요 하트 관련 코드
 let fullHeart = false;
@@ -82,12 +82,25 @@ window.onload = function loadExhibitions() {
             })
             exhibitionHeartSet.appendChild(exhibitionHeart)
 
+            // 전시회 좋아요 개수
             const exhibitionHeartNum = document.createElement("span")
             exhibitionHeartNum.setAttribute("class", "heart-num")
             exhibitionHeartNum.setAttribute("id", `heartNum${exhibition.id}`)
             // 백엔드 정보로 수정 필요 
             exhibitionHeartNum.innerText = exhibition.likes
             exhibitionHeartSet.appendChild(exhibitionHeartNum)
+
+            // 전시회 좋아요 하트색 세팅
+            if (payload) {
+                myPageAPI(payloadParse.user_id).then(({ responseJson }) => {
+                    responseJson.exhibition_likes.forEach((obj) => {
+                        if (exhibition.id == obj.id){
+                            const heartElement = document.querySelector(`#like${exhibition.id}`);
+                            heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+                        }
+                    })
+                })
+            }
 
             // 상세 & 예약 박스
             const exhibitionSignSet = document.createElement('div')
