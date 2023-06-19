@@ -96,10 +96,21 @@ export async function withdrawalAPI(user_id) {
             method: "DELETE",
             headers: { "Authorization": `Bearer ${token}` }
         })
-        const responseJson = response.json();
+        const responseJson = await response.json();
         console.log(response, responseJson)
         return { response, responseJson }
     } else {
-        alert('본인이 아닙니다')
+        return alert('본인이 아닙니다')
     }
+}
+
+export async function userInfoEditAPI(data) {
+    const response = await fetch(`${backendBaseURL}/users/`, {
+        method: "PATCH",
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    console.log(response, responseJson)
+    return { response, responseJson }
 }
