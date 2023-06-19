@@ -5,12 +5,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/accompany-posting.css">
     <script type="module" src="../static/js/accompany-posting.js"></script>
     <title>Document</title>
 </head>
 
 <body>
-
+    <div class="all-items-organizer">
+        <h1 class="welcome-title">동행글 작성/수정 하기</h1>
+        <form class="gray-box">
+            <div class="purple-box">
+                <div class="row1-in-purple">
+                    <div class="nickname">
+                        로그인 닉네임
+                    </div>
+                    <div class="goal-number">
+                        목표인원 <input type="number" class="goal-num" id="personnel">
+                    </div>
+                    <div class="set-date">
+                        동행일 <input type="datetime-local" id="startTime">~<input type="datetime-local" id="endTime">
+                    </div>
+                </div>
+                <div class="row2-in-purple">
+                    <div class="accompany-content"><p class="content-header">이런 분을 구합니다!</p><textarea class="acc-content" id="" placeholder="내용을 입력하세요"></textarea></div>
+                </div>
+                <div class="row3-in-purple">
+                    <button type="button" class="acc-posting-btn">입력완료</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
