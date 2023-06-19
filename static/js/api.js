@@ -4,7 +4,7 @@ export const frontendBaseURL = "http://127.0.0.1:5500";
 export const backendBaseURL = "http://127.0.0.1:8000/api";
 
 export const payload = localStorage.getItem("payload")
-const payloadParse = JSON.parse(payload);
+export const payloadParse = JSON.parse(payload);
 const token = localStorage.getItem("access");
 
 // 회원가입 API
@@ -78,5 +78,13 @@ export async function exhibitionLikeAPI(exhibition_id) {
     const responseJson = await response.json();
     console.log(response, responseJson)
 
+    return { response, responseJson };
+}
+
+// 마이 페이지 API
+export async function myPageAPI(user_id) {
+    const response = await fetch(`${backendBaseURL}/users/${user_id}`)
+    const responseJson = await response.json();
+    console.log(response, responseJson);
     return { response, responseJson };
 }
