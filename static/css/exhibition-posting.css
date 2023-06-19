@@ -1,0 +1,117 @@
+/* 페이지 타이틀 */
+.welcome-title{
+    font-weight: bold;
+    color: #6358DC;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+/* 전체 세로로 좌측 정렬 */
+.all-items-organizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.exh-category {
+    margin-top: 6vmin;
+    margin-right: 20vmin;
+    color: #6358DC;
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    width: 40vmin;
+    height: 5.5vmin;
+    font-weight: bold;
+    text-align: start;
+    text-indent: 2vmin;
+}
+.exh-category > option {
+    font-weight: bold;
+    font-size: 20px;
+}
+/* 전시 제목 */
+.exh-title {
+    margin-top: 2vmin;
+    color: #6358DC;
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    width: 60vmin;
+    height: 6vmin;
+    text-indent: 2vmin;
+}
+.exh-title::placeholder {
+    color: #6358DC;
+    font-weight: bold;
+}
+/* 전시 위치 주소 */
+.exh-location{
+    margin-top: 2vmin;
+    color: #6358DC;
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    width: 60vmin;
+    height: 6vmin;
+    text-indent: 2vmin;
+    margin-bottom: 5vmin;
+}
+.exh-location::placeholder {
+    color: #6358DC;
+    font-weight: bold;
+}
+/* 전시 시작일과 종료일 */
+.all-items-organizer > span {
+    color: #6358DC;
+    font-weight: bold;
+    margin-top: 3vmin;
+    margin-right: 35vmin;
+}
+.exh-start-date {
+    color: #6358DC;
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    width: 60vmin;
+    height: 6vmin;
+    text-indent: 1vmin;
+}
+.exh-end-date {
+    color: #6358DC;
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    width: 60vmin;
+    height: 6vmin;
+    text-indent: 1vmin;
+}
+/* 이미지파일 업로드 */
+.exh-img {
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    color: #6358DC;
+    width: 60vmin;
+    height: 8vmin;
+    margin-bottom: 5vmin;
+    text-indent: 2vmin;
+}
+/* 전시내용 입력 */
+.exh-content {
+    border: 1vmin solid #6358DC;
+    border-radius: 2vmin;
+    color: #6358DC;
+    width: 60vmin;
+    height: 50vmin;
+}
+/* 작성완료 버튼 */
+.submit-btn {
+    margin: 5vmin 0 20vmin 44vmin;
+    background-color: #6358DC;
+    border: 0px solid;
+    border-radius: 1vmin;
+    width: 15vmin;
+    height: 5vmin;
+    color: white;
+    font-weight: bold;
+    font-size: 2.5vmin;
+}
+.submit-btn:hover {
+    background-color: grey;
+}
