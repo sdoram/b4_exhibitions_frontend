@@ -35,12 +35,13 @@ function handleSignIn() {
     }
     // 백엔드 통신 함수 
     signInAPI(data).then(({ response, responseJson }) => {
-        setLocalStorage(responseJson);
         if (response.status == 200) {
+            setLocalStorage(responseJson);
             alert('로그인 성공');
             window.location.replace(`${frontendBaseURL}/`);
         } else {
             alert(response.status);
+            window.location.replace(`${frontendBaseURL}/templates/signin.html`);
         }
     })
 }
@@ -70,7 +71,7 @@ async function googleSignin() {
         const scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
         const param = `scope=${scope}&include_granted_scopes=true&response_type=token&state=pass-through value&prompt=consent&client_id=${google_id}&redirect_uri=${frontendBaseURL}/templates/signin.html`
         window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${param}`
-    })    
+    })
 }
 
 // 일반 로그인 function 실행
