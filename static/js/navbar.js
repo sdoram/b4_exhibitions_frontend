@@ -1,6 +1,6 @@
 console.log('navbar 연결')
 
-import { frontendBaseURL, payload } from "./api.js";
+import { frontendBaseURL, payload, payloadParse } from "./api.js";
 
 async function injectNavbar() {
     fetch("../templates/navbar.html").then(response => {
@@ -26,8 +26,7 @@ async function injectNavbar() {
         const myPage = document.createElement("a");
         myPage.setAttribute("class", "text-warning ms-5 me-5 btn btn-light shadow-warning material-symbols-outlined");
         myPage.innerText = "person 내 정보";
-        myPage.setAttribute("href", `${frontendBaseURL}/templates/my-page.html`);
-
+        myPage.setAttribute("href", `${frontendBaseURL}/templates/my-page.html?user_id=${payloadParse.user_id}`);
         navbarRight.appendChild(myPage);
         navbarRight.appendChild(logOutButton);
 
