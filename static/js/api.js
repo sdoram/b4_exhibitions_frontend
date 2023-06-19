@@ -88,3 +88,18 @@ export async function myPageAPI(user_id) {
     console.log(response, responseJson);
     return { response, responseJson };
 }
+
+// 회원 탈퇴 API
+export async function withdrawalAPI(user_id) {
+    if (user_id == payloadParse.user_id) {
+        const response = await fetch(`${backendBaseURL}/users/`, {
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${token}` }
+        })
+        const responseJson = response.json();
+        console.log(response, responseJson)
+        return { response, responseJson }
+    } else {
+        alert('본인이 아닙니다')
+    }
+}
