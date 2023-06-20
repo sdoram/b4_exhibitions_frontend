@@ -10,11 +10,8 @@ const token = localStorage.getItem("access");
 // 회원가입 API
 export async function signUpAPI(data) {
     const response = await fetch(`${backendBaseURL}/users/signup/`, {
-        headers: {
-            'content-type': 'application/json',
-        },
         method: 'POST',
-        body: JSON.stringify(data)
+        body: data
     });
     console.log(response, 'signUpAPI');
     const responseJson = await response.json();
