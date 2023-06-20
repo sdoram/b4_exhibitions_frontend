@@ -33,26 +33,16 @@ function userInfoEdit() {
     const password = document.getElementById('password').value;
     const passwordCheck = document.getElementById('passwordCheck').value;
     const gender = document.getElementById('gender').value;
-    const profileImage = document.getElementById('profileImage').files[0];
+    const profileImage = document.getElementById('profileImage').files[0] || null
     const bio = document.getElementById('bio').value;
     if (password == passwordCheck) {
         const data = new FormData();
+        data.append("nickname", nickname)
+        data.append("password", password)
+        data.append("gender", gender || '밝히고 싶지 않음')
+        data.append("profile_image", profileImage || '')
+        data.append("bio", bio || '')
 
-        if (nickname) {
-            data.append("nickname", nickname)
-        }
-        if (password) {
-            data.append("password", password)
-        }
-        if (gender) {
-            data.append("gender", gender)
-        }
-        if (profileImage) {
-            data.append("profile_image", profileImage)
-        }
-        if (bio) {
-            data.append("bio", bio)
-        }
 
         userInfoEditAPI(data).then(({ response, responseJson }) => {
             alert(responseJson.message)

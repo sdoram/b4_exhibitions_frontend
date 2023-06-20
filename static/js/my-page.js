@@ -27,8 +27,8 @@ window.onload = function loadUserInfo() {
         nickname.innerText = userInfo.nickname
 
         // 함께한 시간
-        const sinceToGether = document.getElementById("sinceToGether")
-        sinceToGether.innerText = `${userInfo.since_together}일`
+        const sinceTogether = document.getElementById("sinceTogether")
+        sinceTogether.innerText = `${userInfo.since_together}일`
 
         // 자기소개
         const bio = document.getElementById("bio");

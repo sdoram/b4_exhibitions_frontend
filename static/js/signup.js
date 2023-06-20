@@ -13,27 +13,13 @@ function handleSignUp() {
     // API 전달용 data
     if (password == passwordCheck) {
         const data = new FormData();
-        if (email) {
-            data.append("email", email)
-        }
-        if (nickname) {
-            data.append("nickname", nickname)
-        }
-        if (password) {
-            data.append("password", password)
-        }
-        if (passwordCheck) {
-            data.append("password_check", passwordCheck)
-        }
-        if (gender) {
-            data.append("gender", gender)
-        }
-        if (profileImage) {
-            data.append("profile_image", profileImage)
-        }
-        if (bio) {
-            data.append("bio", bio)
-        }
+        data.append("email", email)
+        data.append("nickname", nickname)
+        data.append("password", password)
+        data.append("password_check", passwordCheck)
+        data.append("gender", gender)
+        data.append("profile_image", profileImage || '')
+        data.append("bio", bio || '')
 
         signUpAPI(data).then(({ response, responseJson }) => {
             if (response.status == 201) {
