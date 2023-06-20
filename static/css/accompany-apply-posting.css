@@ -228,7 +228,7 @@ body:last-child {
     height: fit-content;
 }
 .applier-accompany-content {
-    height: 10vmin;
+    height: 20vmin;
     background-color: white;
     overflow: auto;
     padding: 2.2222vmin;
@@ -236,6 +236,15 @@ body:last-child {
     font-weight: bold;
     font-size: 1.8vmin;
     border-radius: 0.5556vmin;
+}
+.applier-content {
+    width: 100%;
+    height: 10vmin;
+    color: #6358DC;
+    font-size: 2vmin;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0px solid;
 }
 .applier-content-header {
     color: #6358DC;
@@ -249,20 +258,10 @@ body:last-child {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-top: 1.6667vmin;
     width: 100%;
     height: fit-content;
-}
-.applier-date-info {
-    margin-left: 1.6667vmin;
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    height: fit-content;
-    color: white;
-    font-weight: bold;
-    font-size: 1.8vmin;
 }
 .applier-row3-in-purple > button {
     border: 0vmin solid;
@@ -277,7 +276,7 @@ body:last-child {
 .applier-row3-in-purple > button:hover {
     background-color: silver;
 }
-.applier-acc-update-btn {
+.applier-acc-posting-btn {
     margin-left: auto;
     margin-right: 1.1111vmin;
 }
