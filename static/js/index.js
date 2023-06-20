@@ -2,12 +2,11 @@ console.log('index 연결')
 import { frontendBaseURL, getExhibitionsAPI, exhibitionLikeAPI, myPageAPI, payload, payloadParse } from "./api.js";
 
 // 좋아요 하트 관련 코드
-let fullHeart = false;
 function heart(exhibition_id) {
-    exhibitionLikeAPI(exhibition_id.split('like')[1]).then(({ response, responseJson }) => {
-        const heartElement = document.querySelector(`#${exhibition_id}`);
-        const heartNum = document.querySelector(`#heartNum${exhibition_id.split('like')[1]}`)
-        console.log(heartNum)
+    let fullHeart = false;
+    exhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+        const heartElement = document.getElementById(exhibition_id);
+        const heartNum = document.getElementById(`heartNum${exhibition_id}`)
         if (response.status == 201) {
             heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
             heartNum.innerText = responseJson.likes
@@ -18,7 +17,6 @@ function heart(exhibition_id) {
         fullHeart = !fullHeart;
     })
 }
-
 
 function exhibitionDetail(exhibition_id) {
     console.log('전시회 디테일', exhibition_id)
@@ -43,10 +41,14 @@ window.onload = function loadExhibitions() {
             // 이미지 사이즈가 클 경우 화면에 맞게 줄여주는 css 수정 필요
             exhibitionImg.setAttribute("class", "card-img-top");
             // 이미지를 못찾을 경우 대체 이미지 
-            exhibitionImg.setAttribute("onerror", "this.src='static/img/default-img.jpg'")
+            exhibitionImg.setAttribute("onerror", "this.src='./static/img/default-img.jpg'")
             if (exhibition.image) {
-                // 대체 url 코드로 인코딩된 url 디코딩 하기
-                exhibitionImg.setAttribute("src", decodeURIComponent(exhibition.image.split("media/")[1]));
+                if (exhibition.image.includes('https:')) {
+                    exhibitionImg.setAttribute("src", exhibition.image);
+                } else {
+                    // 대체 url 코드로 인코딩된 url 디코딩 하기    
+                    exhibitionImg.setAttribute("src", decodeURIComponent(exhibition.image.split("media/")[1]));
+                }
             } else {
                 exhibitionImg.setAttribute("src", "static/img/default-img.jpg")
             }
@@ -76,9 +78,9 @@ window.onload = function loadExhibitions() {
 
             const exhibitionHeart = document.createElement("div")
             exhibitionHeart.setAttribute("class", "heart")
-            exhibitionHeart.setAttribute("id", `like${exhibition.id}`)
+            exhibitionHeart.setAttribute("id", exhibition.id)
             exhibitionHeart.addEventListener("click", function () {
-                heart(this.id)
+                heart(exhibition.id)
             })
             exhibitionHeartSet.appendChild(exhibitionHeart)
 
@@ -86,16 +88,14 @@ window.onload = function loadExhibitions() {
             const exhibitionHeartNum = document.createElement("span")
             exhibitionHeartNum.setAttribute("class", "heart-num")
             exhibitionHeartNum.setAttribute("id", `heartNum${exhibition.id}`)
-            // 백엔드 정보로 수정 필요 
             exhibitionHeartNum.innerText = exhibition.likes
             exhibitionHeartSet.appendChild(exhibitionHeartNum)
 
-            // 전시회 좋아요 하트색 세팅
             if (payload) {
                 myPageAPI(payloadParse.user_id).then(({ responseJson }) => {
                     responseJson.exhibition_likes.forEach((obj) => {
-                        if (exhibition.id == obj.id){
-                            const heartElement = document.querySelector(`#like${exhibition.id}`);
+                        if (exhibition.id == obj.id) {
+                            const heartElement = document.getElementById(exhibition.id);
                             heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
                         }
                     })
@@ -109,16 +109,17 @@ window.onload = function loadExhibitions() {
 
             const exhibitionDetailButton = document.createElement("button")
             exhibitionDetailButton.setAttribute("class", "detail-button")
-            exhibitionDetailButton.setAttribute("exhibition-id", exhibition.id)
-            exhibitionDetailButton.setAttribute("id", exhibition.id)
             exhibitionDetailButton.addEventListener("click", function () {
-                exhibitionDetail(this.id)
+                exhibitionDetail(exhibition.id)
             })
             exhibitionDetailButton.innerText = '전시상세'
             exhibitionSignSet.appendChild(exhibitionDetailButton)
 
             const exhibitionReserveButton = document.createElement("button")
             exhibitionReserveButton.setAttribute("class", "reserve-button")
+            exhibitionReserveButton.addEventListener("click", function () {
+                exhibitionReserve(exhibition.direct_url)
+            })
             exhibitionReserveButton.innerText = '예약하기'
             exhibitionSignSet.appendChild(exhibitionReserveButton)
 
@@ -127,3 +128,6 @@ window.onload = function loadExhibitions() {
     })
 }
 
+function exhibitionReserve(link) {
+    window.open(link)
+}
