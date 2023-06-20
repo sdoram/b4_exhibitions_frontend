@@ -1,12 +1,11 @@
 console.log('my-page 연결')
 
-import { myPageAPI, payloadParse, payload, frontendBaseURL, withdrawalAPI } from "./api.js";
+import { myPageAPI, payloadParse, payload, frontendBaseURL, withdrawalAPI, exhibitionLikeAPI } from "./api.js";
 
 
 window.onload = function loadUserInfo() {
     // url 객체 생성 후 user_id 값 추출 
     const user_id = new URLSearchParams(window.location.search).get("user_id")
-    console.log(user_id)
     myPageAPI(user_id).then(({ response, responseJson }) => {
         console.log(response, responseJson)
         const userInfo = responseJson
@@ -31,7 +30,7 @@ window.onload = function loadUserInfo() {
 
         if (payload) {
             if (user_id == payloadParse.user_id) {
-                const btnsPart = document.getElementById("btnsPart")
+                const buttonPart = document.getElementById("buttonPart")
 
                 const profileEditButton = document.createElement("button")
                 profileEditButton.setAttribute("id", `profileEdit${payloadParse.user_id}`)
@@ -48,11 +47,10 @@ window.onload = function loadUserInfo() {
                     withdrawal(this.id.split('withdrawal')[1])
                 })
 
-                btnsPart.appendChild(profileEditButton)
-                btnsPart.appendChild(withdrawalButton)
+                buttonPart.appendChild(profileEditButton)
+                buttonPart.appendChild(withdrawalButton)
 
                 const exhibitionsDATA = userInfo.exhibition_likes
-                // console.log(likeExhibitions)
 
                 const exhibitionList = document.getElementById("exhibitionList")
                 exhibitionsDATA.forEach(exhibition => {
@@ -106,9 +104,9 @@ window.onload = function loadUserInfo() {
 
                     const exhibitionHeart = document.createElement("div")
                     exhibitionHeart.setAttribute("class", "heart")
-                    exhibitionHeart.setAttribute("id", `like${exhibition.id}`)
+                    exhibitionHeart.setAttribute("id", exhibition.id)
                     exhibitionHeart.addEventListener("click", function () {
-                        heart(this.id)
+                        heart(exhibition.id)
                     })
                     exhibitionHeartSet.appendChild(exhibitionHeart)
 
@@ -116,21 +114,8 @@ window.onload = function loadUserInfo() {
                     const exhibitionHeartNum = document.createElement("span")
                     exhibitionHeartNum.setAttribute("class", "heart-num")
                     exhibitionHeartNum.setAttribute("id", `heartNum${exhibition.id}`)
-                    // 백엔드 정보로 수정 필요 
                     exhibitionHeartNum.innerText = exhibition.likes
                     exhibitionHeartSet.appendChild(exhibitionHeartNum)
-
-                    // 전시회 좋아요 하트색 세팅
-                    if (payload) {
-                        myPageAPI(payloadParse.user_id).then(({ responseJson }) => {
-                            responseJson.exhibition_likes.forEach((obj) => {
-                                if (exhibition.id == obj.id) {
-                                    const heartElement = document.querySelector(`#like${exhibition.id}`);
-                                    heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
-                                }
-                            })
-                        })
-                    }
 
                     // 상세 & 예약 박스
                     const exhibitionSignSet = document.createElement('div')
@@ -139,16 +124,17 @@ window.onload = function loadUserInfo() {
 
                     const exhibitionDetailButton = document.createElement("button")
                     exhibitionDetailButton.setAttribute("class", "detail-button")
-                    exhibitionDetailButton.setAttribute("exhibition-id", exhibition.id)
-                    exhibitionDetailButton.setAttribute("id", exhibition.id)
                     exhibitionDetailButton.addEventListener("click", function () {
-                        exhibitionDetail(this.id)
+                        exhibitionDetail(exhibition.id)
                     })
                     exhibitionDetailButton.innerText = '전시상세'
                     exhibitionSignSet.appendChild(exhibitionDetailButton)
 
                     const exhibitionReserveButton = document.createElement("button")
                     exhibitionReserveButton.setAttribute("class", "reserve-button")
+                    exhibitionReserveButton.addEventListener("click", function () {
+                        exhibitionReserve(exhibition.direct_url)
+                    })
                     exhibitionReserveButton.innerText = '예약하기'
                     exhibitionSignSet.appendChild(exhibitionReserveButton)
 
@@ -175,4 +161,30 @@ function withdrawal(user_id) {
             location.reload();
         }
     })
+}
+
+
+function heart(exhibition_id) {
+    let fullHeart = false;
+    exhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+        const heartElement = document.getElementById(exhibition_id);
+        const heartNum = document.getElementById(`heartNum${exhibition_id}`)
+        if (response.status == 201) {
+            heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+            heartNum.innerText = responseJson.likes
+        } else {
+            heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
+            heartNum.innerText = responseJson.likes
+        }
+        fullHeart = !fullHeart;
+    })
+}
+
+
+function exhibitionDetail(exhibition_id) {
+    window.location.href = `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`
+}
+
+function exhibitionReserve(link) {
+    window.open(link)
 }
