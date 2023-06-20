@@ -33,6 +33,7 @@ function userInfoEdit() {
     const password = document.getElementById('password').value;
     const passwordCheck = document.getElementById('passwordCheck').value;
     const gender = document.getElementById('gender').value;
+    const profileImage = document.getElementById('profileImage').files[0];
     const bio = document.getElementById('bio').value;
     if (password == passwordCheck) {
         const data = new FormData();
@@ -45,6 +46,9 @@ function userInfoEdit() {
         }
         if (gender) {
             data.append("gender", gender)
+        }
+        if (profileImage) {
+            data.append("profile_image", profileImage)
         }
         if (bio) {
             data.append("bio", bio)

@@ -4,29 +4,52 @@ import { signUpAPI, frontendBaseURL, payload } from "./api.js";
 function handleSignUp() {
     console.log('회원가입 버튼')
     const email = document.getElementById("email").value;
-    const nickname = document.getElementById("nickname").value;
-    const password = document.getElementById("password").value;
-    const passwordCheck = document.getElementById("passwordCheck").value;
-    const gender = document.getElementById("gender").value;
+    const nickname = document.getElementById('nickname').value;
+    const password = document.getElementById('password').value;
+    const passwordCheck = document.getElementById('passwordCheck').value;
+    const gender = document.getElementById('gender').value;
+    const profileImage = document.getElementById('profileImage').files[0];
+    const bio = document.getElementById('bio').value;
     // API 전달용 data
-    const data = {
-        "email": email,
-        "nickname": nickname,
-        "password": password,
-        "password_check": passwordCheck,
-        "gender": gender
-    }
-    // 백엔드 통신 함수 
-    signUpAPI(data).then(({ response, responseJson }) => {
-        if (response.status == 201) {
-            alert(responseJson.message);
-            window.location.replace(`${frontendBaseURL}/templates/signin.html`);
-        } else {
-            alert(responseJson.message);
-            console.log(response.status);
+    if (password == passwordCheck) {
+        const data = new FormData();
+        if (email) {
+            data.append("email", email)
         }
-    });
+        if (nickname) {
+            data.append("nickname", nickname)
+        }
+        if (password) {
+            data.append("password", password)
+        }
+        if (passwordCheck) {
+            data.append("password_check", passwordCheck)
+        }
+        if (gender) {
+            data.append("gender", gender)
+        }
+        if (profileImage) {
+            data.append("profile_image", profileImage)
+        }
+        if (bio) {
+            data.append("bio", bio)
+        }
+
+        signUpAPI(data).then(({ response, responseJson }) => {
+            if (response.status == 201) {
+                alert(responseJson.message);
+                window.location.replace(`${frontendBaseURL}/templates/signin.html`);
+            } else {
+                alert(responseJson.message);
+                console.log(response.status);
+            }
+        });
+    } else {
+        alert('비밀번호가 일치하지 않습니다')
+    }
+
 }
+
 // 회원가입 function 실행
 document.getElementById("signUpButton").addEventListener("click", handleSignUp);
 

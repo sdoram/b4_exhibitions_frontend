@@ -1,6 +1,6 @@
 console.log('my-page 연결')
 
-import { myPageAPI, payloadParse, payload, frontendBaseURL, withdrawalAPI, exhibitionLikeAPI } from "./api.js";
+import { myPageAPI, payloadParse, payload, frontendBaseURL, withdrawalAPI, exhibitionLikeAPI, backendBaseURL } from "./api.js";
 
 
 window.onload = function loadUserInfo() {
@@ -13,7 +13,13 @@ window.onload = function loadUserInfo() {
         // 프로필 이미지
         const profileImg = document.getElementById("profileImg");
         if (userInfo.profile_image) {
-            profileImg.setAttribute("src", decodeURIComponent(userInfo.profile_image.split("media/")[1]));
+            if (userInfo.profile_image.includes('profile_images')) {
+                // db에 저장된 이미지인 경우 
+                profileImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${userInfo.profile_image}`)
+            } else {
+                // 링크로 들어온 경우 
+                profileImg.setAttribute("src", decodeURIComponent(userInfo.profile_image.split("media/")[1]));
+            }
         }
 
         // 유저아이디
