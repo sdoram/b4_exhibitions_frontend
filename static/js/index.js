@@ -18,15 +18,11 @@ function heart(exhibition_id) {
     })
 }
 
-function exhibitionDetail(exhibition_id) {
-    console.log('전시회 디테일', exhibition_id)
-    window.location.href = `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`
-}
 
 window.onload = function loadExhibitions() {
     getExhibitionsAPI().then(({ response, responseJson }) => {
         const exhibitionsDATA = responseJson.results
-        console.log(exhibitionsDATA)
+        console.log(responseJson)
         const exhibitionList = document.getElementById("exhibitionList")
         exhibitionsDATA.forEach(exhibition => {
             const exhibitionSet = document.createElement("div");
@@ -124,10 +120,42 @@ window.onload = function loadExhibitions() {
             exhibitionSignSet.appendChild(exhibitionReserveButton)
 
             exhibitionList.appendChild(exhibitionSet)
+
+            // 다음 페이지 버튼
+            const nextPageButton = document.getElementById('nextPageButton')
+            nextPageButton.addEventListener("click", function () {
+                handleNextPage(responseJson.next)
+            })
+
+            // 이전 페이지 버튼 
+            const previousPageButton = document.getElementById('previousPageButton')
+            previousPageButton.addEventListener("click", function () {
+                handlePreviousPage(responseJson.previous)
+            })
         })
     })
 }
 
+// 전시회 예약 페이지
 function exhibitionReserve(link) {
     window.open(link)
 }
+
+// 이전 페이지
+function handlePreviousPage(page) {
+    window.location.href = `${frontendBaseURL}/index.html?${page.split('?')[1]}`
+}
+
+// 다음 페이지 
+function handleNextPage(page) {
+    window.location.href = `${frontendBaseURL}/index.html?${page.split('?')[1]}`
+}
+
+// 전시회 상세 페이지
+function exhibitionDetail(exhibition_id) {
+    console.log('전시회 디테일', exhibition_id)
+    window.location.href = `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`
+}
+
+document.getElementById("nextPageButton").addEventListener("click", handleNextPage);
+document.getElementById("previousPageButton").addEventListener("click", handlePreviousPage);

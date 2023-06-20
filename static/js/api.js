@@ -56,10 +56,20 @@ export async function googleAPI(google_token) {
 
 // 메인 페이지 전시회 전체 조회 API
 export async function getExhibitionsAPI() {
-    const response = await fetch(`${backendBaseURL}/exhibitions/`)
-    const responseJson = await response.json();
-    console.log(responseJson)
-    return { response, responseJson };
+
+    const URLParams = new URL(location.href).searchParams;
+    const page = URLParams.get('page')
+    if (page != null) {
+        // 페이지 정보가 있는 경우
+        const response = await fetch(`${backendBaseURL}/exhibitions/?page=${page}`)
+        const responseJson = await response.json();
+        return { response, responseJson };
+    } else {
+        // 페이지 정보가 없는 경우 
+        const response = await fetch(`${backendBaseURL}/exhibitions/`)
+        const responseJson = await response.json();
+        return { response, responseJson };
+    }
 }
 
 // 전시회 상세 페이지 API
