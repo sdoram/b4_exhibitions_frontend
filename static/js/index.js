@@ -1,24 +1,6 @@
 console.log('index 연결')
 import { frontendBaseURL, getExhibitionsAPI, exhibitionLikeAPI, myPageAPI, payload, payloadParse } from "./api.js";
 
-// 좋아요 하트 관련 코드
-function heart(exhibition_id) {
-    let fullHeart = false;
-    exhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-        const heartElement = document.getElementById(exhibition_id);
-        const heartNum = document.getElementById(`heartNum${exhibition_id}`)
-        if (response.status == 201) {
-            heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
-            heartNum.innerText = responseJson.likes
-        } else {
-            heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
-            heartNum.innerText = responseJson.likes
-        }
-        fullHeart = !fullHeart;
-    })
-}
-
-
 window.onload = function loadExhibitions() {
     getExhibitionsAPI().then(({ response, responseJson }) => {
         const exhibitionsDATA = responseJson.results
@@ -58,7 +40,7 @@ window.onload = function loadExhibitions() {
             // 전시회 제목
             const exhibitionTitle = document.createElement("span");
             exhibitionTitle.setAttribute("class", "exhibition-title");
-            exhibitionTitle.innerText = exhibition.info_name
+            exhibitionTitle.innerHTML = exhibition.info_name
             exhibitionInfoBox.appendChild(exhibitionTitle);
 
             // 전시회 기간
@@ -133,6 +115,23 @@ window.onload = function loadExhibitions() {
                 handlePreviousPage(responseJson.previous)
             })
         })
+    })
+}
+
+// 좋아요 하트 관련 코드
+function heart(exhibition_id) {
+    let fullHeart = false;
+    exhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+        const heartElement = document.getElementById(exhibition_id);
+        const heartNum = document.getElementById(`heartNum${exhibition_id}`)
+        if (response.status == 201) {
+            heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+            heartNum.innerText = responseJson.likes
+        } else {
+            heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
+            heartNum.innerText = responseJson.likes
+        }
+        fullHeart = !fullHeart;
     })
 }
 
