@@ -121,3 +121,14 @@ export async function userInfoEditAPI(data) {
     console.log(response, responseJson)
     return { response, responseJson }
 }
+
+export async function exhibitionPostingAPI(data) {
+    const response = await fetch(`${backendBaseURL}/exhibitions/`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    console.log(response, responseJson)
+    return { response, responseJson }
+}
