@@ -157,5 +157,14 @@ function exhibitionDetail(exhibition_id) {
     window.location.href = `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`
 }
 
+function checkAdmin() {
+    console.log('checkAdmin 연결 확인')
+    console.log(payloadParse.is_admin)
+    if (payloadParse.is_admin) {
+        window.location.replace(`${frontendBaseURL}/templates/backoffice-main.html`)
+    }
+}
+checkAdmin()
+
 document.getElementById("nextPageButton").addEventListener("click", handleNextPage);
 document.getElementById("previousPageButton").addEventListener("click", handlePreviousPage);
