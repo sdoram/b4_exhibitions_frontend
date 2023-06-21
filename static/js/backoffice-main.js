@@ -172,3 +172,10 @@ function checkAdminBackOffice() {
     }
 }
 checkAdminBackOffice()
+
+document.getElementById("exhibitionPosting").addEventListener("click", handleExhibitionPosting);
+
+function handleExhibitionPosting() {
+    console.log('전시등록하기 버튼')
+    window.location.href = `${frontendBaseURL}/templates/exhibition-posting.html`
+}
