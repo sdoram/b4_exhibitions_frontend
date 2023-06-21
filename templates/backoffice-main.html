@@ -24,33 +24,23 @@
     <header></header>
     <div class="welcome-set">
         <h3 class="welcome-greeting">현재 로그인 된 아이디</h3>
-        <h1 class="welcome-title">홈페이지 관리자 001</h1>
+        <h1 class="welcome-title" id="adminNickname">홈페이지 관리자 001</h1>
     </div>
     <div class="searching-set">
         <h2 class="title-show-exh">등록된 전시 목록입니다</h2>
         <div class="magnifier-img"></div>
         <input class="searching-bar">
     </div>
-    <div class="all-exhibitions-organizer">
-        <div class="exhibition-set">
-            <div class="exhibition-img-box">
-                <img class="exhibition-img" src="" onerror="this.src='../static/img/default-img.jpg'"></img>
-            </div>
-            <div class="exhibition-info-box">
-                <span class="exhibition-title">전시 이름</span>
-                <span class="exhibition-period">전시 기간</span>
-                <div class="heart-set">
-                    <div class="heart" id="heart" onclick='heart()'></div>
-                    <span class="heart-num">999</span>
-                </div>
-                <div class="sign-set">
-                    <button class="update-button">수정하기</button>
-                    <button class="delete-button">삭제하기</button>
-                </div>
-            </div>
-        </div>        
+    <div class="all-exhibitions-organizer" id="exhibitionList">
     </div>
-    <button class="new-exh-button">새로운 전시 등록하기</button>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination" id="paginationButton">
+            <li class="page-item"><button type="button" class="page-link" id="previousPageButton">이전 페이지</button>
+            </li>
+            <li class="page-item"><button type="button" class="page-link" id="nextPageButton">다음 페이지</button></li>
+        </ul>
+    </nav>
+    <button class="new-exh-button" id="exhibitionPosting">새로운 전시 등록하기</button>
 </body>
 
 </html>
