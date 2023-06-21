@@ -40,7 +40,7 @@ window.onload = function loadExhibitions() {
             // 전시회 제목
             const exhibitionTitle = document.createElement("span");
             exhibitionTitle.setAttribute("class", "exhibition-title");
-            exhibitionTitle.innerText = exhibition.info_name
+            exhibitionTitle.innerHTML = exhibition.info_name
             exhibitionInfoBox.appendChild(exhibitionTitle);
 
             // 전시회 기간
