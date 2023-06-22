@@ -142,12 +142,13 @@ function exhibitionReserve(link) {
 
 // 이전 페이지
 function handlePreviousPage(page) {
-    window.location.href = `${frontendBaseURL}/index.html?${page.split('?')[1]}`
+    // page 변수명 변경하기 
+    window.location.href = `${frontendBaseURL}${window.location.pathname}?${page.split('?')[1]}`
 }
 
 // 다음 페이지 
 function handleNextPage(page) {
-    window.location.href = `${frontendBaseURL}/index.html?${page.split('?')[1]}`
+    window.location.href = `${frontendBaseURL}${window.location.pathname}?${page.split('?')[1]}`
 }
 
 // 전시회 상세 페이지
