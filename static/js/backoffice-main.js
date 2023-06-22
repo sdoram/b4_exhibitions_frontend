@@ -110,7 +110,7 @@ window.onload = function loadExhibitions() {
             exhibitionDetailButton.addEventListener("click", function () {
                 exhibitionDetail(exhibition.id)
             })
-            exhibitionDetailButton.innerText = '전시상세'
+            exhibitionDetailButton.innerText = '수정하기'
             exhibitionSignSet.appendChild(exhibitionDetailButton)
 
             const exhibitionReserveButton = document.createElement("button")
@@ -118,7 +118,7 @@ window.onload = function loadExhibitions() {
             exhibitionReserveButton.addEventListener("click", function () {
                 exhibitionReserve(exhibition.direct_url)
             })
-            exhibitionReserveButton.innerText = '예약하기'
+            exhibitionReserveButton.innerText = '삭제하기'
             exhibitionSignSet.appendChild(exhibitionReserveButton)
 
             exhibitionList.appendChild(exhibitionSet)
