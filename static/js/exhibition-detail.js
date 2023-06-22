@@ -1,6 +1,6 @@
 console.log('exhibition-detail 연결')
 
-import { getExhibitionAPI, exhibitionLikeAPI, payload, payloadParse, myPageAPI } from "./api.js";
+import { getExhibitionAPI, exhibitionLikeAPI, payload, payloadParse, myPageAPI, getReviewAPI } from "./api.js";
 
 window.onload = function loadExhibition() {
     // url 객체 생성 후 exhibition_id 값 추출 
@@ -21,13 +21,13 @@ window.onload = function loadExhibition() {
         }
 
         // // 전시회 좋아요 
-        const exhibitionHeart = document.getElementById("heartInDeatil");
+        const exhibitionHeart = document.getElementById("heart");
         exhibitionHeart.addEventListener("click", function () {
             heart(exhibitionDATA.id)
         })
 
         // 전시회 좋아요 개수
-        const exhibitionHeartNum = document.getElementById("heartNumInDeatil")
+        const exhibitionHeartNum = document.getElementById("heartNum")
         exhibitionHeartNum.innerText = exhibitionDATA.likes
 
         // 좋아요 하트색 세팅
@@ -35,7 +35,7 @@ window.onload = function loadExhibition() {
             myPageAPI(payloadParse.user_id).then(({ responseJson }) => {
                 responseJson.exhibition_likes.forEach((obj) => {
                     if (exhibitionDATA.id == obj.id) {
-                        const heartElement = document.getElementById("heartInDeatil");
+                        const heartElement = document.getElementById("heart");
                         heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
                     }
                 })
@@ -43,27 +43,27 @@ window.onload = function loadExhibition() {
         }
 
         // 전시회 제목
-        const exhibitionTitle = document.getElementById("titleInDetail");
+        const exhibitionTitle = document.getElementById("title");
         exhibitionTitle.innerHTML = exhibitionDATA.info_name
 
         // 전시회 장소
-        const exhibitionLocation = document.getElementById("locationInDetail");
+        const exhibitionLocation = document.getElementById("location");
         exhibitionLocation.innerHTML = exhibitionDATA.location
 
         // 전시회 시작일
-        const exhibitionStartDate = document.getElementById("startDateInDetail");
+        const exhibitionStartDate = document.getElementById("startDate");
         exhibitionStartDate.innerText = exhibitionDATA.start_date
 
         // 전시회 종료일
-        const exhibitionEndDate = document.getElementById("endDateInDetail");
+        const exhibitionEndDate = document.getElementById("endDate");
         exhibitionEndDate.innerText = exhibitionDATA.end_date
 
         // 전시회 설명
-        const exhibitionContent = document.getElementById("contentInDetail");
+        const exhibitionContent = document.getElementById("content");
         exhibitionContent.innerHTML = exhibitionDATA.content
-        
+
         // 예약하기 버튼
-        const exhibitionReserveButton = document.getElementById("reserveInDetail");
+        const exhibitionReserveButton = document.getElementById("reserveBtn");
         exhibitionReserveButton.addEventListener("click", function () {
             exhibitionReserve(exhibitionDATA.direct_url);
         });
@@ -75,8 +75,8 @@ window.onload = function loadExhibition() {
 function heart(exhibition_id) {
     let fullHeart = false;
     exhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-        const heartElement = document.getElementById("heartInDeatil");
-        const heartNum = document.getElementById("heartNumInDeatil")
+        const heartElement = document.getElementById("heart");
+        const heartNum = document.getElementById("heartNum")
         if (response.status == 201) {
             heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
             heartNum.innerText = responseJson.likes
