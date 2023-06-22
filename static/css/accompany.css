@@ -15,32 +15,6 @@ body:last-child {
     display: flex;
     justify-content: center;
 }
-/* 검색창 */
-.searching-set {
-    margin-top: 4.4444vmin;
-    display: flex;
-    flex-direction: row;
-}
-.magnifier-img {
-    width: 3.3333vmin;
-    height: 3.3333vmin;
-    border: 0.5556vmin solid #6358DC;
-    border-radius: 1.1111vmin;
-    background-image: url("../img/magnifier.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 1.1111vmin;
-}
-.searching-bar {
-    border: 0.5556vmin solid #6358DC;
-    border-radius: 1.1111vmin;
-    width: 38.8889vmin;
-    height: 3.3333vmin;
-    margin-right: 71.1111vmin;
-    background-color: gainsboro;
-    text-indent: 0.5556vmin;
-}
 /* 본격적인 동행글 구간 시작: 동행글 1개 마다 회색박스 1개 차지. 회색박스 안에 동행신청글도 달림. */
 .gray-box {
     margin-top: 10vmin;

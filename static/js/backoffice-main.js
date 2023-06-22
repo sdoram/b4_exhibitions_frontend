@@ -111,6 +111,7 @@ window.onload = function loadExhibitions() {
             exhibitionPutButton.addEventListener("click", function () {
                 exhibitionPut(exhibition.id)
             })
+
             exhibitionPutButton.innerText = '수정하기'
             exhibitionSignSet.appendChild(exhibitionPutButton)
 
@@ -122,7 +123,7 @@ window.onload = function loadExhibitions() {
             })
             exhibitionDeleteButton.innerText = '삭제하기'
             exhibitionSignSet.appendChild(exhibitionDeleteButton)
-
+          
             exhibitionList.appendChild(exhibitionSet)
 
             // 다음 페이지 버튼

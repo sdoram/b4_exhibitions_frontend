@@ -15,33 +15,6 @@ body:last-child {
     display: flex;
     justify-content: center;
 }
-/* 검색창 */
-.searching-set {
-    margin-top: 4.4444vmin;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: -14.6667vmin;
-}
-.magnifier-img {
-    width: 3.3333vmin;
-    height: 3.3333vmin;
-    border: 0.5556vmin solid #6358DC;
-    border-radius: 1.1111vmin;
-    background-image: url("../img/magnifier.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 1.1111vmin;
-}
-.searching-bar {
-    border: 0.5556vmin solid #6358DC;
-    border-radius: 1.1111vmin;
-    width: 38.8889vmin;
-    height: 3.3333vmin;
-    margin-right: 71.1111vmin;
-    background-color: gainsboro;
-    text-indent: 0.5556vmin;
-}
 /* 본격적인 카드 구간 (1개 회색박스 마다 리뷰 1개) */
 .gray-box {
     margin-top: 20vmin;
