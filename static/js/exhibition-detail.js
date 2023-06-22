@@ -1,7 +1,7 @@
 console.log('exhibition-detail 연결')
 
 
-import { getExhibitionAPI, exhibitionLikeAPI, payload, payloadParse, myPageAPI, getReviewAPI, backendBaseURL } from "./api.js";
+import { getExhibitionAPI, exhibitionLikeAPI, payload, payloadParse, myPageAPI, reviewGetAPI, backendBaseURL } from "./api.js";
 
 
 window.onload = function loadExhibition() {
@@ -109,7 +109,7 @@ function exhibitionReserve(link) {
 
 // 리뷰 버튼 눌렀을 때 실행되는 함수
 function review(exhibition_id) {
-    getReviewAPI(exhibition_id).then(({ response, responseJson }) => {
+    reviewGetAPI(exhibition_id).then(({ responseJson }) => {
         const reviewsDATA = responseJson.reviews.results
         console.log(reviewsDATA)
 
