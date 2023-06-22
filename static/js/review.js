@@ -6,6 +6,9 @@ let isReviewsRendered = false;
 
 // 리뷰 버튼 눌렀을 때 실행되는 함수
 export function review(exhibition_id) {
+    var acAllItemsOrganizer = document.querySelector(".ac-all-items-organizer");
+    acAllItemsOrganizer.style.display = "none";
+    
     var rvAllItemsOrganizer = document.querySelector(".rv-all-items-organizer");
     if (rvAllItemsOrganizer.style.display === "none") {
         rvAllItemsOrganizer.style.display = "flex";
@@ -15,7 +18,6 @@ export function review(exhibition_id) {
                 console.log(reviewsDATA)
 
                 const reviewList = document.getElementById("reviewList")
-                reviewList.setAttribute("class", "rv-all-items-organizer")
 
                 // 리뷰 목록
                 reviewsDATA.forEach(review => {          
