@@ -167,3 +167,17 @@ checkAdmin()
 
 document.getElementById("nextPageButton").addEventListener("click", handleNextPage);
 document.getElementById("previousPageButton").addEventListener("click", handlePreviousPage);
+
+// enter입력시 함수 실행 
+document.getElementById("search").addEventListener("keydown", function (e) {
+    if (e.code === 'Enter') {
+        exhibitionSearch(this)
+    }
+})
+document.getElementById("searchButton").addEventListener("click", function () {
+    exhibitionSearch(this)
+})
+
+function exhibitionSearch(search) {
+    window.location.href = `${frontendBaseURL}${window.location.pathname}?search=${search.value}`
+}

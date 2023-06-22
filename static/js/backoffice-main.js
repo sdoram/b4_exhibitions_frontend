@@ -107,7 +107,7 @@ window.onload = function loadExhibitions() {
 
             // 수정하기
             const exhibitionPutButton = document.createElement("button")
-            exhibitionPutButton.setAttribute("class", "update-button")
+            exhibitionPutButton.setAttribute("class", "detail-button")
             exhibitionPutButton.addEventListener("click", function () {
                 exhibitionPut(exhibition.id)
             })
@@ -117,13 +117,13 @@ window.onload = function loadExhibitions() {
 
             // 삭제하기
             const exhibitionDeleteButton = document.createElement("button")
-            exhibitionDeleteButton.setAttribute("class", "delete-button")
+            exhibitionDeleteButton.setAttribute("class", "reserve-button")
             exhibitionDeleteButton.addEventListener("click", function () {
                 exhibitionDelete(exhibition.id)
             })
             exhibitionDeleteButton.innerText = '삭제하기'
             exhibitionSignSet.appendChild(exhibitionDeleteButton)
-          
+
             exhibitionList.appendChild(exhibitionSet)
 
             // 다음 페이지 버튼
@@ -182,4 +182,18 @@ document.getElementById("exhibitionPosting").addEventListener("click", handleExh
 function handleExhibitionPosting() {
     console.log('전시등록하기 버튼')
     window.location.href = `${frontendBaseURL}/templates/exhibition-posting.html`
+}
+
+// enter입력시 함수 실행 
+document.getElementById("search").addEventListener("keydown", function (e) {
+    if (e.code === 'Enter') {
+        exhibitionSearch(this)
+    }
+})
+document.getElementById("searchButton").addEventListener("click", function () {
+    exhibitionSearch(this)
+})
+
+function exhibitionSearch(search) {
+    window.location.href = `${frontendBaseURL}${window.location.pathname}?search=${search.value}`
 }

@@ -57,10 +57,16 @@ export async function getExhibitionsAPI() {
     const URLParams = new URL(location.href).searchParams;
     const page = URLParams.get('page')
     const category = URLParams.get('category')
+    const search = URLParams.get('search')
     if (page != null) {
         // 페이지 정보가 있는 경우
         if (category) {
+
             const response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}&page=${page}`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        } else if (search) {
+            const response = await fetch(`${backendBaseURL}/exhibitions/?search=${search}&page=${page}`)
             const responseJson = await response.json();
             return { response, responseJson };
         } else {
@@ -74,8 +80,11 @@ export async function getExhibitionsAPI() {
             const response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}`)
             const responseJson = await response.json();
             return { response, responseJson };
-        }
-        else {
+        } else if (search) {
+            const response = await fetch(`${backendBaseURL}/exhibitions/search/?search=${search}`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        } else {
             const response = await fetch(`${backendBaseURL}/exhibitions/`)
             const responseJson = await response.json();
             return { response, responseJson };
