@@ -121,3 +121,11 @@ export async function userInfoEditAPI(data) {
     console.log(response, responseJson)
     return { response, responseJson }
 }
+
+// 리뷰 조회 API
+export async function getReviewAPI(exhibition_id) {
+    // const response = await fetch(`${backendBaseURL}/reviews/${exhibition_id}/`, { method: 'GET' })
+    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}?select=reviews`, { method: 'GET' })
+    const responseJson = await response.json();
+    return { response, responseJson }
+}
