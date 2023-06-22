@@ -25,23 +25,36 @@
     <h1 class="welcome-title">전시회 수동 등록</h1>
     <div class="">
         <form class="all-items-organizer">
-            <select id="exh-category" class="exh-category" required>
-                <option selected value="전시회 선택">전시회 선택</option>
-                <option value="option1">option1</option>
-                <option value="option2">option2</option>
-                <option value="option3">option3</option>
+            <select id="exhibitionCategory" class="exh-category" required>
+                <option selected value="">카테고리</option>
+                <option value="전시/관람">전시/관람</option>
+                <option value="서울형키즈카페">서울형키즈카페</option>
+                <option value="산림여가">산림여가</option>
+                <option value="문화행사">문화행사</option>
+                <option value="농장체험">농장체험</option>
+                <option value="교육체험">교육체험</option>
+                <option value="공원탐방">공원탐방</option>
             </select>
-            <input type="text" class="exh-title" placeholder="전시 제목을 입력해주세요">
-            <input type="text" class="exh-location" placeholder="전시 위치를 입력해주세요">
+            <select id="exhibitionService" class="exh-category" required>
+                <option selected value="">서비스 상태</option>
+                <option value="접수중">접수중</option>
+                <option value="접수종료">접수종료</option>
+                <option value="안내중">안내중</option>
+                <option value="예약마감">예약마감</option>
+                <option value="예약일시중지">예약일시중지</option>
+            </select>
+            <input type="text" id="exhibitionTitle" class="exh-title" placeholder="전시 제목을 입력해주세요">
+            <input type="text" id="exhibitionLocation" class="exh-location" placeholder="전시 위치를 입력해주세요">
             <span> ▼ 전시 시작일을 입력해주세요</span>
-            <input type="date" class="exh-start-date">
+            <input type="date" id="exhibitionStartDate" class="exh-start-date">
             <span> ▼ 전시 종료일을 입력해주세요</span>
-            <input type="date" class="exh-end-date">
+            <input type="date" id="exhibitionEndDate"class="exh-end-date">
             <span> ▼ 전시 포스터를 업로드해주세요</span>
-            <input type="file" id="exhImage" class="exh-img" accept=".jpg,.jpeg,.png,.gif,.bmp" capture="camera">
+            <input type="file" id="exhibitionImage" class="exh-img" accept=".jpg,.jpeg,.png,.gif,.bmp" capture="camera">
+            <input type="url" id="exhibitionURL" class="exh-location" placeholder="전시 예약 URL를 입력해주세요">
             <span> ▼ 전시 내용을 입력해주세요</span>
-            <textarea name="" id="" class="exh-content"></textarea>
-            <button type="button" id="" class="submit-btn">작성</button>
+            <textarea name="" id="exhibitionContent" class="exh-content"></textarea>
+            <button type="button" id="exhibitionPostingButton" class="submit-btn">작성</button>
         </form>
     </div>
 </body>

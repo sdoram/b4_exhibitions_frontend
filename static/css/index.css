@@ -1,6 +1,6 @@
 /* 웰컴세트 */
 .welcome-set {
-    margin-left: 60px;
+    margin-left: 3.75rem;
 }
 .welcome-greeting {
     font-weight: bold;
@@ -12,29 +12,30 @@
 
 /* 돋보기와 검색창 */
 .searching-set {
-    margin-top: 40px;
+    margin-top: 2.5rem;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 .magnifier-img {
-    width: 40px;
-    height: 40px;
-    border: 5px solid #6358DC;
-    border-radius: 10px;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.3125rem solid #6358DC;
+    border-radius: 0.625rem;
     background-image: url("../img/magnifier.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    margin-right: 10px;
+    margin-left: 3rem;
+    margin-right: 0.625rem;
 }
 .searching-bar {
-    border: 5px solid #6358DC;
-    border-radius: 10px;
-    width: 350px;
-    height: 40px;
-    margin-right: 100px;
+    border: 0.3125rem solid #6358DC;
+    border-radius: 0.625rem;
+    width: 21.875rem;
+    height: 2.5rem;
     background-color: gainsboro;
+    margin-right: 2.5rem;
 }
 
 /* 전시회 부분 */
@@ -42,24 +43,30 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 0 50px 0 50px;
+    padding: 0 2rem 0 2rem;
     justify-content: flex-start;
 }
 .exhibition-set {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-right: 50px;
+    margin-top: 3.125rem;
+    margin-bottom: 3.125rem;
+    margin-right: 3.125rem;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
 }
 .exhibition-img-box {
-    width:350px;
-    height:350px;
+    width: 21.875rem;
+    height: 21.875rem;
+    position: relative;
     overflow:hidden;
     margin:0 auto;
-    border: 1px solid #6358DC;
-    border-radius: 10px;
+    border: 0.0625rem solid #6358DC;
+    border-radius: 0.625rem;
+}
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .exhibition-img {
     width:100%;
@@ -69,12 +76,12 @@
 .exhibition-info-box {
     color: #6358DC;
     font-weight: bold;
-    width: 350px;
+    width: 21.875rem;
 }
 .exhibition-info-box > span {
     display: flex;
     flex-direction: column;
-    margin-top: 5px;
+    margin-top: 0.3125rem;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -82,15 +89,15 @@
 .heart-set {
     display: flex;
     flex-direction: row;
-    margin-top: 5px;
+    margin-top: 0.3125rem;
 }
 .heart {
     background-image: url('../img/empty-heart.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 18px;
-    margin-right: 7px;
+    width: 1.125rem;
+    margin-right: 0.4375rem;
     filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
 }
 .sign-set {
@@ -98,14 +105,14 @@
     flex-direction: row;
 }
 .sign-set > * {
-    margin-top: 10px;
-    margin-right: 7px;
-    width: 147px;
+    margin-top: 0.625rem;
+    margin-right: 0.4375rem;
+    width: 9.1875rem;
     color: white;
     font-weight: bold;
     background-color: #6358DC;
     border: 0px solid;
-    border-radius: 10px;
+    border-radius: 0.625rem;
 }
 .detail-button:hover {
     background-color: gray;

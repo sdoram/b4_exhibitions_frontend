@@ -122,6 +122,17 @@ export async function userInfoEditAPI(data) {
     return { response, responseJson }
 }
 
+export async function exhibitionPostingAPI(data) {
+    const response = await fetch(`${backendBaseURL}/exhibitions/`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    console.log(response, responseJson)
+    return { response, responseJson }
+}
+
 // 리뷰 조회 API
 export async function getReviewAPI(exhibition_id) {
     // const response = await fetch(`${backendBaseURL}/reviews/${exhibition_id}/`, { method: 'GET' })
