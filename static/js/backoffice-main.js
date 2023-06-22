@@ -1,6 +1,6 @@
 console.log('backoffice-main 연결')
 
-import { frontendBaseURL, getExhibitionsAPI, exhibitionLikeAPI, myPageAPI, payload, payloadParse } from "./api.js";
+import { frontendBaseURL, getExhibitionsAPI, exhibitionLikeAPI, myPageAPI, payload, payloadParse, exhibitionDeleteAPI } from "./api.js";
 
 // 좋아요 하트 관련 코드
 function heart(exhibition_id) {
@@ -60,7 +60,7 @@ window.onload = function loadExhibitions() {
             // 전시회 제목
             const exhibitionTitle = document.createElement("span");
             exhibitionTitle.setAttribute("class", "exhibition-title");
-            exhibitionTitle.innerText = exhibition.info_name
+            exhibitionTitle.innerHTML = exhibition.info_name
             exhibitionInfoBox.appendChild(exhibitionTitle);
 
             // 전시회 기간
@@ -105,21 +105,23 @@ window.onload = function loadExhibitions() {
             exhibitionSignSet.setAttribute("class", "sign-set")
             exhibitionInfoBox.appendChild(exhibitionSignSet)
 
-            const exhibitionDetailButton = document.createElement("button")
-            exhibitionDetailButton.setAttribute("class", "detail-button")
-            exhibitionDetailButton.addEventListener("click", function () {
-                exhibitionDetail(exhibition.id)
+            // 수정하기
+            const exhibitionPutButton = document.createElement("button")
+            exhibitionPutButton.setAttribute("class", "update-button")
+            exhibitionPutButton.addEventListener("click", function () {
+                exhibitionPut(exhibition.id)
             })
-            exhibitionDetailButton.innerText = '전시상세'
-            exhibitionSignSet.appendChild(exhibitionDetailButton)
+            exhibitionPutButton.innerText = '수정하기'
+            exhibitionSignSet.appendChild(exhibitionPutButton)
 
-            const exhibitionReserveButton = document.createElement("button")
-            exhibitionReserveButton.setAttribute("class", "reserve-button")
-            exhibitionReserveButton.addEventListener("click", function () {
-                exhibitionReserve(exhibition.direct_url)
+            // 삭제하기
+            const exhibitionDeleteButton = document.createElement("button")
+            exhibitionDeleteButton.setAttribute("class", "delete-button")
+            exhibitionDeleteButton.addEventListener("click", function () {
+                exhibitionDelete(exhibition.id)
             })
-            exhibitionReserveButton.innerText = '예약하기'
-            exhibitionSignSet.appendChild(exhibitionReserveButton)
+            exhibitionDeleteButton.innerText = '삭제하기'
+            exhibitionSignSet.appendChild(exhibitionDeleteButton)
 
             exhibitionList.appendChild(exhibitionSet)
 
@@ -138,36 +140,37 @@ window.onload = function loadExhibitions() {
     })
 }
 
-// 전시회 예약 페이지
-function exhibitionReserve(link) {
-    window.open(link)
+// 전시회 삭제 
+function exhibitionDelete(exhibition_id) {
+    exhibitionDeleteAPI(exhibition_id).then((response) => {
+        // 전시회 삭제시 확인하기
+        alert('삭제완료')
+        window.location.reload()
+    })
+}
+
+// 전시회 수정
+function exhibitionPut(exhibition_id) {
+    window.location.href = `${frontendBaseURL}/templates/exhibition-posting.html?exhibition_id=${exhibition_id}`
 }
 
 // 이전 페이지
 function handlePreviousPage(page) {
-    window.location.href = `${frontendBaseURL}/templates/backoffice-main.html?${page.split('?')[1]}`
+    window.location.href = `${frontendBaseURL}${window.location.pathname}?${page.split('?')[1]}`
 }
 
 // 다음 페이지 
 function handleNextPage(page) {
-    window.location.href = `${frontendBaseURL}/templates/backoffice-main.html?${page.split('?')[1]}`
+    window.location.href = `${frontendBaseURL}${window.location.pathname}?${page.split('?')[1]}`
 }
 
-// 전시회 상세 페이지
-function exhibitionDetail(exhibition_id) {
-    console.log('전시회 디테일', exhibition_id)
-    window.location.href = `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`
-}
 
 document.getElementById("nextPageButton").addEventListener("click", handleNextPage);
 document.getElementById("previousPageButton").addEventListener("click", handlePreviousPage);
 
 function checkAdminBackOffice() {
     console.log('checkAdmin 연결 확인')
-    if (!payloadParse) {
-        window.location.replace(`${frontendBaseURL}/`)
-    }
-    if (!payloadParse.is_admin) {
+    if (!payloadParse || !payloadParse.is_admin) {
         window.location.replace(`${frontendBaseURL}/`)
     }
 }
