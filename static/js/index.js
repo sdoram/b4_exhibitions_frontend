@@ -159,8 +159,7 @@ function exhibitionDetail(exhibition_id) {
 
 function checkAdmin() {
     console.log('checkAdmin 연결 확인')
-    console.log(payloadParse.is_admin)
-    if (payloadParse.is_admin) {
+    if (payloadParse && payloadParse.is_admin) {
         window.location.replace(`${frontendBaseURL}/templates/backoffice-main.html`)
     }
 }

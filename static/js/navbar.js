@@ -12,6 +12,13 @@ async function injectNavbar() {
     const NavbarHTML = await fetch("../templates/navbar.html");
     const data = await NavbarHTML.text();
     document.querySelector("header").innerHTML = data;
+
+    // 카테고리 id 기준으로 addEventListener 부여 
+    for (var i = 1; i < 9; i++)
+        document.getElementById(i).addEventListener("click", function () {
+            selectCategory(this.value)
+        })
+
     if (payload) {
         // 내비바 왼쪽 항목
         const navbarLeft = document.getElementById("navbarLeft");
@@ -35,12 +42,6 @@ async function injectNavbar() {
         const signUpButton = document.getElementById("signUpButton");
         signInButton.style.display = "none";
         signUpButton.style.display = "none";
-
-        // 카테고리 id 기준으로 addEventListener 부여 
-        for (var i = 1; i < 9; i++)
-            document.getElementById(i).addEventListener("click", function () {
-                selectCategory(this.value)
-            })
     }
 
 }
