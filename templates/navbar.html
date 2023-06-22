@@ -11,11 +11,26 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav" id="navbarLeft"></ul>
       <ul class="navbar-nav" id="navbarRight">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined" id="categoryButton">list 카테고리</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined" href="../templates/signin.html" id="signInButton">person 로그인</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            list 카테고리
+          </a>
+          <ul class="dropdown-menu" id="categoryButton">
+            <li><button class="dropdown-item" id="1" >전체</button></li>
+            <li><button class="dropdown-item" id="2" value="전시/관람">전시/관람</button></li>
+            <li><button class="dropdown-item" id="3" value="서울형키즈카페">서울형키즈카페</button></li>
+            <li><button class="dropdown-item" id="4" value="산림여가">산림여가</button></li>
+            <li><button class="dropdown-item" id="5" value="문화행사">문화행사</button></li>
+            <li><button class="dropdown-item" id="6" value="농장체험">농장체험</button></li>
+            <li><button class="dropdown-item" id="7" value="교육체험">교육체험</button></li>
+            <li><button class="dropdown-item" id="8" value="공원탐방">공원탐방</button></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="text-warning ms-5 me-5 btn btn-light shadow-warning material-symbols-outlined" href="../templates/signup.html" id="signUpButton">person 회원가입</a>

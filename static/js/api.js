@@ -56,16 +56,30 @@ export async function getExhibitionsAPI() {
 
     const URLParams = new URL(location.href).searchParams;
     const page = URLParams.get('page')
+    const category = URLParams.get('category')
     if (page != null) {
         // 페이지 정보가 있는 경우
-        const response = await fetch(`${backendBaseURL}/exhibitions/?page=${page}`)
-        const responseJson = await response.json();
-        return { response, responseJson };
+        if (category) {
+            const response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}&page=${page}`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        } else {
+            const response = await fetch(`${backendBaseURL}/exhibitions/?page=${page}`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        }
     } else {
         // 페이지 정보가 없는 경우 
-        const response = await fetch(`${backendBaseURL}/exhibitions/`)
-        const responseJson = await response.json();
-        return { response, responseJson };
+        if (category) {
+            const response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        }
+        else {
+            const response = await fetch(`${backendBaseURL}/exhibitions/`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        }
     }
 }
 // 전시회 상세 페이지 API
