@@ -16,6 +16,7 @@
     <!--내비바 css  -->
     <link rel="stylesheet" href="../static/css/navbar.css">
     <link rel="stylesheet" href="../static/css/exhibition-detail.css">
+    <link rel="stylesheet" href="../static/css/review.css">
     <script type="module" src="../static/js/navbar.js"></script>
     <script type="module" src="../static/js/exhibition-detail.js"></script>
     <title>지금은 전시상황! | 상세보기</title>
@@ -24,29 +25,29 @@
 <body>
     <header></header>
     <h1 class="welcome-title">전시 상세</h1>
-    <div class="all-items-organizer">
+    <div class="all-items-organizer" id="exhibitionDetail">
         <div class="poster-n-info-organizer">
             <div class="mini-organizer">
                 <div class="poster-part">
                     <img class="poster-img" id="posterImg" src="../static/img/default-img.jpg">
                 </div>
                 <div class="heart-set">
-                    <div class="heart" id="heartInDeatil"></div>
-                    <span class="heart-num" id="heartNumInDeatil"></span>
+                    <div class="heart" id="heart"></div>
+                    <span class="heart-num" id="heartNum"></span>
                 </div>
             </div>
             <div class="info-part">
-                <span class="blue-words">전시 제목</span><span class="black-words" id="titleInDetail"></span>
-                <span class="blue-words">전시 장소</span><span class="black-words" id="locationInDetail"></span>
-                <span class="blue-words">전시 시작일</span><span class="black-words" id="startDateInDetail"></span>
-                <span class="blue-words">전시 종료일</span><span class="black-words" id="endDateInDetail"></span>
-                <span class="blue-words">전시 설명</span><span class="black-words" id="contentInDetail"></span>
+                <span class="blue-words">전시 제목</span><span class="black-words" id="title"></span>
+                <span class=" blue-words">전시 장소</span><span class="black-words" id="location"></span>
+                <span class="blue-words">전시 시작일</span><span class="black-words" id="startDate"></span>
+                <span class="blue-words">전시 종료일</span><span class="black-words" id="endDate"></span>
+                <span class="blue-words">전시 설명</span><span class="black-words" id="content"></span>
             </div>
         </div>
         <div class="btns">
-            <button class="show-reviews">리뷰 보기</button>
+            <button class="show-reviews" id="reviewBtn">리뷰 보기</button>
             <button class="show-accompanies">동행글 보기</button>
-            <button class="show-reservation" id="reserveInDetail">예약하기</button>
+            <button class="show-reservation" id="reserveBtn">예약하기</button>
         </div>
         <!-- 이 부분에 리뷰 목록/ 동행글 목록 들어갈 자리 -->
         <!-- 이 부분에 리뷰 목록/ 동행글 목록 들어갈 자리 -->

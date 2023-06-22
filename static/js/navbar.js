@@ -35,7 +35,14 @@ async function injectNavbar() {
         const signUpButton = document.getElementById("signUpButton");
         signInButton.style.display = "none";
         signUpButton.style.display = "none";
+
+        // 카테고리 id 기준으로 addEventListener 부여 
+        for (var i = 1; i < 9; i++)
+            document.getElementById(i).addEventListener("click", function () {
+                selectCategory(this.value)
+            })
     }
+
 }
 
 // 로그아웃 함수 
@@ -44,6 +51,19 @@ function handleLogOut() {
     localStorage.removeItem("refresh");
     localStorage.removeItem("payload");
     location.reload();
+}
+
+function selectCategory(category) {
+    const URLParams = new URL(location.href).searchParams;
+    const page = URLParams.get('page')
+    // 페이지가 없거나 값이 null인 경우 
+    if (!page || page == null) {
+        console.log(`${frontendBaseURL}${window.location.pathname}?category=${category}`)
+        window.location.href = `${frontendBaseURL}${window.location.pathname}?category=${category}`
+    } else {
+        console.log(`${frontendBaseURL}${window.location.pathname}?category=${category}&page=${page}`)
+        window.location.href = `${frontendBaseURL}${window.location.pathname}?category=${category}&page=${page}`
+    }
 }
 
 injectNavbar();

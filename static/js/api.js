@@ -56,19 +56,32 @@ export async function getExhibitionsAPI() {
 
     const URLParams = new URL(location.href).searchParams;
     const page = URLParams.get('page')
+    const category = URLParams.get('category')
     if (page != null) {
         // 페이지 정보가 있는 경우
-        const response = await fetch(`${backendBaseURL}/exhibitions/?page=${page}`)
-        const responseJson = await response.json();
-        return { response, responseJson };
+        if (category) {
+            const response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}&page=${page}`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        } else {
+            const response = await fetch(`${backendBaseURL}/exhibitions/?page=${page}`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        }
     } else {
         // 페이지 정보가 없는 경우 
-        const response = await fetch(`${backendBaseURL}/exhibitions/`)
-        const responseJson = await response.json();
-        return { response, responseJson };
+        if (category) {
+            const response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        }
+        else {
+            const response = await fetch(`${backendBaseURL}/exhibitions/`)
+            const responseJson = await response.json();
+            return { response, responseJson };
+        }
     }
 }
-
 // 전시회 상세 페이지 API
 export async function getExhibitionAPI(exhibition_id) {
     const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}`)
@@ -111,6 +124,7 @@ export async function withdrawalAPI(user_id) {
     }
 }
 
+// 유저 정보 수정
 export async function userInfoEditAPI(data) {
     const response = await fetch(`${backendBaseURL}/users/`, {
         method: "PATCH",
@@ -122,6 +136,7 @@ export async function userInfoEditAPI(data) {
     return { response, responseJson }
 }
 
+// 전시회 작성
 export async function exhibitionPostingAPI(data) {
     const response = await fetch(`${backendBaseURL}/exhibitions/`, {
         method: "POST",
@@ -130,5 +145,35 @@ export async function exhibitionPostingAPI(data) {
     })
     const responseJson = await response.json();
     console.log(response, responseJson)
+    return { response, responseJson }
+}
+
+// 전시회 수정
+export async function exhibitionPutAPI(exhibition_id, data) {
+    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}/`, {
+        method: "PUT",
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    console.log(response, responseJson)
+    return { response, responseJson }
+}
+
+// 전시회 삭제 
+export async function exhibitionDeleteAPI(exhibition_id) {
+    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` },
+    })
+    console.log(response)
+    return response
+}
+
+// 리뷰 조회 API
+export async function reviewGetAPI(exhibition_id) {
+    // const response = await fetch(`${backendBaseURL}/reviews/${exhibition_id}/`, { method: 'GET' })
+    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}?select=reviews`, { method: 'GET' })
+    const responseJson = await response.json();
     return { response, responseJson }
 }
