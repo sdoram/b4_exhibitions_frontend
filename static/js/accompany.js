@@ -3,7 +3,8 @@ console.log('accompany 연결')
 import { getAccompanyAPI, payload, payloadParse } from "./api.js";
 import { accompanyPosting } from "./accompany-posting.js";
 
-var isAccompaniesRendered = false;
+let isAccompaniesRendered = false;
+let isApBtnRenderd = false;
 
 // 동행구하기 버튼 눌렀을 때 실행되는 함수
 export function accompany(exhibition_id){
@@ -21,16 +22,19 @@ export function accompany(exhibition_id){
         }
         // 동행구하기 버튼 생성
         if (payload) {
-            const accompanyList = document.getElementById("accompanyList")
-            const accompanyPostingBtn = document.createElement("button")
-            accompanyPostingBtn.setAttribute("class", "show-ac-posting")
-            accompanyPostingBtn.setAttribute("id", "accompanyPostingBtn")
-            accompanyPostingBtn.innerText = "동행 구하기"
-            accompanyPostingBtn.addEventListener("click", function () {
-                accompanyPosting(exhibition_id);  
-            });
-            accompanyList.appendChild(accompanyPostingBtn)
-            // 사라졌던 후기 작성하기 버튼 다시 보이게 하기
+            if (!isApBtnRenderd) {
+                const accompanyList = document.getElementById("accompanyList")
+                const accompanyPostingBtn = document.createElement("button")
+                accompanyPostingBtn.setAttribute("class", "show-ac-posting")
+                accompanyPostingBtn.setAttribute("id", "accompanyPostingBtn")
+                accompanyPostingBtn.innerText = "동행 구하기"
+                accompanyList.prepend(accompanyPostingBtn)
+                accompanyPostingBtn.addEventListener("click", function () {
+                    accompanyPosting(exhibition_id);  
+                });
+                isApBtnRenderd = true;
+            }
+            // 사라졌던 동행구하기 작성 버튼 다시 보이게 하기
             var showAcPosting = document.querySelector(".show-ac-posting");
             showAcPosting.style.display = "block";
         }
