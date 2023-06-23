@@ -69,7 +69,6 @@ window.onload = function loadExhibition() {
         // 리뷰 버튼
         const reviewButton = document.getElementById("reviewBtn");
         reviewButton.addEventListener("click", function () {
-            hideRecommendOrganizer();
             review(exhibition_id);  
         });
 
@@ -104,10 +103,6 @@ function heart(exhibition_id) {
 function exhibitionReserve(link) {
     window.open(link)
 }
-
-document.getElementById("accompanyBtn").addEventListener("click", function() {
-    hideRecommendOrganizer(); // 동행글 보기 버튼 클릭 이벤트 처리
-});
 
 // 추천바 숨기기
 function hideRecommendOrganizer() {
