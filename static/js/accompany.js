@@ -1,18 +1,41 @@
 console.log('accompany 연결')
 
-import { accompanyGetAPI, payload, payloadParse } from "./api.js";
+import { getAccompanyAPI, payload, payloadParse } from "./api.js";
+import { accompanyPosting } from "./accompany-posting.js";
 
-let isAccompaniesRendered = false;
+var isAccompaniesRendered = false;
 
+// 동행구하기 버튼 눌렀을 때 실행되는 함수
 export function accompany(exhibition_id){
+    // 후기 안 보이게 하기
     var rvAllItemsOrganizer = document.querySelector(".rv-all-items-organizer");
-    rvAllItemsOrganizer.style.display = "none";
-    
+    rvAllItemsOrganizer.style.display = "none";    
+        
     var acAllItemsOrganizer = document.querySelector(".ac-all-items-organizer");
     if (acAllItemsOrganizer.style.display === "none") {
         acAllItemsOrganizer.style.display = "flex";
+        // 후기 작성창 연 채로 동행글 보기 눌렀을 때 작성창 닫아주는 코드
+        const reviewPostBox = document.getElementById("reviewPostBox")
+        if (reviewPostBox) {
+            reviewPostBox.parentElement.removeChild(reviewPostBox)
+        }
+        // 동행구하기 버튼 생성
+        if (payload) {
+            const accompanyList = document.getElementById("accompanyList")
+            const accompanyPostingBtn = document.createElement("button")
+            accompanyPostingBtn.setAttribute("class", "show-ac-posting")
+            accompanyPostingBtn.setAttribute("id", "accompanyPostingBtn")
+            accompanyPostingBtn.innerText = "동행 구하기"
+            accompanyPostingBtn.addEventListener("click", function () {
+                accompanyPosting(exhibition_id);  
+            });
+            accompanyList.appendChild(accompanyPostingBtn)
+            // 사라졌던 후기 작성하기 버튼 다시 보이게 하기
+            var showAcPosting = document.querySelector(".show-ac-posting");
+            showAcPosting.style.display = "block";
+        }
         if (!isAccompaniesRendered) {
-            accompanyGetAPI(exhibition_id).then(({ responseJson }) => {
+            getAccompanyAPI(exhibition_id).then(({ responseJson }) => {
                 const accompaniesDATA = responseJson.accompanies.results
                 console.log(accompaniesDATA)
 
@@ -79,7 +102,7 @@ export function accompany(exhibition_id){
                     const dateInfo = document.createElement("div")
                     dateInfo.setAttribute("class", "date-info")
                     const span1 = document.createElement("span")
-                    span1.innerText = "동행글 최종 수정일"
+                    span1.innerText = "최종 수정일"
                     dateInfo.appendChild(span1)
                     const span2 = document.createElement("span")
                     span2.innerText = accompany.updated_at.split("T")[0]
@@ -167,7 +190,7 @@ export function accompany(exhibition_id){
                             const applierDateInfo = document.createElement("div")
                             applierDateInfo.setAttribute("class", "applier-date-info")
                             const applierSpan1 = document.createElement("span")
-                            applierSpan1.innerText = "신청댓글 최종 수정일"
+                            applierSpan1.innerText = "최종 수정일"
                             applierDateInfo.appendChild(applierSpan1)
                             const applierSpan2 = document.createElement("span")
                             applierSpan2.innerText = apply.updated_at.split("T")[0]
@@ -204,5 +227,10 @@ export function accompany(exhibition_id){
         }
     } else {
         acAllItemsOrganizer.style.display = "none";
-    }    
+        // 동행구하기 작성창 연 채로 동행글 보기 눌렀을 때 작성창 닫아주는 코드
+        const accompanyPostBox = document.getElementById("accompanyPostBox")
+        if (accompanyPostBox) {
+            accompanyPostBox.parentElement.removeChild(accompanyPostBox)
+        }      
+    } 
 }
