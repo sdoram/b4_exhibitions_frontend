@@ -91,6 +91,7 @@
     height: 8vmin;
     margin-bottom: 5vmin;
     text-indent: 2vmin;
+    padding-top: 1.2vmin;
 }
 /* 전시내용 입력 */
 .exh-content {
