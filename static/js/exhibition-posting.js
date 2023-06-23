@@ -1,6 +1,6 @@
 console.log('exhibition-posting 연결')
 
-import { exhibitionPostingAPI, frontendBaseURL, exhibitionPutAPI, getExhibitionAPI } from "./api.js";
+import { postExhibitionAPI, frontendBaseURL, putExhibitionAPI, getExhibitionAPI } from "./api.js";
 
 // 게시글 작성 정보 가져오기
 function exhibitionInPutInfo() {
@@ -32,7 +32,7 @@ function exhibitionInPutInfo() {
 }
 
 function handleExhibitionPosting() {
-    exhibitionPostingAPI(exhibitionInPutInfo()).then(({ response, responseJson }) => {
+    postExhibitionAPI(exhibitionInPutInfo()).then(({ response, responseJson }) => {
         if (response.status == 201) {
             console.log(responseJson.data)
             alert(responseJson.message);
@@ -46,7 +46,7 @@ function handleExhibitionPosting() {
 }
 
 function handleExhibitionPut(exhibition_id) {
-    exhibitionPutAPI(exhibition_id, exhibitionInPutInfo()).then(({ response, responseJson }) => {
+    putExhibitionAPI(exhibition_id, exhibitionInPutInfo()).then(({ response, responseJson }) => {
         if (response.status == 200) {
             alert('수정했습니다');
             window.location.replace(`${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`)
