@@ -14,7 +14,7 @@
 }
 /* 본격적인 동행글 구간 시작: 동행글 1개 마다 회색박스 1개 차지. 회색박스 안에 동행신청글도 달림. */
 .gray-box {
-    margin-top: 10vmin;
+    margin-top: 5vmin;
     background-color: #e1e1e1;
     width: fit-content;
     height: fit-content;
@@ -54,6 +54,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 2vmin;
+    padding-top: 0.3vmin;
     border-radius: 0.5556vmin;
 }
 .goal-number {
@@ -64,7 +65,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 2vmin;
-    padding-top: 0.1vmin;
+    padding-top: 0.3vmin;
     border-radius: 0.5556vmin;
 }
 .set-date {
@@ -75,7 +76,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 2vmin;
-    padding-top: 0.1vmin;
+    padding-top: 0.3vmin;
     border-radius: 0.5556vmin;
 }
 /* 보라색 안의 중앙: 동행글 본문 */
