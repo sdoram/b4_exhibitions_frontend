@@ -110,12 +110,16 @@ function exhibitionReserve(link) {
     window.open(link)
 }
 
-// 추천바 숨기기
-function hideRecommendOrganizer() {
-    var recommendOrganizer = document.querySelector(".recommend-organizer");
-    if (recommendOrganizer.style.display === "flex") {
+// 스크롤 위치에 따른 추천바 숨기기
+let recommendOrganizer = document.querySelector(".recommend-organizer");
+let reserveBtn = document.querySelector("#reserveBtn");
+let reserveBtnHeight = window.pageYOffset + reserveBtn.getBoundingClientRect().top;
+console.log(reserveBtnHeight)
+window.onscroll = function() {
+    let windowTop = window.scrollY;
+    if (windowTop >= reserveBtnHeight) {
         recommendOrganizer.style.display = "none";
     } else {
         recommendOrganizer.style.display = "flex";
-    } 
+    }
 }
