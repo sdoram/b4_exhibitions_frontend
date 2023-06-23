@@ -179,17 +179,39 @@ export async function deleteExhibitionAPI(exhibition_id) {
 }
 
 // 리뷰 조회 API
-export async function reviewGetAPI(exhibition_id) {
+export async function getReviewAPI(exhibition_id) {
     // const response = await fetch(`${backendBaseURL}/reviews/${exhibition_id}/`, { method: 'GET' })
     const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}?select=reviews`, { method: 'GET' })
     const responseJson = await response.json();
     return { response, responseJson }
 }
 
+// 리뷰 작성 API
+export async function postReviewAPI(exhibition_id, data) {
+    const response = await fetch(`${backendBaseURL}/reviews/${exhibition_id}/`, {
+        method: 'POST',
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    return { response, responseJson }
+}
+
 // 동행 조회 API
-export async function accompanyGetAPI(exhibition_id) {
+export async function getAccompanyAPI(exhibition_id) {
     // const response = await fetch(`${backendBaseURL}/accompanies/${exhibition_id}/`, { method: 'GET' })
     const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}?select=accompanies`, { method: 'GET' })
+    const responseJson = await response.json();
+    return { response, responseJson }
+}
+
+// 동행 작성 API
+export async function postAccompanyAPI(exhibition_id, data) {
+    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}/`, {
+        method: 'POST',
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
     const responseJson = await response.json();
     return { response, responseJson }
 }
