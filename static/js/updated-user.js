@@ -35,12 +35,14 @@ function userInfoEdit() {
     const gender = document.getElementById('gender').value;
     const profileImage = document.getElementById('profileImage').files[0]
     const bio = document.getElementById('bio').value;
-    if (!password | !passwordCheck | password != passwordCheck) {
-        alert('올바른 비밀번호를 입력해주세요')
+    if (password != passwordCheck) {
+        alert('비밀번호가 일치하지 않습니다')
     } else {
         const data = new FormData();
         data.append("nickname", nickname)
-        data.append("password", password)
+        if (password) {
+            data.append("password", password)
+        }
         data.append("gender", gender)
         if (profileImage) {
             data.append("profile_image", profileImage)

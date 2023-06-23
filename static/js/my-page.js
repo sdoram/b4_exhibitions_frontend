@@ -1,6 +1,6 @@
 console.log('my-page 연결')
 
-import { getUserInfoAPI, payloadParse, payload, frontendBaseURL, deleteUserInfoAPI, postExhibitionLikeAPI, backendBaseURL } from "./api.js";
+import { getUserInfoAPI, payloadParse, payload, frontendBaseURL, deleteUserInfoAPI, postExhibitionLikeAPI, backendBaseURL, postSignInAPI } from "./api.js";
 
 
 window.onload = function loadUserInfo() {
@@ -94,7 +94,7 @@ window.onload = function loadUserInfo() {
                     // 전시회 제목
                     const exhibitionTitle = document.createElement("span");
                     exhibitionTitle.setAttribute("class", "exhibition-title");
-                    exhibitionTitle.innerText = exhibition.info_name
+                    exhibitionTitle.innerHTML = exhibition.info_name
                     exhibitionInfoBox.appendChild(exhibitionTitle);
 
                     // 전시회 기간
@@ -153,20 +153,38 @@ window.onload = function loadUserInfo() {
 }
 
 function profileEdit(user_id) {
-    console.log('프로필 수정', user_id)
-    window.location.href = `${frontendBaseURL}/templates/updated-user.html?user_id=${user_id}`
+    console.log('프로필 수정', payloadParse)
+    // 일반 로그인만 비밀번호 확인하기 
+    if (payloadParse.signin_type == 'normal') {
+        let data = {
+            "email": payloadParse.email,
+            "password": prompt('비밀번호를 입력해주세요')
+        }
+        postSignInAPI(data).then(({ response, responseJson }) => {
+            if (response.status == 200) {
+                window.location.href = `${frontendBaseURL}/templates/updated-user.html?user_id=${user_id}`
+            } else {
+                alert('비밀번호가 일치하지 않습니다')
+            }
+        })
+    } else {
+        window.location.href = `${frontendBaseURL}/templates/updated-user.html?user_id=${user_id}`
+    }
 }
 
 function withdrawal(user_id) {
     console.log('회원 탈퇴', user_id)
-    deleteUserInfoAPI(user_id).then(({ response, responseJson }) => {
-        if (response.status == 200) {
-            localStorage.removeItem("access")
-            localStorage.removeItem("refresh")
-            localStorage.removeItem("payload")
-            location.reload();
-        }
-    })
+    if (confirm("정말 탈퇴하시겠습니까?")) {
+        deleteUserInfoAPI(user_id).then(({ response, responseJson }) => {
+            if (response.status == 200) {
+                alert("탈퇴가 완료됐습니다.")
+                localStorage.removeItem("access")
+                localStorage.removeItem("refresh")
+                localStorage.removeItem("payload")
+                location.reload();
+            }
+        })
+    }
 }
 
 
