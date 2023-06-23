@@ -143,11 +143,14 @@ window.onload = function loadExhibitions() {
 
 // 전시회 삭제 
 function exhibitionDelete(exhibition_id) {
-    deleteExhibitionAPI(exhibition_id).then((response) => {
-        // 전시회 삭제시 확인하기
-        alert('삭제완료')
-        window.location.reload()
-    })
+    // 전시회 삭제시 확인하기
+    if (confirm("정말 삭제하시겠습니까?")) {
+        deleteExhibitionAPI(exhibition_id).then((response) => {
+            console.log(response)
+            alert('삭제완료')
+            window.location.reload()
+        })
+    }
 }
 
 // 전시회 수정
