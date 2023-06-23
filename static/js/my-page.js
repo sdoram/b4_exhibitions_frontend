@@ -1,12 +1,12 @@
 console.log('my-page 연결')
 
-import { myPageAPI, payloadParse, payload, frontendBaseURL, withdrawalAPI, exhibitionLikeAPI, backendBaseURL } from "./api.js";
+import { getUserInfoAPI, payloadParse, payload, frontendBaseURL, deleteUserInfoAPI, postExhibitionLikeAPI, backendBaseURL } from "./api.js";
 
 
 window.onload = function loadUserInfo() {
     // url 객체 생성 후 user_id 값 추출 
     const user_id = new URLSearchParams(window.location.search).get("user_id")
-    myPageAPI(user_id).then(({ response, responseJson }) => {
+    getUserInfoAPI(user_id).then(({ response, responseJson }) => {
         console.log(response, responseJson)
         const userInfo = responseJson
 
@@ -159,7 +159,7 @@ function profileEdit(user_id) {
 
 function withdrawal(user_id) {
     console.log('회원 탈퇴', user_id)
-    withdrawalAPI(user_id).then(({ response, responseJson }) => {
+    deleteUserInfoAPI(user_id).then(({ response, responseJson }) => {
         if (response.status == 200) {
             localStorage.removeItem("access")
             localStorage.removeItem("refresh")
@@ -172,7 +172,7 @@ function withdrawal(user_id) {
 
 function heart(exhibition_id) {
     let fullHeart = false;
-    exhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+    postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
         const heartElement = document.getElementById(exhibition_id);
         const heartNum = document.getElementById(`heartNum${exhibition_id}`)
         if (response.status == 201) {

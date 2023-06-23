@@ -1,5 +1,5 @@
 console.log('signin 연결')
-import { signInAPI, googleAPI, frontendBaseURL, payload } from "./api.js";
+import { postSignInAPI, googleAPI, frontendBaseURL, payload } from "./api.js";
 
 // 로그인 확인
 function checkSignIn() {
@@ -34,7 +34,7 @@ function handleSignIn() {
         "password": password
     }
     // 백엔드 통신 함수 
-    signInAPI(data).then(({ response, responseJson }) => {
+    postSignInAPI(data).then(({ response, responseJson }) => {
         if (response.status == 200) {
             setLocalStorage(responseJson);
             alert('로그인 성공');

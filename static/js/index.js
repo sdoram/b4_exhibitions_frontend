@@ -1,5 +1,5 @@
 console.log('index 연결')
-import { frontendBaseURL, getExhibitionsAPI, exhibitionLikeAPI, myPageAPI, payload, payloadParse } from "./api.js";
+import { frontendBaseURL, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, payload, payloadParse } from "./api.js";
 
 window.onload = function loadExhibitions() {
     getExhibitionsAPI().then(({ response, responseJson }) => {
@@ -70,7 +70,7 @@ window.onload = function loadExhibitions() {
             exhibitionHeartSet.appendChild(exhibitionHeartNum)
 
             if (payload) {
-                myPageAPI(payloadParse.user_id).then(({ responseJson }) => {
+                getUserInfoAPI(payloadParse.user_id).then(({ responseJson }) => {
                     responseJson.exhibition_likes.forEach((obj) => {
                         if (exhibition.id == obj.id) {
                             const heartElement = document.getElementById(exhibition.id);
@@ -121,7 +121,7 @@ window.onload = function loadExhibitions() {
 // 좋아요 하트 관련 코드
 function heart(exhibition_id) {
     let fullHeart = false;
-    exhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+    postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
         const heartElement = document.getElementById(exhibition_id);
         const heartNum = document.getElementById(`heartNum${exhibition_id}`)
         if (response.status == 201) {

@@ -1,5 +1,5 @@
 console.log('signup 연결')
-import { signUpAPI, frontendBaseURL, payload } from "./api.js";
+import { postSignUpAPI, frontendBaseURL, payload } from "./api.js";
 
 function handleSignUp() {
     console.log('회원가입 버튼')
@@ -21,7 +21,7 @@ function handleSignUp() {
         data.append("profile_image", profileImage || '')
         data.append("bio", bio || '')
 
-        signUpAPI(data).then(({ response, responseJson }) => {
+        postSignUpAPI(data).then(({ response, responseJson }) => {
             if (response.status == 201) {
                 alert(responseJson.message);
                 window.location.replace(`${frontendBaseURL}/templates/signin.html`);

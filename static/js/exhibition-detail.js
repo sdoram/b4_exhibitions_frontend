@@ -1,7 +1,7 @@
 console.log('exhibition-detail 연결')
 
 
-import { getExhibitionAPI, exhibitionLikeAPI, payload, payloadParse, myPageAPI, frontendBaseURL } from "./api.js";
+import { getExhibitionAPI, postExhibitionLikeAPI, payload, payloadParse, getUserInfoAPI, frontendBaseURL } from "./api.js";
 import { review } from "./review.js";
 import { accompany } from "./accompany.js";
 
@@ -36,7 +36,7 @@ window.onload = function loadExhibition() {
 
         // 좋아요 하트색 세팅
         if (payload) {
-            myPageAPI(payloadParse.user_id).then(({ responseJson }) => {
+            getUserInfoAPI(payloadParse.user_id).then(({ responseJson }) => {
                 responseJson.exhibition_likes.forEach((obj) => {
                     if (exhibitionDATA.id == obj.id) {
                         const heartElement = document.getElementById("heart");
@@ -68,7 +68,7 @@ window.onload = function loadExhibition() {
 
         // 전시 추천바
         for (let i = 1; i <= 5; i++) {
-            let recommend = exhibitionDATA.recommend[i-1]
+            let recommend = exhibitionDATA.recommend[i - 1]
 
             // 상세페이지 링크
             let linkedExhibition = document.getElementById(`${i}-rec-img-anchor`)
@@ -89,11 +89,11 @@ window.onload = function loadExhibition() {
             let recommendTitle = document.getElementById(`${i}-rec-title`)
             recommendTitle.innerHTML = recommend.info_name
         }
-        
+
         // 리뷰 버튼
         const reviewButton = document.getElementById("reviewBtn");
         reviewButton.addEventListener("click", function () {
-            review(exhibition_id);  
+            review(exhibition_id);
         });
 
         // 동행 버튼
@@ -108,13 +108,13 @@ window.onload = function loadExhibition() {
             exhibitionReserve(exhibitionDATA.direct_url);
         });
     })
-    
+
 }
 
 // 좋아요 하트 관련 코드
 function heart(exhibition_id) {
     let fullHeart = false;
-    exhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+    postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
         const heartElement = document.getElementById("heart");
         const heartNum = document.getElementById("heartNum")
         if (response.status == 201) {
@@ -141,7 +141,7 @@ let reserveBtnHeight = window.pageYOffset + reserveBtn.getBoundingClientRect().t
 let welcomeTitle = document.querySelector("#title");
 let welcomeTitleHeight = window.pageYOffset + welcomeTitle.getBoundingClientRect().top;
 
-window.onscroll = function() {
+window.onscroll = function () {
     let windowTop = window.scrollY;
     if (windowTop >= reserveBtnHeight || windowTop <= welcomeTitleHeight) {
         recommendOrganizer.style.display = "none";

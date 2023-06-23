@@ -1,12 +1,12 @@
 console.log('updated-user 연결')
 
-import { myPageAPI, payloadParse, frontendBaseURL, userInfoEditAPI } from "./api.js";
+import { getUserInfoAPI, payloadParse, frontendBaseURL, patchUserInfoAPI } from "./api.js";
 
 console.log()
 window.onload = function () {
     const user_id = new URLSearchParams(window.location.search).get("user_id")
 
-    myPageAPI(user_id).then(({ response, responseJson }) => {
+    getUserInfoAPI(user_id).then(({ response, responseJson }) => {
         const userInfo = responseJson
 
         // 닉네임
@@ -33,23 +33,25 @@ function userInfoEdit() {
     const password = document.getElementById('password').value;
     const passwordCheck = document.getElementById('passwordCheck').value;
     const gender = document.getElementById('gender').value;
-    const profileImage = document.getElementById('profileImage').files[0] || null
+    const profileImage = document.getElementById('profileImage').files[0]
     const bio = document.getElementById('bio').value;
-    if (password == passwordCheck) {
+    if (!password | !passwordCheck | password != passwordCheck) {
+        alert('올바른 비밀번호를 입력해주세요')
+    } else {
         const data = new FormData();
         data.append("nickname", nickname)
         data.append("password", password)
-        data.append("gender", gender || '밝히고 싶지 않음')
-        data.append("profile_image", profileImage || '')
-        data.append("bio", bio || '')
+        data.append("gender", gender)
+        if (profileImage) {
+            data.append("profile_image", profileImage)
+        }
+        data.append("bio", bio)
 
 
-        userInfoEditAPI(data).then(({ response, responseJson }) => {
+        patchUserInfoAPI(data).then(({ response, responseJson }) => {
             alert(responseJson.message)
             window.location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${user_id}`
         })
-    } else {
-        alert('비밀번호가 일치하지 않습니다')
     }
 }
 document.getElementById("userInfoEditButton").addEventListener("click", userInfoEdit);
