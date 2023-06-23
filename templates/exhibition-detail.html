@@ -25,7 +25,7 @@
 
 <body>
     <header></header>
-    <h1 class="welcome-title">전시 상세</h1>
+    <h1 class="welcome-title" id="title"></h1>
     <div class="all-items-organizer" id="exhibitionDetail">
         <div class="poster-n-info-organizer">
             <div class="mini-organizer">
@@ -38,23 +38,27 @@
                 </div>
             </div>
             <div class="info-part">
-                <span class="blue-words">전시 제목</span><span class="black-words" id="title"></span>
-                <span class=" blue-words">전시 장소</span><span class="black-words" id="location"></span>
-                <span class="blue-words">전시 시작일</span><span class="black-words" id="startDate"></span>
-                <span class="blue-words">전시 종료일</span><span class="black-words" id="endDate"></span>
-                <span class="blue-words">전시 설명</span><span class="black-words" id="content"></span>
+                <!--<span class="blue-words">전시명</span><span class="black-words"></span>-->
+                <span class="blue-words">장소</span><span class="black-words" id="location"></span>
+                <span class="blue-words">시작날짜</span><span class="black-words" id="startDate"></span>
+                <span class="blue-words">종료날짜</span><span class="black-words" id="endDate"></span>
+                <span class="blue-words">설명</span><span class="black-words" id="content"></span>
             </div>
         </div>
         <div class="btns">
-            <button class="show-reviews" id="reviewBtn">리뷰 보기</button>
-            <button class="show-accompanies" id="accompanyBtn">동행글 보기</button>
+            <button class="show-reviews" id="reviewBtn">이용 후기</button>
+            <button class="show-accompanies" id="accompanyBtn">동행 구해요!</button>
             <button class="show-reservation" id="reserveBtn">예약하기</button>
         </div>
-        <div class="rv-all-items-organizer" id="reviewList" style="display: none;"></div>
-        <div class="ac-all-items-organizer" id="accompanyList" style="display: none;"></div>
+        <div class="rv-all-items-organizer" id="reviewList" style="display: none;">
+            <!--review.html 파일에 있음-->
+        </div>
+        <div class="ac-all-items-organizer" id="accompanyList" style="display: none;">
+            <!--accompany.html 파일에 있음-->
+        </div>
     </div>
-    <div class="recommend-organizer" style="display: flex;">
-        <h6 class="rec-intro">그 외 전시 추천</h6>
+    <div class="recommend-organizer" style="display: none;">
+        <h6 class="rec-intro">이런 전시는 어떠세요?</h6>
         <div class="recommend-organizer-small">
             <div class="one-by-one">
                 <div class="rec-img-box">
@@ -62,7 +66,7 @@
                         <img class="rec-img" src="../static/img/default-img.jpg" id="1-rec-img">
                     </a>
                 </div>
-                <span class="rec-title" id="1-rec-title">추천전시 제목</span>
+                <span class="rec-title" id="1-rec-title"></span>
             </div>
             <div class="one-by-one">
                 <div class="rec-img-box">
@@ -70,7 +74,7 @@
                         <img class="rec-img" src="../static/img/default-img.jpg" id="2-rec-img">
                     </a>
                 </div>
-                <span class="rec-title" id="2-rec-title">추천전시 제목</span>
+                <span class="rec-title" id="2-rec-title"></span>
             </div>
             <div class="one-by-one">
                 <div class="rec-img-box">
@@ -78,7 +82,7 @@
                         <img class="rec-img" src="../static/img/default-img.jpg" id="3-rec-img">
                     </a>
                 </div>
-                <span class="rec-title" id="3-rec-title">추천전시 제목</span>
+                <span class="rec-title" id="3-rec-title"></span>
             </div>
             <div class="one-by-one">
                 <div class="rec-img-box">
@@ -86,7 +90,7 @@
                         <img class="rec-img" src="../static/img/default-img.jpg" id="4-rec-img">
                     </a>
                 </div>
-                <span class="rec-title" id="4-rec-title">추천전시 제목</span>
+                <span class="rec-title" id="4-rec-title"></span>
             </div>
             <div class="one-by-one">
                 <div class="rec-img-box">
@@ -94,7 +98,7 @@
                         <img class="rec-img" src="../static/img/default-img.jpg" id="5-rec-img">
                     </a>
                 </div>
-                <span class="rec-title" id="5-rec-title">추천전시 제목</span>
+                <span class="rec-title" id="5-rec-title"></span>
             </div>
         </div>
     </div>
