@@ -1,25 +1,44 @@
 console.log('review 연결')
 
-import { payload, payloadParse, reviewGetAPI, backendBaseURL } from "./api.js";
+import { payload, payloadParse, getReviewAPI, backendBaseURL } from "./api.js";
+import { reviewPosting } from "./review-posting.js";
 
 let isReviewsRendered = false;
 
-// 리뷰 버튼 눌렀을 때 실행되는 함수
+// 이용후기 버튼 눌렀을 때 실행되는 함수
 export function review(exhibition_id) {
+    // 동행글 안 보이게 하기
     var acAllItemsOrganizer = document.querySelector(".ac-all-items-organizer");
     acAllItemsOrganizer.style.display = "none";
     
     var rvAllItemsOrganizer = document.querySelector(".rv-all-items-organizer");
     if (rvAllItemsOrganizer.style.display === "none") {
         rvAllItemsOrganizer.style.display = "flex";
+        // 동행구하기 작성창 연 채로 동행글 보기 눌렀을 때 작성창 닫아주는 코드
+        const accompanyPostBox = document.getElementById("accompanyPostBox")
+        if (accompanyPostBox) {
+            accompanyPostBox.parentElement.removeChild(accompanyPostBox)
+        }
+        // 후기 작성하기 버튼 생성
+        if (payload) {
+            const reviewList = document.getElementById("reviewList")
+            const reviewPostingBtn = document.createElement("button")
+            reviewPostingBtn.setAttribute("class", "show-rv-posting")
+            reviewPostingBtn.setAttribute("id", "reviewPostingBtn")
+            reviewPostingBtn.innerText = "후기 작성하기"
+            reviewPostingBtn.addEventListener("click", function () {
+                reviewPosting(exhibition_id);  
+            });
+            reviewList.appendChild(reviewPostingBtn)
+            // 사라졌던 후기 작성하기 버튼 다시 보이게 하기
+            var showRvPosting = document.querySelector(".show-rv-posting");
+            showRvPosting.style.display = "block";
+        }
         if (!isReviewsRendered) {
-            reviewGetAPI(exhibition_id).then(({ responseJson }) => {
-                const reviewsDATA = responseJson.reviews.results
-                console.log(reviewsDATA)
+            getReviewAPI(exhibition_id).then(({ responseJson }) => {
+                const reviewsDATA = responseJson.reviews.results            
 
-                const reviewList = document.getElementById("reviewList")
-
-                // 리뷰 목록
+                // 후기 목록
                 reviewsDATA.forEach(review => {          
                     const grayBox = document.createElement("div")
                     grayBox.setAttribute("class", "rv-gray-box")
@@ -74,7 +93,7 @@ export function review(exhibition_id) {
                     const row2InPurple = document.createElement("div")
                     row2InPurple.setAttribute("class", "rv-row2-in-purple")
 
-                    // 리뷰 내용
+                    // 후기 내용
                     const reviewContent = document.createElement("div")
                     reviewContent.setAttribute("class", "rv-review-content")
                     reviewContent.innerText = review.content
@@ -84,11 +103,11 @@ export function review(exhibition_id) {
                     const row3InPurple = document.createElement("div")
                     row3InPurple.setAttribute("class", "rv-row3-in-purple")
 
-                    // 리뷰 날짜
+                    // 후기 날짜
                     const dateInfo = document.createElement("div")
                     dateInfo.setAttribute("class", "rv-date-info")
                     const span1 = document.createElement("span")
-                    span1.innerText = "리뷰 최종 수정일"
+                    span1.innerText = "최종 수정일"
                     dateInfo.appendChild(span1)
                     const span2 = document.createElement("span")
                     span2.innerText = review.updated_at.split("T")[0]
@@ -122,5 +141,10 @@ export function review(exhibition_id) {
         }
     } else {
         rvAllItemsOrganizer.style.display = "none";
+        // 후기 작성창 연 채로 이용후기 버튼 다시 눌렀을 때 작성창 닫아주는 코드
+        const reviewPostBox = document.getElementById("reviewPostBox")
+        if (reviewPostBox) {
+            reviewPostBox.parentElement.removeChild(reviewPostBox)
+        }
     }    
 }

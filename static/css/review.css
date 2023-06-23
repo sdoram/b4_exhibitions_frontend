@@ -14,7 +14,7 @@
 }
 /* 본격적인 카드 구간 (1개 회색박스 마다 리뷰 1개) */
 .rv-gray-box {
-    margin-top: 10vmin;
+    margin-top: 5vmin;
     background-color: #e1e1e1;
     width: fit-content;
     height: 60%;
