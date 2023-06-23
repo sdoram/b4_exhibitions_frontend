@@ -1,7 +1,7 @@
 console.log('exhibition-detail 연결')
 
 
-import { getExhibitionAPI, exhibitionLikeAPI, payload, payloadParse, myPageAPI } from "./api.js";
+import { getExhibitionAPI, exhibitionLikeAPI, payload, payloadParse, myPageAPI, frontendBaseURL } from "./api.js";
 import { review } from "./review.js";
 import { accompany } from "./accompany.js";
 
@@ -66,6 +66,29 @@ window.onload = function loadExhibition() {
         const exhibitionContent = document.getElementById("content");
         exhibitionContent.innerHTML = exhibitionDATA.content
 
+        // 전시 추천바
+        for (let i = 1; i <= 5; i++) {
+            let recommend = exhibitionDATA.recommend[i-1]
+
+            // 상세페이지 링크
+            let linkedExhibition = document.getElementById(`${i}-rec-img-anchor`)
+            linkedExhibition.setAttribute("href", `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${recommend.id}`)
+
+            // 이미지
+            let recommendImg = document.getElementById(`${i}-rec-img`)
+            if (recommend.image) {
+                if (recommend.image.includes('https:')) {
+                    recommendImg.setAttribute("src", recommend.image);
+                } else {
+                    // 대체 url 코드로 인코딩된 url 디코딩 하기    
+                    recommendImg.setAttribute("src", decodeURIComponent(recommend.image.split("media/")[1]));
+                }
+            }
+
+            // 제목
+            let recommendTitle = document.getElementById(`${i}-rec-title`)
+            recommendTitle.innerHTML = recommend.info_name
+        }
         
         // 리뷰 버튼
         const reviewButton = document.getElementById("reviewBtn");
@@ -114,10 +137,13 @@ function exhibitionReserve(link) {
 let recommendOrganizer = document.querySelector(".recommend-organizer");
 let reserveBtn = document.querySelector("#reserveBtn");
 let reserveBtnHeight = window.pageYOffset + reserveBtn.getBoundingClientRect().top;
-console.log(reserveBtnHeight)
+
+let welcomeTitle = document.querySelector("#title");
+let welcomeTitleHeight = window.pageYOffset + welcomeTitle.getBoundingClientRect().top;
+
 window.onscroll = function() {
     let windowTop = window.scrollY;
-    if (windowTop >= reserveBtnHeight) {
+    if (windowTop >= reserveBtnHeight || windowTop <= welcomeTitleHeight) {
         recommendOrganizer.style.display = "none";
     } else {
         recommendOrganizer.style.display = "flex";
