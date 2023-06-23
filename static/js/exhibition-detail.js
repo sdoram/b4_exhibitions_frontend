@@ -3,6 +3,7 @@ console.log('exhibition-detail 연결')
 
 import { getExhibitionAPI, exhibitionLikeAPI, payload, payloadParse, myPageAPI } from "./api.js";
 import { review } from "./review.js";
+import { accompany } from "./accompany.js";
 
 
 window.onload = function loadExhibition() {
@@ -72,6 +73,11 @@ window.onload = function loadExhibition() {
             review(exhibition_id);  
         });
 
+        // 동행 버튼
+        const accompanyButton = document.getElementById("accompanyBtn");
+        accompanyButton.addEventListener("click", function () {
+            accompany(exhibition_id);
+        });
 
         // 예약하기 버튼
         const exhibitionReserveButton = document.getElementById("reserveBtn");

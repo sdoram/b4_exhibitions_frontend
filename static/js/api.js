@@ -186,3 +186,11 @@ export async function reviewGetAPI(exhibition_id) {
     const responseJson = await response.json();
     return { response, responseJson }
 }
+
+// 동행 조회 API
+export async function accompanyGetAPI(exhibition_id) {
+    // const response = await fetch(`${backendBaseURL}/accompanies/${exhibition_id}/`, { method: 'GET' })
+    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}?select=accompanies`, { method: 'GET' })
+    const responseJson = await response.json();
+    return { response, responseJson }
+}
