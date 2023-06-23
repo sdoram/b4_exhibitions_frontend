@@ -4,6 +4,7 @@ import { payload, payloadParse, getReviewAPI, backendBaseURL } from "./api.js";
 import { reviewPosting } from "./review-posting.js";
 
 let isReviewsRendered = false;
+let isRpBtnRendered = false;
 
 // 이용후기 버튼 눌렀을 때 실행되는 함수
 export function review(exhibition_id) {
@@ -21,15 +22,18 @@ export function review(exhibition_id) {
         }
         // 후기 작성하기 버튼 생성
         if (payload) {
-            const reviewList = document.getElementById("reviewList")
-            const reviewPostingBtn = document.createElement("button")
-            reviewPostingBtn.setAttribute("class", "show-rv-posting")
-            reviewPostingBtn.setAttribute("id", "reviewPostingBtn")
-            reviewPostingBtn.innerText = "후기 작성하기"
-            reviewPostingBtn.addEventListener("click", function () {
-                reviewPosting(exhibition_id);  
-            });
-            reviewList.appendChild(reviewPostingBtn)
+            if (!isRpBtnRendered) {
+                const reviewList = document.getElementById("reviewList")
+                const reviewPostingBtn = document.createElement("button")
+                reviewPostingBtn.setAttribute("class", "show-rv-posting")
+                reviewPostingBtn.setAttribute("id", "reviewPostingBtn")
+                reviewPostingBtn.innerText = "후기 작성하기"
+                reviewList.prepend(reviewPostingBtn)
+                reviewPostingBtn.addEventListener("click", function () {
+                    reviewPosting(exhibition_id);  
+                });
+                isRpBtnRendered = true;
+            }
             // 사라졌던 후기 작성하기 버튼 다시 보이게 하기
             var showRvPosting = document.querySelector(".show-rv-posting");
             showRvPosting.style.display = "block";
