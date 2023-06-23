@@ -53,17 +53,11 @@ function handleLogOut() {
     localStorage.removeItem("payload");
     location.reload();
 }
-
 function selectCategory(category) {
-    const URLParams = new URL(location.href).searchParams;
-    const page = URLParams.get('page')
-    // 페이지가 없거나 값이 null인 경우 
-    if (!page || page == null) {
-        console.log(`${frontendBaseURL}${window.location.pathname}?category=${category}`)
-        window.location.href = `${frontendBaseURL}${window.location.pathname}?category=${category}`
+    if (payloadParse.is_admin) {
+        window.location.href = `${frontendBaseURL}/templates/backoffice-main.html?category=${category}`
     } else {
-        console.log(`${frontendBaseURL}${window.location.pathname}?category=${category}&page=${page}`)
-        window.location.href = `${frontendBaseURL}${window.location.pathname}?category=${category}&page=${page}`
+        window.location.href = `${frontendBaseURL}/index.html?category=${category}`
     }
 }
 
