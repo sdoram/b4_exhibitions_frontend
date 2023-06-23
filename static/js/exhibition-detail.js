@@ -3,6 +3,7 @@ console.log('exhibition-detail 연결')
 
 import { getExhibitionAPI, exhibitionLikeAPI, payload, payloadParse, myPageAPI } from "./api.js";
 import { review } from "./review.js";
+import { accompany } from "./accompany.js";
 
 
 window.onload = function loadExhibition() {
@@ -69,10 +70,14 @@ window.onload = function loadExhibition() {
         // 리뷰 버튼
         const reviewButton = document.getElementById("reviewBtn");
         reviewButton.addEventListener("click", function () {
-            hideRecommendOrganizer();
             review(exhibition_id);  
         });
 
+        // 동행 버튼
+        const accompanyButton = document.getElementById("accompanyBtn");
+        accompanyButton.addEventListener("click", function () {
+            accompany(exhibition_id);
+        });
 
         // 예약하기 버튼
         const exhibitionReserveButton = document.getElementById("reserveBtn");
@@ -104,10 +109,6 @@ function heart(exhibition_id) {
 function exhibitionReserve(link) {
     window.open(link)
 }
-
-document.getElementById("accompanyBtn").addEventListener("click", function() {
-    hideRecommendOrganizer(); // 동행글 보기 버튼 클릭 이벤트 처리
-});
 
 // 스크롤 위치에 따른 추천바 숨기기
 let recommendOrganizer = document.querySelector(".recommend-organizer");
