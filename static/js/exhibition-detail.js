@@ -138,12 +138,12 @@ let recommendOrganizer = document.querySelector(".recommend-organizer");
 let reserveBtn = document.querySelector("#reserveBtn");
 let reserveBtnHeight = window.pageYOffset + reserveBtn.getBoundingClientRect().top;
 
-let welcomeTitle = document.querySelector("#title");
-let welcomeTitleHeight = window.pageYOffset + welcomeTitle.getBoundingClientRect().top;
+let header = document.querySelector("header");
+let headerHeight = window.pageYOffset + header.getBoundingClientRect().top;
 
 window.onscroll = function () {
     let windowTop = window.scrollY;
-    if (windowTop >= reserveBtnHeight || windowTop <= welcomeTitleHeight) {
+    if (windowTop >= reserveBtnHeight || windowTop <= headerHeight) {
         recommendOrganizer.style.display = "none";
     } else {
         recommendOrganizer.style.display = "flex";

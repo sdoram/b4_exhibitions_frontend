@@ -99,6 +99,51 @@
 .show-accompanies:hover {
     background-color: silver;
 }
+.show-reservation:hover {
+    background-color: silver;
+}
+
+/* 리뷰 작성 버튼 */
+.show-rv-posting {
+    margin-top: 5vmin;
+    margin-right: 5vmin;
+    width: 25vmin;
+    height: 7vmin;
+    color: #6358DC;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: white;
+    border: 0.8vmin solid transparent;
+    background-image: linear-gradient(white, white), linear-gradient(50deg, #fb3c00, #ffb800);
+    border-image-slice: 1;
+    border-radius: 2vmin;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+.show-rv-posting:hover {
+    color: silver;
+}
+
+/* 동행글 작성 버튼 */
+.show-ac-posting {
+    margin-top: 5vmin;
+    margin-right: 5vmin;
+    width: 25vmin;
+    height: 7vmin;
+    color: #6358DC;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: white;
+    border: 0.8vmin solid transparent;
+    background-image: linear-gradient(white, white), linear-gradient(50deg, #fb3c00, #ffb800);
+    border-image-slice: 1;
+    border-radius: 2vmin;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+.show-ac-posting:hover {
+    color: silver;
+}
 
 /* 추천 전시 부분 recommend */
 .recommend-organizer {
