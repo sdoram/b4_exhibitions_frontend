@@ -31,7 +31,7 @@ export function accompany(exhibition_id){
 
                     // 닉네임
                     const nicknameBox = document.createElement("div")
-                    nicknameBox.setAttribute("class", "nickname-box")
+                    nicknameBox.setAttribute("class", "nickname")
                     nicknameBox.innerText = accompany.nickname
                     row1InPurple.appendChild(nicknameBox)
 
@@ -64,7 +64,11 @@ export function accompany(exhibition_id){
                     contentHeader.setAttribute("class", "content-header")
                     contentHeader.innerText = "이런 분을 구합니다!"
                     accompanyContent.appendChild(contentHeader)
-                    accompanyContent.innerText = accompany.content
+
+                    const contentBody = document.createElement("p"); // 새로운 p 태그 추가
+                    contentBody.innerText = accompany.content; // 이 부분 변경
+                    accompanyContent.appendChild(contentBody); // 새로운 p 태그 추가
+
                     row2InPurple.appendChild(accompanyContent)
                     purpleBox.appendChild(row2InPurple)
 
@@ -143,11 +147,16 @@ export function accompany(exhibition_id){
                             // 저도 같이 갈래요!
                             const applierAccompanyContent = document.createElement("div")
                             applierAccompanyContent.setAttribute("class", "applier-accompany-content")
+
                             const applierContentHeader = document.createElement("p")
                             applierContentHeader.setAttribute("class", "applier-content-header")
                             applierContentHeader.innerText = "저도 같이 갈래요!"
                             applierAccompanyContent.appendChild(applierContentHeader)
-                            applierAccompanyContent.innerText = apply.content
+
+                            const applierContent = document.createElement("p"); // 새로운 p 태그 추가
+                            applierContent.innerText = apply.content; // 이 부분 변경
+                            applierAccompanyContent.appendChild(applierContent); // 새로운 p 태그 추가
+
                             applierRow2InPurple.appendChild(applierAccompanyContent)
                             applierPurpleBox.appendChild(applierRow2InPurple)
 

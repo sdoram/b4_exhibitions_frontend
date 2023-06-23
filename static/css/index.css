@@ -120,3 +120,24 @@
 .reserve-button:hover {
     background-color: gray;
 }
+
+/* 페이지 네이션 */
+.pagination {
+    margin-top: 10vmin;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.page-item > button {
+    border: 0.5vmin solid #6358DC;
+    width: 25vmin;
+    height: 5vmin;
+    font-weight: bold;
+    font-size: 1.8vmin;
+    color: #6358DC;  
+}
+
+/* 페이지 바닥 여백주기 */
+body:last-child {
+    margin-bottom: 20vmin;
+}

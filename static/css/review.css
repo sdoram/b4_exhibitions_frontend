@@ -15,7 +15,7 @@
 /* 본격적인 카드 구간 (1개 회색박스 마다 리뷰 1개) */
 .rv-gray-box {
     margin-top: 10vmin;
-    background-color: silver;
+    background-color: #e1e1e1;
     width: fit-content;
     height: 60%;
     overflow: auto;
@@ -137,4 +137,9 @@
 .rv-review-update-btn {
     margin-left: auto;
     margin-right: 1.1111vmin;
+}
+
+/* 페이지 바닥 여백주기 */
+body:last-child {
+    margin-bottom: 20vmin;
 }

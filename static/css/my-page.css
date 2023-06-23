@@ -4,7 +4,7 @@
     justify-content: center;
     color: #6358DC;
     font-weight: bold;
-    font-size: 8vmin;
+    font-size: 6vmin;
     margin-top: 10vmin;
 }
 
@@ -13,17 +13,17 @@
     margin-top: 10vmin;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-content: space-between;
-    padding: 0 18vmin 0 18vmin;
+    justify-content: center;
+    padding: 0 35vmin 0 25vmin;
     height: 50vmin;
     width: 100%;
+    font-family:Arial, Helvetica, sans-serif
 }
 /* 프로필 이미지 부분 */
 .profile-part {
-    height:50vmin;
+    height:40vmin;
     overflow:hidden;
-    border: 0.2vmin solid #6358DC;
+    border: 0.5vmin solid #6358DC;
     border-radius: 1vmin;
 }
 .profile-img {
@@ -40,6 +40,13 @@
     height: 100%;
     margin-right: auto;
     margin-left: 7vmin;
+}
+.user-info-part > div {
+    border: 0.5vmin solid #6358DC;
+    border-radius: 10px;
+    padding: 1.5vmin;
+    width: 46vmin;
+    height: fit-content;
 }
 .user-info-part > div:nth-child(1) {
     margin-bottom: 1.5vmin;
@@ -94,15 +101,15 @@
     justify-content: flex-start;
     color: #6358DC;
     font-weight: bold;
-    font-size: 5vmin;
-    margin-top: 14vmin;
-    margin-left: 20vmin;
+    font-size: 4vmin;
+    margin-top: 4vmin;
+    margin-left: 25vmin;
 }
 .all-exhibitions-organizer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 0 50px 0 140px;
+    padding: 0 5vmin 0 25vmin;
     justify-content: flex-start;
 }
 .exhibition-set {
@@ -177,4 +184,8 @@
 }
 .reserve-button:hover {
     background-color: gray;
+}
+/* 페이지 바닥 여백주기 */
+body:last-child {
+    margin-bottom: 20vmin;
 }
