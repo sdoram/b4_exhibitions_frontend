@@ -70,19 +70,20 @@ window.onload = function loadUserInfo() {
                     // 전시회 이미지
                     const exhibitionImg = document.createElement("img");
                     console.log(exhibition.image)
-                    // 이미지 사이즈가 클 경우 화면에 맞게 줄여주는 css 수정 필요
                     exhibitionImg.setAttribute("class", "card-img-top");
                     // 이미지를 못찾을 경우 대체 이미지 
-                    exhibitionImg.setAttribute("onerror", "this.src='../static/img/default-img.jpg'")
+                    exhibitionImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
                     if (exhibition.image) {
                         if (exhibition.image.includes('https:')) {
                             exhibitionImg.setAttribute("src", exhibition.image);
-                        } else {
+                        } else if (exhibition.image.includes('https%3A')) {
                             // 대체 url 코드로 인코딩된 url 디코딩 하기    
                             exhibitionImg.setAttribute("src", decodeURIComponent(exhibition.image.split("media/")[1]));
+                        } else if (exhibition.image.includes('media')) {
+                            exhibitionImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${exhibition.image}`)
                         }
                     } else {
-                        exhibitionImg.setAttribute("src", "static/img/default-img.jpg")
+                        exhibitionImg.setAttribute("src", "/static/img/default-img.jpg")
                     }
                     exhibitionImgBox.appendChild(exhibitionImg)
 
@@ -190,18 +191,20 @@ function withdrawal(user_id) {
 
 function heart(exhibition_id) {
     let fullHeart = false;
-    postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-        const heartElement = document.getElementById(exhibition_id);
-        const heartNum = document.getElementById(`heartNum${exhibition_id}`)
-        if (response.status == 201) {
-            heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
-            heartNum.innerText = responseJson.likes
-        } else {
-            heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
-            heartNum.innerText = responseJson.likes
-        }
-        fullHeart = !fullHeart;
-    })
+    if (payload) {
+        postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+            const heartElement = document.getElementById(exhibition_id);
+            const heartNum = document.getElementById(`heartNum${exhibition_id}`)
+            if (response.status == 201) {
+                heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+                heartNum.innerText = responseJson.likes
+            } else {
+                heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
+                heartNum.innerText = responseJson.likes
+            }
+            fullHeart = !fullHeart;
+        })
+    }
 }
 
 
