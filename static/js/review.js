@@ -11,11 +11,16 @@ export function review(exhibition_id) {
     // 동행글 안 보이게 하기
     var acAllItemsOrganizer = document.querySelector(".ac-all-items-organizer");
     acAllItemsOrganizer.style.display = "none";
+    // 동행구하기 버튼 안 보이게 하기
+    var showAcPosting = document.querySelector(".show-ac-posting");
+    if (showAcPosting) {
+        showAcPosting.style.display = "none";
+    }
     
     var rvAllItemsOrganizer = document.querySelector(".rv-all-items-organizer");
     if (rvAllItemsOrganizer.style.display === "none") {
         rvAllItemsOrganizer.style.display = "flex";
-        // 동행구하기 작성창 연 채로 동행글 보기 눌렀을 때 작성창 닫아주는 코드
+        // 동행구하기 작성창 연 채로 리뷰 보기 눌렀을 때 작성창 닫아주는 코드
         const accompanyPostBox = document.getElementById("accompanyPostBox")
         if (accompanyPostBox) {
             accompanyPostBox.parentElement.removeChild(accompanyPostBox)
@@ -24,13 +29,13 @@ export function review(exhibition_id) {
         if (payload) {
             if (!isRpBtnRendered) {
                 const reviewList = document.getElementById("reviewList")
-                const reviewPostingBtn = document.createElement("button")
+                var reviewPostingBtn = document.createElement("button")
                 reviewPostingBtn.setAttribute("class", "show-rv-posting")
                 reviewPostingBtn.setAttribute("id", "reviewPostingBtn")
                 reviewPostingBtn.innerText = "후기 작성하기"
-                reviewList.prepend(reviewPostingBtn)
+                reviewList.before(reviewPostingBtn)
                 reviewPostingBtn.addEventListener("click", function () {
-                    reviewPosting(exhibition_id);  
+                    reviewPosting(exhibition_id);
                 });
                 isRpBtnRendered = true;
             }
@@ -52,6 +57,7 @@ export function review(exhibition_id) {
                     imgBox.setAttribute("class", "rv-img-box")
                     const reviewImg = document.createElement("img")
                     reviewImg.setAttribute("class", "rv-review-img")
+                    reviewImg.setAttribute("id", "reviewImg")
                     reviewImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
                     if (review.image) {                
                         reviewImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${review.image}`);             
@@ -141,10 +147,13 @@ export function review(exhibition_id) {
                     reviewList.appendChild(grayBox)
                 })
             })
-        isReviewsRendered = true;
+            isReviewsRendered = true;
         }
     } else {
         rvAllItemsOrganizer.style.display = "none";
+        // 이용후기 버튼 다시 눌렀을 때 후기 작성하기 버튼 안 보이게 하기
+        var showRvPosting = document.querySelector(".show-rv-posting");
+        showRvPosting.style.display = "none";
         // 후기 작성창 연 채로 이용후기 버튼 다시 눌렀을 때 작성창 닫아주는 코드
         const reviewPostBox = document.getElementById("reviewPostBox")
         if (reviewPostBox) {
