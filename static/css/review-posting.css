@@ -32,7 +32,7 @@ body:last-child {
 /* 좌측 이미지 업로드 부분 */
 .rp-img-box {
     width: 50vmin;
-    height: 47.6vmin;
+    height: 47vmin;
     overflow: hidden;
     border: 0vmin solid;
     border-top-left-radius: 1.1111vmin;
@@ -50,7 +50,7 @@ body:last-child {
     font-size: 2vmin;
     text-indent: 1.3vmin;
 }
-.rp-filebox .upload-name {
+.rp-filebox .rp-upload-name {
     display: inline-block;
     height: 40px;
     padding: 0 10px;
@@ -67,7 +67,7 @@ body:last-child {
     vertical-align: middle;
     background-color: #6358DC;
     cursor: pointer;
-    height: 20px;
+    height: 40px;
     margin-left: 10px;
 }
 .rp-filebox input[type="file"] {
@@ -82,7 +82,7 @@ body:last-child {
 .rp-purple-box {
     background-color: #6358DC;
     width: 55%;
-    height: 47.7778vmin;
+    height: 47vmin;
     display: flex;
     flex-direction: column;
     align-items: center;
