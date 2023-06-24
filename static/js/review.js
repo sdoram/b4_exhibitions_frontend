@@ -15,7 +15,7 @@ export function review(exhibition_id) {
     var rvAllItemsOrganizer = document.querySelector(".rv-all-items-organizer");
     if (rvAllItemsOrganizer.style.display === "none") {
         rvAllItemsOrganizer.style.display = "flex";
-        // 동행구하기 작성창 연 채로 동행글 보기 눌렀을 때 작성창 닫아주는 코드
+        // 동행구하기 작성창 연 채로 리뷰 보기 눌렀을 때 작성창 닫아주는 코드
         const accompanyPostBox = document.getElementById("accompanyPostBox")
         if (accompanyPostBox) {
             accompanyPostBox.parentElement.removeChild(accompanyPostBox)
@@ -141,7 +141,7 @@ export function review(exhibition_id) {
                     reviewList.appendChild(grayBox)
                 })
             })
-        isReviewsRendered = true;
+            isReviewsRendered = true;
         }
     } else {
         rvAllItemsOrganizer.style.display = "none";
