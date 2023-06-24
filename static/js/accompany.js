@@ -227,11 +227,11 @@ export function accompany(exhibition_id){
                     accompanyList.appendChild(grayBox)
                 })
             })
-        isAccompaniesRendered = true;
+            isAccompaniesRendered = true;
         }
     } else {
         acAllItemsOrganizer.style.display = "none";
-        // 동행구하기 작성창 연 채로 동행글 보기 눌렀을 때 작성창 닫아주는 코드
+        // 동행구하기 작성창 연 채로 동행글 보기 다시 눌렀을 때 작성창 닫아주는 코드
         const accompanyPostBox = document.getElementById("accompanyPostBox")
         if (accompanyPostBox) {
             accompanyPostBox.parentElement.removeChild(accompanyPostBox)
