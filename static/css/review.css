@@ -29,7 +29,7 @@
 /* 좌측 이미지카드 부분 */
 .rv-img-box {
     width: 50vmin;
-    height: 47.6vmin;
+    height: 47vmin;
     overflow:hidden;
     border: 0vmin solid;
     border-top-left-radius: 1.1111vmin;
@@ -44,7 +44,7 @@
 .rv-purple-box {
     background-color: #6358DC;
     width: 55%;
-    height: 47.7778vmin;
+    height: 47vmin;
     display: flex;
     flex-direction: column;
     align-items: center;
