@@ -88,6 +88,7 @@ export async function deleteUserInfoAPI(user_id) {
 
 // 메인 페이지 전시회 전체 조회 API
 export async function getExhibitionsAPI() {
+    let response
     const URLParams = new URL(location.href).searchParams;
     const page = URLParams.get('page')
     const category = URLParams.get('category')
@@ -95,34 +96,24 @@ export async function getExhibitionsAPI() {
     if (page != null) {
         // 페이지 정보가 있는 경우
         if (category) {
-            const response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}&page=${page}`)
-            const responseJson = await response.json();
-            return { response, responseJson };
+            response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}&page=${page}`)
         } else if (search) {
-            const response = await fetch(`${backendBaseURL}/exhibitions/?search=${search}&page=${page}`)
-            const responseJson = await response.json();
-            return { response, responseJson };
+            response = await fetch(`${backendBaseURL}/exhibitions/search/?search=${search}&page=${page}`)
         } else {
-            const response = await fetch(`${backendBaseURL}/exhibitions/?page=${page}`)
-            const responseJson = await response.json();
-            return { response, responseJson };
+            response = await fetch(`${backendBaseURL}/exhibitions/?page=${page}`)
         }
     } else {
         // 페이지 정보가 없는 경우 
         if (category) {
-            const response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}`)
-            const responseJson = await response.json();
-            return { response, responseJson };
+            response = await fetch(`${backendBaseURL}/exhibitions/?category=${category}`)
         } else if (search) {
-            const response = await fetch(`${backendBaseURL}/exhibitions/search/?search=${search}`)
-            const responseJson = await response.json();
-            return { response, responseJson };
+            response = await fetch(`${backendBaseURL}/exhibitions/search/?search=${search}`)
         } else {
-            const response = await fetch(`${backendBaseURL}/exhibitions/`)
-            const responseJson = await response.json();
-            return { response, responseJson };
+            response = await fetch(`${backendBaseURL}/exhibitions/`)
         }
     }
+    const responseJson = await response.json();
+    return { response, responseJson };
 }
 
 // 전시회 상세 페이지 API
