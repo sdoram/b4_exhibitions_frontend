@@ -14,7 +14,7 @@ async function injectNavbar() {
     document.querySelector("header").innerHTML = data;
 
     // 카테고리 id 기준으로 addEventListener 부여 
-    for (var i = 1; i < 9; i++)
+    for (let i = 1; i < 9; i++)
         document.getElementById(i).addEventListener("click", function () {
             selectCategory(this.value)
         })
@@ -54,7 +54,7 @@ function handleLogOut() {
     location.reload();
 }
 function selectCategory(category) {
-    if (payloadParse.is_admin) {
+    if (payloadParse && payloadParse.is_admin) {
         window.location.href = `${frontendBaseURL}/templates/backoffice-main.html?category=${category}`
     } else {
         window.location.href = `${frontendBaseURL}/index.html?category=${category}`
