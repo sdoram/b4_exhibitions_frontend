@@ -1,5 +1,5 @@
 console.log('index 연결')
-import { frontendBaseURL, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, payload, payloadParse } from "./api.js";
+import { frontendBaseURL, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, payload, payloadParse, backendBaseURL } from "./api.js";
 
 window.onload = function loadExhibitions() {
     getExhibitionsAPI().then(({ response, responseJson }) => {
@@ -23,12 +23,12 @@ window.onload = function loadExhibitions() {
             if (exhibition.image) {
                 if (exhibition.image.includes('https:')) {
                     exhibitionImg.setAttribute("src", exhibition.image);
-                } else {
+                } else if (exhibition.image.includes('https%3A')) {
                     // 대체 url 코드로 인코딩된 url 디코딩 하기    
                     exhibitionImg.setAttribute("src", decodeURIComponent(exhibition.image.split("media/")[1]));
+                } else {
+                    exhibitionImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${exhibition.image}`)
                 }
-            } else {
-                exhibitionImg.setAttribute("src", "static/img/default-img.jpg")
             }
             exhibitionImgBox.appendChild(exhibitionImg)
 
@@ -121,18 +121,20 @@ window.onload = function loadExhibitions() {
 // 좋아요 하트 관련 코드
 function heart(exhibition_id) {
     let fullHeart = false;
-    postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-        const heartElement = document.getElementById(exhibition_id);
-        const heartNum = document.getElementById(`heartNum${exhibition_id}`)
-        if (response.status == 201) {
-            heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
-            heartNum.innerText = responseJson.likes
-        } else {
-            heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
-            heartNum.innerText = responseJson.likes
-        }
-        fullHeart = !fullHeart;
-    })
+    if (payload) {
+        postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+            const heartElement = document.getElementById(exhibition_id);
+            const heartNum = document.getElementById(`heartNum${exhibition_id}`)
+            if (response.status == 201) {
+                heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+                heartNum.innerText = responseJson.likes
+            } else {
+                heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
+                heartNum.innerText = responseJson.likes
+            }
+            fullHeart = !fullHeart;
+        })
+    }
 }
 
 // 전시회 예약 페이지
@@ -175,7 +177,7 @@ document.getElementById("search").addEventListener("keydown", function (e) {
     }
 })
 document.getElementById("searchButton").addEventListener("click", function () {
-    exhibitionSearch(this)
+    exhibitionSearch(document.getElementById("search"))
 })
 
 function exhibitionSearch(search) {

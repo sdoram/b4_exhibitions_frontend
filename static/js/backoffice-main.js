@@ -1,22 +1,24 @@
 console.log('backoffice-main 연결')
 
-import { frontendBaseURL, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, payload, payloadParse, deleteExhibitionAPI } from "./api.js";
+import { frontendBaseURL, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, payload, payloadParse, deleteExhibitionAPI, backendBaseURL } from "./api.js";
 
 // 좋아요 하트 관련 코드
 function heart(exhibition_id) {
     let fullHeart = false;
-    postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-        const heartElement = document.getElementById(exhibition_id);
-        const heartNum = document.getElementById(`heartNum${exhibition_id}`)
-        if (response.status == 201) {
-            heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
-            heartNum.innerText = responseJson.likes
-        } else {
-            heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
-            heartNum.innerText = responseJson.likes
-        }
-        fullHeart = !fullHeart;
-    })
+    if (payload) {
+        postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+            const heartElement = document.getElementById(exhibition_id);
+            const heartNum = document.getElementById(`heartNum${exhibition_id}`)
+            if (response.status == 201) {
+                heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+                heartNum.innerText = responseJson.likes
+            } else {
+                heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
+                heartNum.innerText = responseJson.likes
+            }
+            fullHeart = !fullHeart;
+        })
+    }
 }
 
 
@@ -41,15 +43,22 @@ window.onload = function loadExhibitions() {
             // 이미지 사이즈가 클 경우 화면에 맞게 줄여주는 css 수정 필요
             exhibitionImg.setAttribute("class", "card-img-top");
             // 이미지를 못찾을 경우 대체 이미지 
-            exhibitionImg.setAttribute("onerror", "this.src='../static/img/default-img.jpg'")
+            exhibitionImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
             if (exhibition.image) {
                 if (exhibition.image.includes('https:')) {
                     exhibitionImg.setAttribute("src", exhibition.image);
-                } else {
+                } else if (exhibition.image.includes('https%3A')) {
                     // 대체 url 코드로 인코딩된 url 디코딩 하기    
                     exhibitionImg.setAttribute("src", decodeURIComponent(exhibition.image.split("media/")[1]));
+                } else if (exhibition.image.includes('media')) {
+                    exhibitionImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${exhibition.image}`)
                 }
+            } else {
+                exhibitionImg.setAttribute("src", "/static/img/default-img.jpg")
             }
+            exhibitionImg.addEventListener("click", function () {
+                exhibitionDetail(exhibition.id)
+            })
             exhibitionImgBox.appendChild(exhibitionImg)
 
             // 전시회 정보 박스 
@@ -158,6 +167,12 @@ function exhibitionPut(exhibition_id) {
     window.location.href = `${frontendBaseURL}/templates/exhibition-posting.html?exhibition_id=${exhibition_id}`
 }
 
+// 전시회 상세 페이지
+function exhibitionDetail(exhibition_id) {
+    console.log('전시회 디테일', exhibition_id)
+    window.location.href = `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`
+}
+
 // 이전 페이지
 function handlePreviousPage(page) {
     window.location.href = `${frontendBaseURL}${window.location.pathname}?${page.split('?')[1]}`
@@ -194,7 +209,7 @@ document.getElementById("search").addEventListener("keydown", function (e) {
     }
 })
 document.getElementById("searchButton").addEventListener("click", function () {
-    exhibitionSearch(this)
+    exhibitionSearch(document.getElementById("search"))
 })
 
 function exhibitionSearch(search) {
