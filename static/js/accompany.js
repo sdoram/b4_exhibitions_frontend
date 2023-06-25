@@ -1,6 +1,6 @@
 console.log('accompany 연결')
 
-import { payload, payloadParse, getAccompanyAPI, postAccompanyAPI } from "./api.js";
+import { payload, payloadParse, getAccompanyAPI, postAccompanyAPI, putAccompanyAPI, deleteAccompanyAPI } from "./api.js";
 
 let isAccompaniesRendered = false;
 let isApBtnRenderd = false;
@@ -141,6 +141,9 @@ export function accompany(exhibition_id){
                             accDeleteBtn.setAttribute("type", "button")
                             accDeleteBtn.setAttribute("class", "acc-delete-btn")
                             accDeleteBtn.innerText = "삭제"
+                            accDeleteBtn.addEventListener("click", function () {
+                                deleteAccompany(grayBox, accompany)
+                            })
                             btngroup.appendChild(accDeleteBtn)
                         }
                     }
@@ -467,6 +470,9 @@ function addNewAccompany(accompanyData) {
             accDeleteBtn.setAttribute("type", "button")
             accDeleteBtn.setAttribute("class", "acc-delete-btn")
             accDeleteBtn.innerText = "삭제"
+            accDeleteBtn.addEventListener("click", function () {
+                deleteAccompany(grayBox, accompany)
+            })
             btngroup.appendChild(accDeleteBtn)
         }
     }
@@ -474,4 +480,17 @@ function addNewAccompany(accompanyData) {
     purpleBox.appendChild(row3InPurple)     
     grayBox.appendChild(purpleBox)
     accompanyList.prepend(grayBox)
+}
+
+//------------------------------------------------------------------------------------------삭제----------------------------------------------------------------
+// 삭제 버튼 눌렀을 때 실행되는 함수
+function deleteAccompany(accompanyBox, accompany) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        deleteAccompanyAPI(accompany.id).then((response) => {
+            if (response.status == 204) {
+                alert("삭제되었습니다.")
+                accompanyBox.parentNode.removeChild(accompanyBox)
+            }            
+        })
+    }
 }
