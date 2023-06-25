@@ -1,6 +1,6 @@
 console.log('review 연결')
 
-import { payload, payloadParse, getReviewAPI, backendBaseURL, postReviewAPI, putReviewAPI } from "./api.js";
+import { backendBaseURL, payload, payloadParse, getReviewAPI, postReviewAPI, putReviewAPI, deleteReviewAPI } from "./api.js";
 
 let isReviewsRendered = false;
 let isRpBtnRendered = false;
@@ -140,11 +140,11 @@ export function review(exhibition_id) {
                             reviewUpdateBtn.addEventListener("click", function () {
                                 if (!isEditingReview) {
                                     isEditingReview = true;
-                                    updateReview(grayBox, review);
+                                    updateReview(grayBox, review)
                                 } else {
                                     alert("수정하고 있는 리뷰를 저장 또는 취소 후 클릭하십시오.")
                                 }
-                            });
+                            })
                             row3InPurple.appendChild(reviewUpdateBtn)
 
                             // 삭제 버튼
@@ -152,6 +152,9 @@ export function review(exhibition_id) {
                             reviewDeleteBtn.setAttribute("type", "button")
                             reviewDeleteBtn.setAttribute("class", "rv-review-delete-btn")
                             reviewDeleteBtn.innerText = "삭제"
+                            reviewDeleteBtn.addEventListener("click", function () {
+                                deleteReview(grayBox, review)
+                            })
                             row3InPurple.appendChild(reviewDeleteBtn)
                         }
                     }
@@ -432,6 +435,9 @@ function addNewReview(reviewData) {
             reviewDeleteBtn.setAttribute("type", "button")
             reviewDeleteBtn.setAttribute("class", "rv-review-delete-btn")
             reviewDeleteBtn.innerText = "삭제"
+            reviewDeleteBtn.addEventListener("click", function () {
+                deleteReview(grayBox, review)
+            })
             row3InPurple.appendChild(reviewDeleteBtn)
         }
     }
@@ -605,7 +611,6 @@ function updateReview(reviewBox, reviewData) {
 
                 // 저장->수정, 취소->삭제
                 saveBtn.innerText = "수정"
-                cancelBtn.innerText = "삭제"
                 saveBtn.onclick = function () {
                     if (!isEditingReview) {
                         isEditingReview = true;
@@ -613,6 +618,10 @@ function updateReview(reviewBox, reviewData) {
                     } else {
                         alert("수정하고 있는 리뷰를 저장 또는 취소 후 클릭하십시오.")
                     }                    
+                }
+                cancelBtn.innerText = "삭제"
+                cancelBtn.onclick = function () {
+                    deleteReview(reviewBox, responseJson.data)
                 }
             } else {
                 alert(responseJson.message)
@@ -647,7 +656,23 @@ function updateReview(reviewBox, reviewData) {
             }
         };
         cancelBtn.innerText = "삭제"
+        cancelBtn.onclick = function () {
+            deleteReview(reviewBox, reviewData)
+        }
 
         isEditingReview = false
     };
+}
+
+//------------------------------------------------------------------------------------------삭제----------------------------------------------------------------
+// 삭제 버튼 눌렀을 때 실행되는 함수
+function deleteReview(reviewBox, review) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        deleteReviewAPI(review.id).then((response) => {
+            if (response.status == 204) {
+                alert("삭제되었습니다.")
+                reviewBox.parentNode.removeChild(reviewBox)
+            }            
+        })
+    }
 }
