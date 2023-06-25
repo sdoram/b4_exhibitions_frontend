@@ -205,8 +205,7 @@ export async function deleteReviewAPI(review_id) {
         method: 'DELETE',
         headers: { "Authorization": `Bearer ${token}` },
     })
-    const responseJson = await response.json();
-    return { response, responseJson }
+    return response
 }
 
 // 동행 조회 API
