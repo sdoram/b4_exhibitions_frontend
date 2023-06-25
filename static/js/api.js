@@ -171,7 +171,6 @@ export async function deleteExhibitionAPI(exhibition_id) {
 
 // 리뷰 조회 API
 export async function getReviewAPI(exhibition_id) {
-    // const response = await fetch(`${backendBaseURL}/reviews/${exhibition_id}/`, { method: 'GET' })
     const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}?select=reviews`, { method: 'GET' })
     const responseJson = await response.json();
     return { response, responseJson }
@@ -210,7 +209,6 @@ export async function deleteReviewAPI(review_id) {
 
 // 동행 조회 API
 export async function getAccompanyAPI(exhibition_id) {
-    // const response = await fetch(`${backendBaseURL}/accompanies/${exhibition_id}/`, { method: 'GET' })
     const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}?select=accompanies`, { method: 'GET' })
     const responseJson = await response.json();
     return { response, responseJson }
@@ -218,11 +216,31 @@ export async function getAccompanyAPI(exhibition_id) {
 
 // 동행 작성 API
 export async function postAccompanyAPI(exhibition_id, data) {
-    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}/`, {
+    const response = await fetch(`${backendBaseURL}/accompanies/${exhibition_id}/`, {
         method: 'POST',
         headers: { "Authorization": `Bearer ${token}` },
         body: data
     })
     const responseJson = await response.json();
     return { response, responseJson }
+}
+
+// 동행 수정 API
+export async function putAccompanyAPI(accompany_id, data) {
+    const response = await fetch(`${backendBaseURL}/accompanies/detail/${accompany_id}/`, {
+        method: 'PUT',
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    return { response, responseJson }
+}
+
+// 동행 삭제 API
+export async function deleteAccompanyAPI(accompany_id) {
+    const response = await fetch(`${backendBaseURL}/accompanies/detail/${accompany_id}/`, {
+        method: 'DELETE',
+        headers: { "Authorization": `Bearer ${token}` },
+    })
+    return response
 }
