@@ -188,6 +188,26 @@ export async function postReviewAPI(exhibition_id, data) {
     return { response, responseJson }
 }
 
+// 리뷰 수정 API
+export async function putReviewAPI(review_id, data) {
+    const response = await fetch(`${backendBaseURL}/reviews/detail/${review_id}/`, {
+        method: 'PUT',
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    return { response, responseJson }
+}
+
+// 리뷰 삭제 API
+export async function deleteReviewAPI(review_id) {
+    const response = await fetch(`${backendBaseURL}/reviews/detail/${review_id}/`, {
+        method: 'DELETE',
+        headers: { "Authorization": `Bearer ${token}` },
+    })
+    return response
+}
+
 // 동행 조회 API
 export async function getAccompanyAPI(exhibition_id) {
     // const response = await fetch(`${backendBaseURL}/accompanies/${exhibition_id}/`, { method: 'GET' })
