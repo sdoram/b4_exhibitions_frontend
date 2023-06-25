@@ -247,7 +247,7 @@ export function accompany(exhibition_id){
                     accompanyList.appendChild(grayBox)
                 })
             })
-        isAccompaniesRendered = true;
+            isAccompaniesRendered = true;
         }
     } else {
         acAllItemsOrganizer.style.display = "none";
