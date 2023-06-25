@@ -218,7 +218,7 @@ export async function getAccompanyAPI(exhibition_id) {
 
 // 동행 작성 API
 export async function postAccompanyAPI(exhibition_id, data) {
-    const response = await fetch(`${backendBaseURL}/exhibitions/${exhibition_id}/`, {
+    const response = await fetch(`${backendBaseURL}/accompanies/${exhibition_id}/`, {
         method: 'POST',
         headers: { "Authorization": `Bearer ${token}` },
         body: data
