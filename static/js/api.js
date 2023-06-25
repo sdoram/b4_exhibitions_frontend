@@ -226,3 +226,23 @@ export async function postAccompanyAPI(exhibition_id, data) {
     const responseJson = await response.json();
     return { response, responseJson }
 }
+
+// 동행 수정 API
+export async function putAccompanyAPI(accompany_id, data) {
+    const response = await fetch(`${backendBaseURL}/reviews/detail/${accompany_id}/`, {
+        method: 'PUT',
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    return { response, responseJson }
+}
+
+// 동행 삭제 API
+export async function deleteAccompanyAPI(accompany_id) {
+    const response = await fetch(`${backendBaseURL}/reviews/detail/${accompany_id}/`, {
+        method: 'DELETE',
+        headers: { "Authorization": `Bearer ${token}` },
+    })
+    return response
+}
