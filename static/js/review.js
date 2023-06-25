@@ -449,7 +449,7 @@ function removeExistingListeners(element, eventName) {
 }
 
 // 수정 버튼 눌렀을 때 실행되는 함수
-export function updateReview(reviewBox, reviewData) {
+function updateReview(reviewBox, reviewData) {
     // 후기 작성창 연 채로 수정 버튼 눌렀을 때 작성창 닫아주는 코드
     const reviewPostBox = document.getElementById("reviewPostBox")
     if (reviewPostBox) {
