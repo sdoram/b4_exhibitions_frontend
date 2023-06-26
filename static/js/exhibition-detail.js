@@ -1,9 +1,8 @@
-console.log('exhibition-detail 연결')
-
-
 import { getExhibitionAPI, postExhibitionLikeAPI, payload, payloadParse, getUserInfoAPI, frontendBaseURL } from "./api.js";
-import { review, isEditingReview } from "./review.js";
-import { accompany, isEditingAccompany } from "./accompany.js";
+import { review } from "./review.js";
+import { accompany } from "./accompany.js";
+import { isEditingReview } from "./review-editing.js";
+import { isEditingAccompany } from "./accompany-editing.js";
 
 
 window.onload = function loadExhibition() {
