@@ -10,15 +10,15 @@ let isEditingAccompany = false;
 // 동행구해요! 버튼 눌렀을 때 실행되는 함수
 export function accompany(exhibition_id){
     // 후기 안 보이게 하기
-    var rvAllItemsOrganizer = document.querySelector(".rv-all-items-organizer");
-    rvAllItemsOrganizer.style.display = "none";
+    const rvAllItemsOrganizer = document.querySelector(".rv-all-items-organizer")
+    rvAllItemsOrganizer.style.display = "none"
     // 후기 작성 버튼 안 보이게 하기
-    var showRvPosting = document.querySelector(".show-rv-posting");
+    const showRvPosting = document.querySelector(".show-rv-posting")
     if (showRvPosting) {
-        showRvPosting.style.display = "none";
+        showRvPosting.style.display = "none"
     }
        
-    var acAllItemsOrganizer = document.querySelector(".ac-all-items-organizer");
+    const acAllItemsOrganizer = document.querySelector(".ac-all-items-organizer");
     if (acAllItemsOrganizer.style.display === "none") {
         acAllItemsOrganizer.style.display = "flex";
         // 후기 작성창 연 채로 동행글 보기 눌렀을 때 작성창 닫아주는 코드
@@ -263,6 +263,7 @@ export function accompany(exhibition_id){
 }
 
 //------------------------------------------------------------------------------------------작성----------------------------------------------------------------
+// 동행 구하기 버튼 눌렀을 때 실행되는 함수
 function accompanyPosting(exhibition_id){
     if (isEditingAccompany) {
         alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
@@ -417,6 +418,7 @@ function addNewAccompany(accompanyData) {
     goalNumber.setAttribute("class", "ac-goal-number")
     goalNumber.innerText = "목표인원 "
     const personnel = document.createElement("span")
+    personnel.setAttribute("id", "personnel")
     personnel.innerText = `${accompanyData.personnel}명`
     goalNumber.appendChild(personnel)
     row1InPurple.appendChild(goalNumber)
@@ -426,6 +428,7 @@ function addNewAccompany(accompanyData) {
     setDate.setAttribute("class", "ac-set-date")
     setDate.innerText = "동행시간 "
     const time = document.createElement("span")
+    time.setAttribute("id", "timeView")
     time.innerText = `${accompanyData.start_time.split("T")[0]} ${accompanyData.start_time.split("T")[1].slice(0,5)} ~ ${accompanyData.end_time.split("T")[0]} ${accompanyData.end_time.split("T")[1].slice(0,5)}`
     setDate.appendChild(time)
     row1InPurple.appendChild(setDate)
@@ -481,8 +484,8 @@ function addNewAccompany(accompanyData) {
             accUpdateBtn.innerText = "수정"
             accUpdateBtn.addEventListener("click", function () {
                 if (!isEditingAccompany) {
-                    isEditingAccompany = true;
-                    updateAccompany(grayBox, accompany)
+                    isEditingAccompany = true
+                    updateAccompany(grayBox, accompanyData)
                 } else {
                     alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
                 }
@@ -495,7 +498,7 @@ function addNewAccompany(accompanyData) {
             accDeleteBtn.setAttribute("class", "acc-delete-btn")
             accDeleteBtn.innerText = "삭제"
             accDeleteBtn.addEventListener("click", function () {
-                deleteAccompany(grayBox, accompany)
+                deleteAccompany(grayBox, accompanyData)
             })
             btngroup.appendChild(accDeleteBtn)
         }
@@ -520,7 +523,12 @@ function updateAccompany(accompanyBox, accompanyData) {
     const accompanyPostBox = document.getElementById("accompanyPostBox")
     if (accompanyPostBox) {
         accompanyPostBox.parentElement.removeChild(accompanyPostBox)
-    }   
+    }
+    // 수정 버튼 클릭 시 동행구하기 버튼 사라지게 하는 코드
+    let showAcPosting = document.querySelector(".show-ac-posting")
+    if (showAcPosting) {
+        showAcPosting.style.display = "none"
+    }
     
     // 목표 인원
     let goalNumberElement = accompanyBox.querySelector(".ac-goal-number")
@@ -652,7 +660,8 @@ function updateAccompany(accompanyBox, accompanyData) {
                 textareaElement.style.display = "block"
             }            
         })
-        isEditingAccompany = false
+        isEditingAccompany = false // 수정 중인 상태가 아닌 것으로 변경
+        showAcPosting.style.display = "block"   // 수정 중에 사라졌던 동행구하기 버튼 다시 생기게 하기
     }
 
     cancelBtn.onclick = (event) => {
@@ -663,6 +672,7 @@ function updateAccompany(accompanyBox, accompanyData) {
         goalNumberElement.removeChild(nameElement)
 
         // 동행시간 되돌리기
+        originTime.style.display = ""
         setDateElement.removeChild(startBox)
         setDateElement.removeChild(endBox)
         setDateElement.removeChild(setDateElement.lastChild)    
@@ -687,8 +697,9 @@ function updateAccompany(accompanyBox, accompanyData) {
             deleteAccompany(accompanyBox, accompanyData)
         }
 
-        isEditingAccompany = false
-    };
+        isEditingAccompany = false // 수정 중인 상태가 아닌 것으로 변경
+        showAcPosting.style.display = "block"   // 수정 중에 사라졌던 동행구하기 버튼 다시 생기게 하기
+    }
 }
 
 //------------------------------------------------------------------------------------------삭제----------------------------------------------------------------
