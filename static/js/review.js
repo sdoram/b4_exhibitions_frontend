@@ -11,15 +11,15 @@ let isEditingReview = false;
 // 이용후기 버튼 눌렀을 때 실행되는 함수
 export function review(exhibition_id) {
     // 동행글 안 보이게 하기
-    var acAllItemsOrganizer = document.querySelector(".ac-all-items-organizer");
-    acAllItemsOrganizer.style.display = "none";
+    const acAllItemsOrganizer = document.querySelector(".ac-all-items-organizer")
+    acAllItemsOrganizer.style.display = "none"
     // 동행구하기 버튼 안 보이게 하기
-    var showAcPosting = document.querySelector(".show-ac-posting");
+    const showAcPosting = document.querySelector(".show-ac-posting")
     if (showAcPosting) {
-        showAcPosting.style.display = "none";
+        showAcPosting.style.display = "none"
     }
     
-    var rvAllItemsOrganizer = document.querySelector(".rv-all-items-organizer");
+    const rvAllItemsOrganizer = document.querySelector(".rv-all-items-organizer");
     if (rvAllItemsOrganizer.style.display === "none") {
         rvAllItemsOrganizer.style.display = "flex";
         // 동행구하기 작성창 연 채로 리뷰 보기 눌렀을 때 작성창 닫아주는 코드
@@ -31,7 +31,7 @@ export function review(exhibition_id) {
         if (payload) {
             if (!isRpBtnRendered) {
                 const reviewList = document.getElementById("reviewList")
-                var reviewPostingBtn = document.createElement("button")
+                const reviewPostingBtn = document.createElement("button")
                 reviewPostingBtn.setAttribute("class", "show-rv-posting")
                 reviewPostingBtn.setAttribute("id", "reviewPostingBtn")
                 reviewPostingBtn.innerText = "후기 작성하기"
@@ -39,10 +39,10 @@ export function review(exhibition_id) {
                 reviewPostingBtn.addEventListener("click", function () {
                     reviewPosting(exhibition_id);
                 });
-                isRpBtnRendered = true;
+                isRpBtnRendered = true
             }
             // 사라졌던 후기 작성하기 버튼 다시 보이게 하기
-            var showRvPosting = document.querySelector(".show-rv-posting");
+            const showRvPosting = document.querySelector(".show-rv-posting");
             showRvPosting.style.display = "block";
         }
         if (!isReviewsRendered) {
@@ -139,7 +139,7 @@ export function review(exhibition_id) {
                             reviewUpdateBtn.innerText = "수정"
                             reviewUpdateBtn.addEventListener("click", function () {
                                 if (!isEditingReview) {
-                                    isEditingReview = true;
+                                    isEditingReview = true
                                     updateReview(grayBox, review)
                                 } else {
                                     alert("수정하고 있는 리뷰를 저장 또는 취소 후 클릭하십시오.")
@@ -163,12 +163,12 @@ export function review(exhibition_id) {
                     reviewList.appendChild(grayBox)
                 })
             })
-            isReviewsRendered = true;
+            isReviewsRendered = true
         }
     } else {
         rvAllItemsOrganizer.style.display = "none";
         // 이용후기 버튼 다시 눌렀을 때 후기 작성하기 버튼 안 보이게 하기
-        var showRvPosting = document.querySelector(".show-rv-posting");
+        const showRvPosting = document.querySelector(".show-rv-posting");
         showRvPosting.style.display = "none";
         // 후기 작성창 연 채로 이용후기 버튼 다시 눌렀을 때 작성창 닫아주는 코드
         const reviewPostBox = document.getElementById("reviewPostBox")
@@ -181,119 +181,114 @@ export function review(exhibition_id) {
 //------------------------------------------------------------------------------------------작성----------------------------------------------------------------
 // 후기 작성하기 버튼 눌렀을 때 실행되는 함수
 function reviewPosting(exhibition_id) {
-    if (isEditingReview) {
-        alert("수정하고 있는 리뷰를 저장 또는 취소 후 클릭하십시오.")
-    } else {
-        // 후기 작성하기 버튼 안 보이게 하기
-        var showRvPosting = document.querySelector(".show-rv-posting");
-        showRvPosting.style.display = "none";
+    // 후기 작성하기 버튼 안 보이게 하기
+    const showRvPosting = document.querySelector(".show-rv-posting");
+    showRvPosting.style.display = "none";
 
-        // 후기 작성창이 없을 때 렌더하기
-        let reviewPostBox = document.getElementById("reviewPostBox")
-        if (!reviewPostBox) {
-            const reviewList = document.getElementById("reviewList")
+    // 후기 작성창이 없을 때 렌더하기
+    let reviewPostBox = document.getElementById("reviewPostBox")
+    if (!reviewPostBox) {
+        const reviewList = document.getElementById("reviewList")
 
-            const grayBox = document.createElement("form")
-            grayBox.setAttribute("class", "rp-gray-box")
-            grayBox.setAttribute("id", "reviewPostBox")
+        const grayBox = document.createElement("form")
+        grayBox.setAttribute("class", "rp-gray-box")
+        grayBox.setAttribute("id", "reviewPostBox")
 
-            // 이미지 업로드
-            const imgBox = document.createElement("div")
-            imgBox.setAttribute("class", "rp-img-box")
+        // 이미지 업로드
+        const imgBox = document.createElement("div")
+        imgBox.setAttribute("class", "rp-img-box")
 
-            const fileBox = document.createElement("div")
-            fileBox.setAttribute("class", "rp-filebox")
+        const fileBox = document.createElement("div")
+        fileBox.setAttribute("class", "rp-filebox")
 
-            const uploadName = document.createElement("input")
-            uploadName.setAttribute("class", "rp-upload-name")
-            uploadName.setAttribute("value", "후기 이미지 업로드")
-            uploadName.setAttribute("placeholder", "후기 이미지 업로드")
-            uploadName.setAttribute("disabled", "disabled")
-            fileBox.appendChild(uploadName)
+        const uploadName = document.createElement("input")
+        uploadName.setAttribute("class", "rp-upload-name")
+        uploadName.setAttribute("value", "후기 이미지 업로드")
+        uploadName.setAttribute("placeholder", "후기 이미지 업로드")
+        uploadName.setAttribute("disabled", "disabled")
+        fileBox.appendChild(uploadName)
 
-            const file = document.createElement("label")
-            file.setAttribute("for", "rvImage")
-            file.innerText = "파일찾기"
-            fileBox.appendChild(file)
-            
-            const inputFile = document.createElement("input")
-            inputFile.setAttribute("type", "file")
-            inputFile.setAttribute("id", "rvImage")
-            inputFile.setAttribute("accept", ".jpg,.jpeg,.png,.gif,.bmp")
-            inputFile.setAttribute("capture", "camera")
-            inputFile.setAttribute("class", "rp-upload-hidden")
-            fileBox.appendChild(inputFile)
-            imgBox.appendChild(fileBox)
-            grayBox.appendChild(imgBox)
+        const file = document.createElement("label")
+        file.setAttribute("for", "rvImage")
+        file.innerText = "파일찾기"
+        fileBox.appendChild(file)
+        
+        const inputFile = document.createElement("input")
+        inputFile.setAttribute("type", "file")
+        inputFile.setAttribute("id", "rvImage")
+        inputFile.setAttribute("accept", ".jpg,.jpeg,.png,.gif,.bmp")
+        inputFile.setAttribute("capture", "camera")
+        inputFile.setAttribute("class", "rp-upload-hidden")
+        fileBox.appendChild(inputFile)
+        imgBox.appendChild(fileBox)
+        grayBox.appendChild(imgBox)
 
-            // 이미지 업로드 시 후기 이미지 업로드 글자를 이미지 이름으로 바꾸는 코드
-            inputFile.addEventListener('input', function (event) {
-                const fileName = event.target.files[0].name;
-                uploadName.value = fileName;
+        // 이미지 업로드 시 후기 이미지 업로드 글자를 이미지 이름으로 바꾸는 코드
+        inputFile.addEventListener('input', function (event) {
+            const fileName = event.target.files[0].name;
+            uploadName.value = fileName;
+        });
+
+        const purpleBox = document.createElement("div")
+        purpleBox.setAttribute("class", "rp-purple-box")
+
+        const row1InPurple = document.createElement("div")
+        row1InPurple.setAttribute("class", "rp-row1-in-purple")
+
+        // 닉네임
+        const nicknameBox = document.createElement("div")
+        nicknameBox.setAttribute("class", "rp-nickname-box")
+        nicknameBox.innerText = payloadParse.nickname
+        row1InPurple.appendChild(nicknameBox)
+
+        // 별점
+        const stars = document.createElement("div")
+        stars.setAttribute("class", "rp-stars")
+        stars.setAttribute("id", "rvStar")
+        
+        for (let i = 1; i <= 5; i++) { 
+            let star = document.createElement("img")
+            star.setAttribute("class", "rp-star")              
+            star.setAttribute("src", "/static/img/empty-star.png")
+            star.setAttribute("id", `star${i}`)
+            star.setAttribute("value", `${i}`)
+            star.addEventListener("click", function () {
+                fillStars(i);
             });
-
-            const purpleBox = document.createElement("div")
-            purpleBox.setAttribute("class", "rp-purple-box")
-
-            const row1InPurple = document.createElement("div")
-            row1InPurple.setAttribute("class", "rp-row1-in-purple")
-
-            // 닉네임
-            const nicknameBox = document.createElement("div")
-            nicknameBox.setAttribute("class", "rp-nickname-box")
-            nicknameBox.innerText = payloadParse.nickname
-            row1InPurple.appendChild(nicknameBox)
-
-            // 별점
-            const stars = document.createElement("div")
-            stars.setAttribute("class", "rp-stars")
-            stars.setAttribute("id", "rvStar")
-            
-            for (let i = 1; i <= 5; i++) { 
-                let star = document.createElement("img")
-                star.setAttribute("class", "rp-star")              
-                star.setAttribute("src", "/static/img/empty-star.png")
-                star.setAttribute("id", `star${i}`)
-                star.setAttribute("value", `${i}`)
-                star.addEventListener("click", function () {
-                    fillStars(i);
-                });
-                stars.appendChild(star)
-            }
-            row1InPurple.appendChild(stars)
-            purpleBox.appendChild(row1InPurple)
-
-            const row2InPurple = document.createElement("div")
-            row2InPurple.setAttribute("class", "rv-row2-in-purple")
-
-            // 후기 내용
-            const reviewContent = document.createElement("textarea")
-            reviewContent.setAttribute("class", "rp-review-content")
-            reviewContent.setAttribute("id", "rvContent")
-            reviewContent.setAttribute("placeholder", "후기 내용을 입력해주세요.")
-            row2InPurple.appendChild(reviewContent)
-            purpleBox.appendChild(row2InPurple)
-
-            const row3InPurple = document.createElement("div")
-            row3InPurple.setAttribute("class", "rp-row3-in-purple")
-
-            // 후기 입력완료 버튼
-            const rvPostingBtn = document.createElement("button")
-            rvPostingBtn.setAttribute("type", "button")
-            rvPostingBtn.setAttribute("class", "rp-review-posting-btn")
-            rvPostingBtn.setAttribute("id", "rvPostingBtn")
-            rvPostingBtn.addEventListener("click", function () {
-                handleReviewPosting(exhibition_id)
-                review(exhibition_id)
-            })
-            rvPostingBtn.innerText = "입력완료"
-            row3InPurple.appendChild(rvPostingBtn)
-            purpleBox.appendChild(row3InPurple)
-            grayBox.appendChild(purpleBox)
-            reviewList.prepend(grayBox)
+            stars.appendChild(star)
         }
+        row1InPurple.appendChild(stars)
+        purpleBox.appendChild(row1InPurple)
+
+        const row2InPurple = document.createElement("div")
+        row2InPurple.setAttribute("class", "rv-row2-in-purple")
+
+        // 후기 내용
+        const reviewContent = document.createElement("textarea")
+        reviewContent.setAttribute("class", "rp-review-content")
+        reviewContent.setAttribute("id", "rvContent")
+        reviewContent.setAttribute("placeholder", "후기 내용을 입력해주세요.")
+        row2InPurple.appendChild(reviewContent)
+        purpleBox.appendChild(row2InPurple)
+
+        const row3InPurple = document.createElement("div")
+        row3InPurple.setAttribute("class", "rp-row3-in-purple")
+
+        // 후기 입력완료 버튼
+        const rvPostingBtn = document.createElement("button")
+        rvPostingBtn.setAttribute("type", "button")
+        rvPostingBtn.setAttribute("class", "rp-review-posting-btn")
+        rvPostingBtn.setAttribute("id", "rvPostingBtn")
+        rvPostingBtn.addEventListener("click", function () {
+            handleReviewPosting(exhibition_id)
+            review(exhibition_id)
+        })
+        rvPostingBtn.innerText = "입력완료"
+        row3InPurple.appendChild(rvPostingBtn)
+        purpleBox.appendChild(row3InPurple)
+        grayBox.appendChild(purpleBox)
+        reviewList.prepend(grayBox)
     }
-    
 }
 
 //--------------위에서 실행시킨 함수가 선언되는 부분--------------
@@ -331,8 +326,8 @@ function reviewInputInfo() {
 function handleReviewPosting(exhibition_id) {
     postReviewAPI(exhibition_id, reviewInputInfo()).then(({ response, responseJson }) => {
         if (response.status == 201) {
-            addNewReview(responseJson.data);
-            review(exhibition_id);
+            addNewReview(responseJson.data)
+            review(exhibition_id)
         } else {
             alert(responseJson.message);
         }
@@ -377,6 +372,7 @@ function addNewReview(reviewData) {
     // 별점
     const stars = document.createElement("div")
     stars.setAttribute("class", "rv-stars")
+    stars.setAttribute("data-value", reviewData.rating)
     
     for (let i = 1; i <= 5; i++) {
         if (i <= reviewData.rating) {  
@@ -428,11 +424,12 @@ function addNewReview(reviewData) {
             reviewUpdateBtn.innerText = "수정"
             reviewUpdateBtn.addEventListener("click", function () {
                 if (!isEditingReview) {
-                    updateReview(grayBox, reviewData);
+                    isEditingReview = true
+                    updateReview(grayBox, reviewData)
                 } else {
                     alert("수정하고 있는 리뷰를 저장 또는 취소 후 클릭하십시오.")
                 }
-            });
+            })
             row3InPurple.appendChild(reviewUpdateBtn)
 
             // 삭제 버튼
@@ -441,7 +438,7 @@ function addNewReview(reviewData) {
             reviewDeleteBtn.setAttribute("class", "rv-review-delete-btn")
             reviewDeleteBtn.innerText = "삭제"
             reviewDeleteBtn.addEventListener("click", function () {
-                deleteReview(grayBox, review)
+                deleteReview(grayBox, reviewData)
             })
             row3InPurple.appendChild(reviewDeleteBtn)
         }
@@ -465,6 +462,11 @@ function updateReview(reviewBox, reviewData) {
     const reviewPostBox = document.getElementById("reviewPostBox")
     if (reviewPostBox) {
         reviewPostBox.parentElement.removeChild(reviewPostBox)
+    }
+    // 수정 버튼 클릭 시 후기 작성하기 버튼 사라지게 하는 코드
+    let showRvPosting = document.querySelector(".show-rv-posting")
+    if (showRvPosting) {
+        showRvPosting.style.display = "none"
     }
     
     // 이미지
@@ -618,7 +620,7 @@ function updateReview(reviewBox, reviewData) {
                 saveBtn.innerText = "수정"
                 saveBtn.onclick = function () {
                     if (!isEditingReview) {
-                        isEditingReview = true;
+                        isEditingReview = true
                         updateReview(reviewBox, responseJson.data)
                     } else {
                         alert("수정하고 있는 리뷰를 저장 또는 취소 후 클릭하십시오.")
@@ -633,7 +635,8 @@ function updateReview(reviewBox, reviewData) {
                 textareaElement.style.display = "block"
             }            
         })
-        isEditingReview = false
+        isEditingReview = false // 수정 중인 상태가 아닌 것으로 변경
+        showRvPosting.style.display = "block"   // 수정 중에 사라졌던 후기 작성하기 버튼 다시 생기게 하기
     }
 
     cancelBtn.onclick = (event) => {
@@ -665,7 +668,8 @@ function updateReview(reviewBox, reviewData) {
             deleteReview(reviewBox, reviewData)
         }
 
-        isEditingReview = false
+        isEditingReview = false // 수정 중인 상태가 아닌 것으로 변경
+        showRvPosting.style.display = "block"   // 수정 중에 사라졌던 후기 작성하기 버튼 다시 생기게 하기
     };
 }
 
