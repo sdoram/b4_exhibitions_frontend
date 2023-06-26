@@ -2,9 +2,9 @@ console.log('accompany 연결')
 
 import { payload, payloadParse, getAccompanyAPI, postAccompanyAPI, putAccompanyAPI, deleteAccompanyAPI } from "./api.js";
 
+export let isEditingAccompany = false;
 let isAccompaniesRendered = false;
 let isApBtnRenderd = false;
-export let isEditingAccompany = false;
 
 //------------------------------------------------------------------------------------------조회----------------------------------------------------------------
 // 동행구해요! 버튼 눌렀을 때 실행되는 함수
