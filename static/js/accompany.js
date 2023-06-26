@@ -356,8 +356,19 @@ function accompanyPosting(exhibition_id){
             accPostingBtn.setAttribute("type", "button")
             accPostingBtn.setAttribute("class", "ap-acc-posting-btn")
             accPostingBtn.addEventListener("click", function () {
-                handleAccompanyPosting(exhibition_id)
-                accompany(exhibition_id)
+                postAccompanyAPI(exhibition_id, accompanyInputInfo()).then(({ response, responseJson }) => {
+                    if (response.status == 201) {
+                        addNewAccompany(responseJson.data)
+                        accompany(exhibition_id)
+                    } else {
+                        alert(responseJson.errors["content"] && "내용없이 글을 작성할 수 없습니다."
+                            || responseJson.errors["personnel"] && "목표인원을 1명 이상 선택하십시오."
+                            || responseJson.errors["start_time"] && "시작 시간을 설정하십시오."
+                            || responseJson.errors["end_time"] && "종료 시간을 설정하십시오."
+                            || responseJson.errors["non_field_errors"])
+                    }
+                    accompany(exhibition_id)
+                })
             })
             accPostingBtn.innerText = "입력완료"
             row3InPurple.appendChild(accPostingBtn)
@@ -385,18 +396,6 @@ function accompanyInputInfo() {
     data.append("content", accContent)
 
     return data
-}
-
-// 입력완료 버튼 시 실행되는 함수
-function handleAccompanyPosting(exhibition_id) {
-    postAccompanyAPI(exhibition_id, accompanyInputInfo()).then(({ response, responseJson }) => {
-        if (response.status == 201) {
-            addNewAccompany(responseJson.data)
-            accompany(exhibition_id)
-        } else {
-            alert(responseJson.message)
-        }
-    })
 }
 
 // 방금 작성한 동행구하기 글 목록에 추가하기
@@ -659,7 +658,11 @@ function updateAccompany(accompanyBox, accompanyData) {
                     deleteAccompany(accompanyBox, responseJson.data)
                 }
             } else {
-                alert(responseJson.message)
+                alert(responseJson.errors["content"] && "내용없이 글을 작성할 수 없습니다."
+                    || responseJson.errors["personnel"] && "목표인원을 1명 이상 선택하십시오."
+                    || responseJson.errors["start_time"] && "시작 시간을 설정하십시오."
+                    || responseJson.errors["end_time"] && "종료 시간을 설정하십시오."
+                    || responseJson.errors["non_field_errors"])
                 textareaElement.style.display = "block"
             }            
         })
