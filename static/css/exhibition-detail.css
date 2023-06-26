@@ -6,8 +6,8 @@
     font-weight: bold;
     font-size: 6vmin;
     margin-top: 10vmin;
+    margin: 10vmin 30vmin 0vmin 30vmin;
 }
-
 /* 상단 전시회 포스터 및 인포 부분 */
 .all-items-organizer {
     display: flex;
