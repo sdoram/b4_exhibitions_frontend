@@ -1,6 +1,7 @@
 console.log('accompany 연결')
 
 import { payload, payloadParse, getAccompanyAPI, postAccompanyAPI, putAccompanyAPI, deleteAccompanyAPI } from "./api.js";
+import { isEditingReview } from "./review.js";
 
 export let isEditingAccompany = false;
 let isAccompaniesRendered = false;
@@ -9,7 +10,7 @@ let isApBtnRenderd = false;
 //------------------------------------------------------------------------------------------조회----------------------------------------------------------------
 // 동행구해요! 버튼 눌렀을 때 실행되는 함수
 export function accompany(exhibition_id){
-    if (isEditingAccompany) {
+    if (isEditingAccompany || isEditingReview) {
         alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
     } else {
         // 후기 안 보이게 하기
