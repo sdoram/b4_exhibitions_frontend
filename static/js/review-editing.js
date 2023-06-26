@@ -179,7 +179,8 @@ export function updateReview(reviewBox, reviewData) {
                     deleteReview(reviewBox, responseJson.data)
                 }
             } else {
-                alert(responseJson.message)
+                alert(responseJson.content && "내용없이 글을 작성할 수 없습니다."
+                    || responseJson.rating && "별점을 선택하십시오.")
                 textareaElement.style.display = "block"
             }            
         })
