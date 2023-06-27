@@ -1,5 +1,5 @@
 import { payload, payloadParse, postAccompanyAPI } from "./api.js";
-import { accompany, deleteAccompany } from "./accompany.js";
+import { getAccompany, deleteAccompany } from "./accompany.js";
 import { isEditingAccompany, updateAccompany } from "./accompany-editing.js";
 
 //----------------------------------------------------------------작성----------------------------------------------------------------
@@ -94,8 +94,8 @@ export function accompanyPosting(exhibition_id){
                 postAccompanyAPI(exhibition_id, accompanyInputInfo()).then(({ response, responseJson }) => {
                     if (response.status == 201) {
                         addNewAccompany(responseJson.data)
-                        accompany(exhibition_id)
-                        accompany(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
+                        getAccompany(exhibition_id)
+                        getAccompany(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
                         alert("글이 등록되었습니다.")
                     } else {
                         alert(responseJson.content && "내용없이 글을 작성할 수 없습니다."
