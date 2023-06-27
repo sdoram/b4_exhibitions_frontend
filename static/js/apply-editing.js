@@ -1,8 +1,6 @@
 import { putApplyAPI } from "./api.js";
 import { deleteApply } from "./accompany.js";
 
-export let isEditingApply = false;
-
 // 수정 버튼 눌렀을 때 실행되는 함수
 export function updateApply(applyBox, applyData) {
     // 저도 같이 갈래요!
@@ -49,12 +47,8 @@ export function updateApply(applyBox, applyData) {
                 // 저장->수정, 취소->삭제
                 saveBtn.innerText = "수정"
                 saveBtn.onclick = function () {
-                    if (isEditingApply) {
-                        alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
-                    } else {
-                        isEditingApply = true
-                        updateApply(accompanyBox, responseJson.data)
-                    }                    
+                    updateApply(applyBox, responseJson.data)
+                  
                 }
                 cancelBtn.innerText = "삭제"
                 cancelBtn.onclick = function () {
@@ -65,7 +59,6 @@ export function updateApply(applyBox, applyData) {
                 textareaElement.style.display = "block"
             }            
         })
-        isEditingApply = false // 수정 중인 상태가 아닌 것으로 변경
     }
 
     cancelBtn.onclick = (event) => {
@@ -77,18 +70,12 @@ export function updateApply(applyBox, applyData) {
         // 버튼 되돌리기
         saveBtn.innerText = "수정"
         saveBtn.onclick = function () {
-            if (isEditingApply) {
-                alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
-            } else {
-                isEditingApply = true
-                updateApply(applyBox, applyData)
-            }
+            updateApply(applyBox, applyData)
         }
         cancelBtn.innerText = "삭제"
         cancelBtn.onclick = function () {
             deleteApply(applyBox, applyData)
         }
-        isEditingApply = false // 수정 중인 상태가 아닌 것으로 변경
     }
 }
 
