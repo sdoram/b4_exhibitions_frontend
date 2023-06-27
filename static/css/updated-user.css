@@ -3,12 +3,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* margin-right: 10%; */
 }
 
 /* 웰컴세트 */
 .welcome-set {
-    margin-bottom: 40px;
+    margin-top: 5vmin;
+    margin-bottom: 10vmin;
 }
 .welcome-greeting {
     font-weight: bold;

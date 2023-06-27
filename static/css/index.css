@@ -136,8 +136,3 @@
     font-size: 1.8vmin;
     color: #6358DC;  
 }
-
-/* 페이지 바닥 여백주기 */
-body:last-child {
-    margin-bottom: 20vmin;
-}

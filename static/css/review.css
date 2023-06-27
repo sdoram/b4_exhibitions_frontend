@@ -197,8 +197,3 @@
     margin-left: auto;
     margin-right: 1.1111vmin;
 }
-
-/* 페이지 바닥 여백주기 */
-body:last-child {
-    margin-bottom: 20vmin;
-}
