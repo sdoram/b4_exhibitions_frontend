@@ -3,6 +3,7 @@ import { accompanyPosting } from "./accompany-posting.js";
 import { isEditingAccompany, updateAccompany } from "./accompany-editing.js";
 import { isEditingReview } from "./review-editing.js";
 import { postApply } from "./apply-posting.js";
+import { updateApply } from "./apply-editing.js";
 
 let isAccompaniesRendered = false;
 let isApBtnRenderd = false;
@@ -234,6 +235,9 @@ export function accompany(exhibition_id){
                                         const applierAccUpdateBtn = document.createElement("button")
                                         applierAccUpdateBtn.setAttribute("type", "button")
                                         applierAccUpdateBtn.setAttribute("class", "applier-acc-update-btn")
+                                        applierAccUpdateBtn.addEventListener("click", function () {
+                                            updateApply(applierAll, apply)
+                                        })
                                         applierAccUpdateBtn.innerText = "수정"
                                         applierRow3InPurple.appendChild(applierAccUpdateBtn)
 

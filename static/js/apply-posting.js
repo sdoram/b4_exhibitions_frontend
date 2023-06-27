@@ -170,6 +170,9 @@ function addNewApply(applyData) {
             const applierAccUpdateBtn = document.createElement("button")
             applierAccUpdateBtn.setAttribute("type", "button")
             applierAccUpdateBtn.setAttribute("class", "applier-acc-update-btn")
+            applierAccUpdateBtn.addEventListener("click", function () {
+                updateApply(applierAll, apply)
+            })
             applierAccUpdateBtn.innerText = "수정"
             applierRow3InPurple.appendChild(applierAccUpdateBtn)
 
