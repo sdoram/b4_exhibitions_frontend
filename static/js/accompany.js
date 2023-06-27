@@ -2,6 +2,7 @@ import { payload, payloadParse, getAccompanyAPI, deleteAccompanyAPI } from "./ap
 import { accompanyPosting } from "./accompany-posting.js";
 import { isEditingAccompany, updateAccompany } from "./accompany-editing.js";
 import { isEditingReview } from "./review-editing.js";
+import { postApply } from "./apply-posting.js";
 
 let isAccompaniesRendered = false;
 let isApBtnRenderd = false;
@@ -49,9 +50,8 @@ export function accompany(exhibition_id){
             }
             if (!isAccompaniesRendered) {
                 getAccompanyAPI(exhibition_id).then(({ responseJson }) => {
-                    const accompaniesDATA = responseJson.accompanies.results
-                    console.log(accompaniesDATA)
-
+                    const accompaniesDATA = responseJson.accompanies
+                    
                     const accompanyList = document.getElementById("accompanyList")
 
                     // 동행 구하기 목록
@@ -61,6 +61,7 @@ export function accompany(exhibition_id){
                         
                         const purpleBox = document.createElement("div")
                         purpleBox.setAttribute("class", "ac-purple-box")
+                        purpleBox.setAttribute("id", `accompany${accompany.id}`)
 
                         const row1InPurple = document.createElement("div")
                         row1InPurple.setAttribute("class", "ac-row1-in-purple")
@@ -132,6 +133,9 @@ export function accompany(exhibition_id){
                         const accApplyBtn = document.createElement("button")
                         accApplyBtn.setAttribute("type", "button")
                         accApplyBtn.setAttribute("class", "acc-apply-btn")
+                        accApplyBtn.addEventListener("click", function () {
+                            postApply(accompany)
+                        })
                         accApplyBtn.innerText = "동행신청"
                         btngroup.appendChild(accApplyBtn)
                         if (payload) {
