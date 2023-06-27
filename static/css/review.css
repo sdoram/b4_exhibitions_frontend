@@ -42,7 +42,8 @@
     object-fit:cover;
 }
 .rv-filebox {
-    margin-top: 10vmin;
+    margin-top: 20vmin;
+    margin-left: 6vmin;
 }
 .rv-upload-name {
     width: 40vmin;
@@ -58,7 +59,7 @@
     padding: 0 10px;
     vertical-align: middle;
     border: 1px solid #6358DC;
-    width: 45%;
+    width: 55%;
     color: #6358DC;
     margin-left: 2vmin;
 }
