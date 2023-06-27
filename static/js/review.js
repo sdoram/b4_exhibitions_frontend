@@ -8,7 +8,7 @@ let isRpBtnRendered = false;
 
 //----------------------------------------------------------------조회 및 삭제----------------------------------------------------------------
 // 이용후기 버튼 눌렀을 때 실행되는 함수
-export function review(exhibition_id) {
+export function getReview(exhibition_id) {
     if (isEditingReview || isEditingAccompany) {
         alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
     } else {
@@ -49,7 +49,7 @@ export function review(exhibition_id) {
             }
             if (!isReviewsRendered) {
                 getReviewAPI(exhibition_id).then(({ responseJson }) => {
-                    const reviewsDATA = responseJson.reviews.results            
+                    const reviewsDATA = responseJson.reviews         
 
                     // 후기 목록
                     reviewsDATA.forEach(review => {      
