@@ -1,5 +1,5 @@
 import { payload, payloadParse, postApplyAPI } from "./api.js";
-import { accompany } from "./accompany.js";
+import { deleteApply } from "./accompany.js";
 
 //----------------------------------------------------------------작성----------------------------------------------------------------
 // 동행 신청 버튼 눌렀을 때 실행되는 함수
@@ -177,6 +177,9 @@ function addNewApply(applyData) {
             const applierAccDeleteBtn = document.createElement("button")
             applierAccDeleteBtn.setAttribute("type", "button")
             applierAccDeleteBtn.setAttribute("class", "applier-acc-delete-btn")
+            applierAccDeleteBtn.addEventListener("click", function () {
+                deleteApply(applierAll, applyData)
+            })
             applierAccDeleteBtn.innerText = "삭제"
             applierRow3InPurple.appendChild(applierAccDeleteBtn)
         }

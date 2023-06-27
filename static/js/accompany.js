@@ -1,4 +1,4 @@
-import { payload, payloadParse, getAccompanyAPI, deleteAccompanyAPI } from "./api.js";
+import { payload, payloadParse, getAccompanyAPI, deleteAccompanyAPI, deleteApplyAPI } from "./api.js";
 import { accompanyPosting } from "./accompany-posting.js";
 import { isEditingAccompany, updateAccompany } from "./accompany-editing.js";
 import { isEditingReview } from "./review-editing.js";
@@ -51,7 +51,7 @@ export function accompany(exhibition_id){
             if (!isAccompaniesRendered) {
                 getAccompanyAPI(exhibition_id).then(({ responseJson }) => {
                     const accompaniesDATA = responseJson.accompanies
-                    
+
                     const accompanyList = document.getElementById("accompanyList")
 
                     // 동행 구하기 목록
@@ -241,6 +241,9 @@ export function accompany(exhibition_id){
                                         const applierAccDeleteBtn = document.createElement("button")
                                         applierAccDeleteBtn.setAttribute("type", "button")
                                         applierAccDeleteBtn.setAttribute("class", "applier-acc-delete-btn")
+                                        applierAccDeleteBtn.addEventListener("click", function () {
+                                            deleteApply(applierAll, apply)
+                                        })
                                         applierAccDeleteBtn.innerText = "삭제"
                                         applierRow3InPurple.appendChild(applierAccDeleteBtn)
                                     }
@@ -269,13 +272,25 @@ export function accompany(exhibition_id){
     }
 }
 
-// 삭제 버튼 눌렀을 때 실행되는 함수
+// 동행구하기 삭제 버튼 눌렀을 때 실행되는 함수
 export function deleteAccompany(accompanyBox, accompany) {
     if (confirm("정말 삭제하시겠습니까?")) {
         deleteAccompanyAPI(accompany.id).then((response) => {
             if (response.status == 204) {
                 alert("삭제되었습니다.")
                 accompanyBox.parentNode.removeChild(accompanyBox)
+            }            
+        })
+    }
+}
+
+// 동행신청글 삭제 버튼 눌렀을 때 실행되는 함수
+export function deleteApply(applyBox, apply) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        deleteApplyAPI(apply.id).then((response) => {
+            if (response.status == 204) {
+                alert("삭제되었습니다.")
+                applyBox.parentNode.removeChild(applyBox)
             }            
         })
     }
