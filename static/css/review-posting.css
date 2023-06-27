@@ -5,9 +5,6 @@
     align-items: center;
     justify-content: center;
 }
-body:last-child {
-    margin-bottom: 50vmin;
-}
 /* 페이지 타이틀: 리뷰 작성하기 */
 .rp-welcome-title {
     color: #6358DC;
