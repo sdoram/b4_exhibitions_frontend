@@ -120,19 +120,21 @@ window.onload = function loadExhibition() {
 
 // 좋아요 하트 관련 코드
 function heart(exhibition_id) {
-    let fullHeart = false
-    postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-        const heartElement = document.getElementById("heart")
-        const heartNum = document.getElementById("heartNum")
-        if (response.status == 201) {
-            heartElement.style.backgroundImage = 'url("/static/img/filled-heart.png")'
-            heartNum.innerText = responseJson.likes
-        } else {
-            heartElement.style.backgroundImage = 'url("/static/img/empty-heart.png")'
-            heartNum.innerText = responseJson.likes
-        }
-        fullHeart = !fullHeart
-    })
+    let fullHeart = false;
+    if (payload) {
+        postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+            const heartElement = document.getElementById(exhibition_id);
+            const heartNum = document.getElementById(`heartNum${exhibition_id}`)
+            if (response.status == 201) {
+                heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+                heartNum.innerText = responseJson.likes
+            } else {
+                heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
+                heartNum.innerText = responseJson.likes
+            }
+            fullHeart = !fullHeart;
+        })
+    }
 }
 
 // 전시회 예약 페이지
