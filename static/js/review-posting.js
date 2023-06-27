@@ -1,5 +1,5 @@
 import { backendBaseURL, payload, payloadParse, postReviewAPI } from "./api.js";
-import { review, deleteReview } from "./review.js";
+import { getReview, deleteReview } from "./review.js";
 import { isEditingReview, updateReview } from "./review-editing.js"
 
 let starValue = 0;
@@ -112,8 +112,8 @@ export function postReview(exhibition_id) {
                 postReviewAPI(exhibition_id, reviewInputInfo()).then(({ response, responseJson }) => {
                     if (response.status == 201) {
                         addNewReview(responseJson.data)
-                        review(exhibition_id)
-                        review(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
+                        getReview(exhibition_id)
+                        getReview(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
                         alert("글이 등록되었습니다.")
                     } else {
                         alert(responseJson.content && "내용없이 글을 작성할 수 없습니다."
