@@ -1,6 +1,6 @@
 import { getExhibitionAPI, postExhibitionLikeAPI, payload, payloadParse, getUserInfoAPI, frontendBaseURL } from "./api.js";
-import { review } from "./review.js";
-import { accompany } from "./accompany.js";
+import { getReview } from "./review.js";
+import { getAccompany } from "./accompany.js";
 import { isEditingReview } from "./review-editing.js";
 import { isEditingAccompany } from "./accompany-editing.js";
 
@@ -95,13 +95,13 @@ window.onload = function loadExhibition() {
         // 리뷰 버튼
         const reviewButton = document.getElementById("reviewBtn")
         reviewButton.addEventListener("click", function () {
-            review(exhibition_id)
+            getReview(exhibition_id)
         })
 
         // 동행 버튼
         const accompanyButton = document.getElementById("accompanyBtn")
         accompanyButton.addEventListener("click", function () {
-            accompany(exhibition_id)
+            getAccompany(exhibition_id)
         })
 
         // 예약하기 버튼
