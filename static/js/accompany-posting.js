@@ -95,14 +95,14 @@ export function accompanyPosting(exhibition_id){
                     if (response.status == 201) {
                         addNewAccompany(responseJson.data)
                         accompany(exhibition_id)
-                        accompany(exhibition_id)
+                        accompany(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
                         alert("글이 등록되었습니다.")
                     } else {
-                        alert(responseJson.errors["content"] && "내용없이 글을 작성할 수 없습니다."
-                            || responseJson.errors["personnel"] && "목표인원을 1명 이상 선택하십시오."
-                            || responseJson.errors["start_time"] && "시작 시간을 설정하십시오."
-                            || responseJson.errors["end_time"] && "종료 시간을 설정하십시오."
-                            || responseJson.errors["non_field_errors"])
+                        alert(responseJson.content && "내용없이 글을 작성할 수 없습니다."
+                            || responseJson.personnel && "목표인원을 1명 이상 선택하십시오."
+                            || responseJson.start_time && "시작 시간을 설정하십시오."
+                            || responseJson.end_time && "종료 시간을 설정하십시오."
+                            || responseJson.non_field_errors)
                     }
                 })
             })
