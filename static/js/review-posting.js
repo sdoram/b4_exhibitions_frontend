@@ -109,8 +109,17 @@ export function postReview(exhibition_id) {
             rvPostingBtn.setAttribute("class", "rp-review-posting-btn")
             rvPostingBtn.setAttribute("id", "rvPostingBtn")
             rvPostingBtn.addEventListener("click", function () {
-                handleReviewPosting(exhibition_id)
-                review(exhibition_id)
+                postReviewAPI(exhibition_id, reviewInputInfo()).then(({ response, responseJson }) => {
+                    if (response.status == 201) {
+                        addNewReview(responseJson.data)
+                        review(exhibition_id)
+                        review(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
+                        alert("글이 등록되었습니다.")
+                    } else {
+                        alert(responseJson.content && "내용없이 글을 작성할 수 없습니다."
+                            || responseJson.rating && "별점을 선택하십시오.")
+                    }
+                })
             })
             rvPostingBtn.innerText = "입력완료"
             row3InPurple.appendChild(rvPostingBtn)
@@ -150,18 +159,6 @@ function reviewInputInfo() {
         data.append("image", rvImage)
     }
     return data
-}
-
-// 입력완료 버튼 시 실행되는 함수
-function handleReviewPosting(exhibition_id) {
-    postReviewAPI(exhibition_id, reviewInputInfo()).then(({ response, responseJson }) => {
-        if (response.status == 201) {
-            addNewReview(responseJson.data)
-            review(exhibition_id)
-        } else {
-            alert(responseJson.message)
-        }
-    })
 }
 
 // 방금 작성한 리뷰 목록에 추가하기
@@ -254,7 +251,7 @@ function addNewReview(reviewData) {
             reviewUpdateBtn.innerText = "수정"
             reviewUpdateBtn.addEventListener("click", function () {
                 if (isEditingReview) {
-                    alert("수정하고 있는 리뷰를 저장 또는 취소 후 클릭하십시오.")
+                    alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
                 } else {
                     updateReview(grayBox, reviewData)
                 }
