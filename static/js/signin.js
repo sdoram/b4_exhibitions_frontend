@@ -58,7 +58,7 @@ if (payload) {
             alert('로그인 성공');
             window.location.replace(`${frontendBaseURL}/`);
         } else {
-            alert(responseJson.error);
+            alert(responseJson.message);
             window.location.replace(`${frontendBaseURL}/templates/signin.html`);
         }
     })
