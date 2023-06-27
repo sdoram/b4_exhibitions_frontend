@@ -1,7 +1,9 @@
-import { payload, payloadParse, getAccompanyAPI, deleteAccompanyAPI } from "./api.js";
+import { payload, payloadParse, getAccompanyAPI, deleteAccompanyAPI, deleteApplyAPI } from "./api.js";
 import { accompanyPosting } from "./accompany-posting.js";
 import { isEditingAccompany, updateAccompany } from "./accompany-editing.js";
 import { isEditingReview } from "./review-editing.js";
+import { postApply } from "./apply-posting.js";
+import { updateApply } from "./apply-editing.js";
 
 let isAccompaniesRendered = false;
 let isApBtnRenderd = false;
@@ -51,7 +53,6 @@ export function getAccompany(exhibition_id){
                 getAccompanyAPI(exhibition_id).then(({ responseJson }) => {
                     const accompaniesDATA = responseJson.accompanies
                     console.log(accompaniesDATA)
-
                     const accompanyList = document.getElementById("accompanyList")
 
                     // 동행 구하기 목록
@@ -61,6 +62,7 @@ export function getAccompany(exhibition_id){
                         
                         const purpleBox = document.createElement("div")
                         purpleBox.setAttribute("class", "ac-purple-box")
+                        purpleBox.setAttribute("id", `accompany${accompany.id}`)
 
                         const row1InPurple = document.createElement("div")
                         row1InPurple.setAttribute("class", "ac-row1-in-purple")
@@ -132,6 +134,10 @@ export function getAccompany(exhibition_id){
                         const accApplyBtn = document.createElement("button")
                         accApplyBtn.setAttribute("type", "button")
                         accApplyBtn.setAttribute("class", "acc-apply-btn")
+                        accApplyBtn.setAttribute("id", `accPostingBtn${accompany.id}`)
+                        accApplyBtn.addEventListener("click", function () {
+                            postApply(accompany)                       
+                        })
                         accApplyBtn.innerText = "동행신청"
                         btngroup.appendChild(accApplyBtn)
                         if (payload) {
@@ -230,6 +236,9 @@ export function getAccompany(exhibition_id){
                                         const applierAccUpdateBtn = document.createElement("button")
                                         applierAccUpdateBtn.setAttribute("type", "button")
                                         applierAccUpdateBtn.setAttribute("class", "applier-acc-update-btn")
+                                        applierAccUpdateBtn.addEventListener("click", function () {
+                                            updateApply(applierAll, apply)
+                                        })
                                         applierAccUpdateBtn.innerText = "수정"
                                         applierRow3InPurple.appendChild(applierAccUpdateBtn)
 
@@ -237,6 +246,9 @@ export function getAccompany(exhibition_id){
                                         const applierAccDeleteBtn = document.createElement("button")
                                         applierAccDeleteBtn.setAttribute("type", "button")
                                         applierAccDeleteBtn.setAttribute("class", "applier-acc-delete-btn")
+                                        applierAccDeleteBtn.addEventListener("click", function () {
+                                            deleteApply(applierAll, apply)
+                                        })
                                         applierAccDeleteBtn.innerText = "삭제"
                                         applierRow3InPurple.appendChild(applierAccDeleteBtn)
                                     }
@@ -265,13 +277,25 @@ export function getAccompany(exhibition_id){
     }
 }
 
-// 삭제 버튼 눌렀을 때 실행되는 함수
+// 동행구하기 삭제 버튼 눌렀을 때 실행되는 함수
 export function deleteAccompany(accompanyBox, accompany) {
     if (confirm("정말 삭제하시겠습니까?")) {
         deleteAccompanyAPI(accompany.id).then((response) => {
             if (response.status == 204) {
                 alert("삭제되었습니다.")
                 accompanyBox.parentNode.removeChild(accompanyBox)
+            }            
+        })
+    }
+}
+
+// 동행신청글 삭제 버튼 눌렀을 때 실행되는 함수
+export function deleteApply(applyBox, apply) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        deleteApplyAPI(apply.id).then((response) => {
+            if (response.status == 204) {
+                alert("삭제되었습니다.")
+                applyBox.parentNode.removeChild(applyBox)
             }            
         })
     }
