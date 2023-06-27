@@ -1,19 +1,26 @@
 import { payload, payloadParse, postApplyAPI } from "./api.js";
 import { deleteApply } from "./accompany.js";
+import { updateApply } from "./apply-editing.js";
 
-//----------------------------------------------------------------작성----------------------------------------------------------------
+let isPostingApply = 0;
+
 // 동행 신청 버튼 눌렀을 때 실행되는 함수
 export function postApply(accompany){
     // 동행 구하는 글 박스
     const accompanyBox = document.getElementById(`accompany${accompany.id}`)
     // 동행 신청 버튼
-    const accApplyBtn = document.querySelector(".acc-apply-btn")
+    const accApplyBtn = document.getElementById(`accPostingBtn${accompany.id}`)
     // 동행 신청 작성창 있으면 삭제, 없으면 렌더하기
     const applyPostBox = document.getElementById("applyPostBox")
     if (applyPostBox) {
-        accApplyBtn.innerText = "동행신청"
-        accompanyBox.parentNode.removeChild(applyPostBox)
+        if (isPostingApply == accompany.id) {
+            accApplyBtn.innerText = "동행신청"
+            accompanyBox.parentNode.removeChild(applyPostBox)
+        } else {
+            alert("작성 중인 다른 글을 등록 또는 닫은 후 다시 클릭해 주십시오.")
+        }
     } else {
+        isPostingApply = accompany.id
         accApplyBtn.innerText = "닫기"
 
         const applierAll = document.createElement("div")
@@ -171,7 +178,7 @@ function addNewApply(applyData) {
             applierAccUpdateBtn.setAttribute("type", "button")
             applierAccUpdateBtn.setAttribute("class", "applier-acc-update-btn")
             applierAccUpdateBtn.addEventListener("click", function () {
-                updateApply(applierAll, apply)
+                updateApply(applierAll, applyData)
             })
             applierAccUpdateBtn.innerText = "수정"
             applierRow3InPurple.appendChild(applierAccUpdateBtn)

@@ -134,8 +134,9 @@ export function accompany(exhibition_id){
                         const accApplyBtn = document.createElement("button")
                         accApplyBtn.setAttribute("type", "button")
                         accApplyBtn.setAttribute("class", "acc-apply-btn")
+                        accApplyBtn.setAttribute("id", `accPostingBtn${accompany.id}`)
                         accApplyBtn.addEventListener("click", function () {
-                            postApply(accompany)
+                            postApply(accompany)                       
                         })
                         accApplyBtn.innerText = "동행신청"
                         btngroup.appendChild(accApplyBtn)
