@@ -10,7 +10,7 @@ let isApBtnRenderd = false;
 
 //----------------------------------------------------------------조회 및 삭제----------------------------------------------------------------
 // 동행구해요! 버튼 눌렀을 때 실행되는 함수
-export function accompany(exhibition_id){
+export function getAccompany(exhibition_id){
     if (isEditingAccompany || isEditingReview) {
         alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
     } else {
@@ -52,7 +52,7 @@ export function accompany(exhibition_id){
             if (!isAccompaniesRendered) {
                 getAccompanyAPI(exhibition_id).then(({ responseJson }) => {
                     const accompaniesDATA = responseJson.accompanies
-
+                    console.log(accompaniesDATA)
                     const accompanyList = document.getElementById("accompanyList")
 
                     // 동행 구하기 목록
