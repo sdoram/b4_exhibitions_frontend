@@ -7,6 +7,9 @@ window.onload = function loadUserInfo() {
     // url 객체 생성 후 user_id 값 추출 
     const user_id = new URLSearchParams(window.location.search).get("user_id")
     getUserInfoAPI(user_id).then(({ response, responseJson }) => {
+        if (response.status == 404) {
+            window.location.replace("/templates/page_not_found.html")
+        }
         console.log(response, responseJson)
         const userInfo = responseJson
 
@@ -147,7 +150,6 @@ window.onload = function loadUserInfo() {
 
                     exhibitionList.appendChild(exhibitionSet)
                 })
-
             }
         }
     })
