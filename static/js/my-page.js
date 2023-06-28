@@ -13,12 +13,14 @@ window.onload = function loadUserInfo() {
         // 프로필 이미지
         const profileImg = document.getElementById("profileImg");
         if (userInfo.profile_image) {
-            if (userInfo.profile_image.includes('profile_images')) {
-                // db에 저장된 이미지인 경우 
-                profileImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${userInfo.profile_image}`)
+            if (userInfo.profile_image.includes('https%3A')) {
+                // 대체 url 코드로 인코딩된 url 디코딩 하기    
+                profileImg.setAttribute("src", `https://${decodeURIComponent(userInfo.profile_image.split("https%3A")[1])}`)
+            }
+            else if (userInfo.profile_image.includes('https:')) {
+                profileImg.setAttribute("src", userInfo.profile_image)
             } else {
-                // 링크로 들어온 경우 
-                profileImg.setAttribute("src", decodeURIComponent(userInfo.profile_image.split("media/")[1]));
+                profileImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${userInfo.profile_image}`)
             }
         }
 
@@ -72,19 +74,20 @@ window.onload = function loadUserInfo() {
                     console.log(exhibition.image)
                     exhibitionImg.setAttribute("class", "card-img-top");
                     // 이미지를 못찾을 경우 대체 이미지 
-                    exhibitionImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
+                    exhibitionImg.setAttribute("onerror", "src='/static/img/default-img.jpg'")
                     if (exhibition.image) {
-                        if (exhibition.image.includes('https:')) {
-                            exhibitionImg.setAttribute("src", exhibition.image);
-                        } else if (exhibition.image.includes('https%3A')) {
+                        if (exhibition.image.includes('https%3A')) {
                             // 대체 url 코드로 인코딩된 url 디코딩 하기    
-                            exhibitionImg.setAttribute("src", decodeURIComponent(exhibition.image.split("media/")[1]));
-                        } else if (exhibition.image.includes('media')) {
-                            exhibitionImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${exhibition.image}`)
+                            exhibitionImg.setAttribute("src", `https://${decodeURIComponent(exhibition.image.split("https%3A")[1])}`)
                         }
-                    } else {
-                        exhibitionImg.setAttribute("src", "/static/img/default-img.jpg")
+                        else if (exhibition.image.includes('https:')) {
+                            exhibitionImg.setAttribute("src", exhibition.image)
+                        } else {
+                            exhibitionImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${exhibition.image}`)
+                            console.log(`${backendBaseURL.split('/api')[0]}${exhibition.image}`)
+                        }
                     }
+
                     exhibitionImgBox.appendChild(exhibitionImg)
 
                     // 전시회 정보 박스 

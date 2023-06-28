@@ -43,19 +43,19 @@ window.onload = function loadExhibitions() {
             // 이미지 사이즈가 클 경우 화면에 맞게 줄여주는 css 수정 필요
             exhibitionImg.setAttribute("class", "card-img-top");
             // 이미지를 못찾을 경우 대체 이미지 
-            exhibitionImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
+            exhibitionImg.setAttribute("onerror", "src='/static/img/default-img.jpg'")
             if (exhibition.image) {
-                if (exhibition.image.includes('https:')) {
-                    exhibitionImg.setAttribute("src", exhibition.image);
-                } else if (exhibition.image.includes('https%3A')) {
+                if (exhibition.image.includes('https%3A')) {
                     // 대체 url 코드로 인코딩된 url 디코딩 하기    
-                    exhibitionImg.setAttribute("src", decodeURIComponent(exhibition.image.split("media/")[1]));
-                } else if (exhibition.image.includes('media')) {
+                    exhibitionImg.setAttribute("src", `https://${decodeURIComponent(exhibition.image.split("https%3A")[1])}`)
+                }
+                else if (exhibition.image.includes('https:')) {
+                    exhibitionImg.setAttribute("src", exhibition.image)
+                } else {
                     exhibitionImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${exhibition.image}`)
                 }
-            } else {
-                exhibitionImg.setAttribute("src", "/static/img/default-img.jpg")
             }
+
             exhibitionImg.addEventListener("click", function () {
                 exhibitionDetail(exhibition.id)
             })
