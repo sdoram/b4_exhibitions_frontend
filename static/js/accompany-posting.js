@@ -1,4 +1,4 @@
-import { payload, payloadParse, postAccompanyAPI } from "./api.js";
+import { frontendBaseURL, payload, payloadParse, postAccompanyAPI } from "./api.js";
 import { getAccompany, deleteAccompany } from "./accompany.js";
 import { isEditingAccompany, updateAccompany } from "./accompany-editing.js";
 import { postApply } from "./apply-posting.js";
@@ -156,6 +156,9 @@ function addNewAccompany(accompanyData) {
     // 닉네임
     const nicknameBox = document.createElement("div")
     nicknameBox.setAttribute("class", "ac-nickname-box")
+    nicknameBox.addEventListener("click", function() {
+        location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${accompany.user}`;
+    });
     nicknameBox.innerText = accompanyData.nickname
     row1InPurple.appendChild(nicknameBox)
 
