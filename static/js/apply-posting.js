@@ -87,7 +87,7 @@ export function postApply(accompany){
             applierAccPostingBtn.addEventListener("click", function () {
                 postApplyAPI(accompany.id, applyInputInfo()).then(({ response, responseJson }) => {
                     if (response.status == 201) {
-                        addNewApply(responseJson.data)
+                        addNewApply(accompany, responseJson.data)
                         alert("글이 등록되었습니다.")
                     } else {
                         alert(responseJson.content && "내용없이 글을 작성할 수 없습니다.")
@@ -118,7 +118,7 @@ function applyInputInfo() {
 }
 
 // 방금 작성한 동행구하기 글 목록에 추가하기
-function addNewApply(applyData) {
+function addNewApply(accompany, applyData) {
     // 동행 구하는 글 박스
     const accompanyBox = document.getElementById(`accompany${applyData.accompany}`)
     // 동행신청 작성창 삭제
@@ -158,7 +158,11 @@ function addNewApply(applyData) {
 
     const applierContentHeader = document.createElement("p")
     applierContentHeader.setAttribute("class", "applier-content-header")
-    applierContentHeader.innerText = "저도 같이 갈래요!"
+    if (applyData.user == accompany.user) {
+        applierContentHeader.innerText = "이런 분을 구합니다!"
+    } else {
+        applierContentHeader.innerText = "저도 같이 갈래요!"
+    }
     applierAccompanyContent.appendChild(applierContentHeader)
 
     const applierContent = document.createElement("p")
