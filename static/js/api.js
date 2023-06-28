@@ -1,6 +1,6 @@
 console.log('api 연결')
 
-export const frontendBaseURL = "https://b4-exhibitions-now.netlify.app/";
+export const frontendBaseURL = "https://b4-exhibitions-now.netlify.app";
 export const backendBaseURL = "https://www.b4-exhibitions.shop/api";
 
 export const payload = localStorage.getItem("payload")
