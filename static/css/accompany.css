@@ -56,6 +56,7 @@
     font-size: 2vmin;
     padding-top: 0.3vmin;
     border-radius: 0.5556vmin;
+    cursor: pointer;
 }
 .ac-goal-number {
     background-color: white;
@@ -203,6 +204,7 @@
     font-size: 2vmin;
     border-radius: 0.5556vmin;
     padding-bottom: 0.5vmin;
+    cursor: pointer;
 }
 /* 보라색 안의 중앙: 동행글 본문 */
 .applier-row2-in-purple {
