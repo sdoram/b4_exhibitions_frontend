@@ -1,5 +1,3 @@
-console.log('backoffice-main 연결')
-
 import { frontendBaseURL, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, payload, payloadParse, deleteExhibitionAPI, backendBaseURL } from "./api.js";
 
 // 좋아요 하트 관련 코드
@@ -23,12 +21,10 @@ function heart(exhibition_id) {
 
 
 window.onload = function loadExhibitions() {
-    console.log(payloadParse)
     const adminNickname = document.getElementById("adminNickname")
     adminNickname.innerText = payloadParse.nickname
     getExhibitionsAPI().then(({ response, responseJson }) => {
         const exhibitionsDATA = responseJson.results
-        console.log(responseJson)
         const exhibitionList = document.getElementById("exhibitionList")
         exhibitionsDATA.forEach(exhibition => {
             const exhibitionSet = document.createElement("div");
@@ -155,7 +151,6 @@ function exhibitionDelete(exhibition_id) {
     // 전시회 삭제시 확인하기
     if (confirm("정말 삭제하시겠습니까?")) {
         deleteExhibitionAPI(exhibition_id).then((response) => {
-            console.log(response)
             alert('삭제완료')
             window.location.reload()
         })
@@ -169,7 +164,6 @@ function exhibitionPut(exhibition_id) {
 
 // 전시회 상세 페이지
 function exhibitionDetail(exhibition_id) {
-    console.log('전시회 디테일', exhibition_id)
     window.location.href = `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`
 }
 
@@ -188,7 +182,6 @@ document.getElementById("nextPageButton").addEventListener("click", handleNextPa
 document.getElementById("previousPageButton").addEventListener("click", handlePreviousPage);
 
 function checkAdminBackOffice() {
-    console.log('checkAdmin 연결 확인')
     if (!payloadParse || !payloadParse.is_admin) {
         window.location.replace(`${frontendBaseURL}/`)
     }
@@ -198,7 +191,6 @@ checkAdminBackOffice()
 document.getElementById("exhibitionPosting").addEventListener("click", handleExhibitionPosting);
 
 function handleExhibitionPosting() {
-    console.log('전시등록하기 버튼')
     window.location.href = `${frontendBaseURL}/templates/exhibition-posting.html`
 }
 

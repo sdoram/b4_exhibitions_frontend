@@ -1,9 +1,7 @@
-console.log('signin 연결')
 import { postSignInAPI, googleAPI, frontendBaseURL, payload } from "./api.js";
 
 // 로그인 확인
 function checkSignIn() {
-    console.log('checkSignIn 연결 확인')
     if (payload) {
         window.location.replace(`${frontendBaseURL}/`)
     }
@@ -25,7 +23,6 @@ function setLocalStorage(responseJson) {
 
 // 일반 로그인
 function handleSignIn() {
-    console.log('로그인 버튼')
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     // API 전달용 data

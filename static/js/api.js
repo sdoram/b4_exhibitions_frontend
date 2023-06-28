@@ -1,7 +1,5 @@
-console.log('api 연결')
-
 // 배포용 URL
-export const frontendBaseURL = "https://b4-exhibitions-front.netlify.app";
+export const frontendBaseURL = "https://b4-exhibitions-now.netlify.app";
 export const backendBaseURL = "https://www.b4-exhibitions.shop/api";
 
 // 로컬용 URL
@@ -18,7 +16,6 @@ export async function postSignUpAPI(data) {
         method: 'POST',
         body: data
     });
-    console.log(response, 'signUpAPI');
     const responseJson = await response.json();
     return { response, responseJson };
 }
@@ -32,7 +29,6 @@ export async function postSignInAPI(data) {
         method: 'POST',
         body: JSON.stringify(data)
     });
-    console.log(response, 'signInAPI');
     const responseJson = await response.json();
     return { response, responseJson };
 }
@@ -60,7 +56,6 @@ export async function googleAPI(google_token) {
 export async function getUserInfoAPI(user_id) {
     const response = await fetch(`${backendBaseURL}/users/${user_id}`)
     const responseJson = await response.json();
-    console.log(response, responseJson);
     return { response, responseJson };
 }
 
@@ -72,7 +67,6 @@ export async function patchUserInfoAPI(data) {
         body: data
     })
     const responseJson = await response.json();
-    console.log(response, responseJson)
     return { response, responseJson }
 }
 
@@ -84,7 +78,6 @@ export async function deleteUserInfoAPI(user_id) {
             headers: { "Authorization": `Bearer ${token}` }
         })
         const responseJson = await response.json();
-        console.log(response, responseJson)
         return { response, responseJson }
     } else {
         return alert('본인이 아닙니다')
@@ -135,8 +128,6 @@ export async function postExhibitionLikeAPI(exhibition_id) {
         headers: { "Authorization": `Bearer ${token}` }
     })
     const responseJson = await response.json();
-    console.log(response, responseJson)
-
     return { response, responseJson };
 }
 
@@ -148,7 +139,6 @@ export async function postExhibitionAPI(data) {
         body: data
     })
     const responseJson = await response.json();
-    console.log(response, responseJson)
     return { response, responseJson }
 }
 
@@ -160,7 +150,6 @@ export async function putExhibitionAPI(exhibition_id, data) {
         body: data
     })
     const responseJson = await response.json();
-    console.log(response, responseJson)
     return { response, responseJson }
 }
 
@@ -170,7 +159,6 @@ export async function deleteExhibitionAPI(exhibition_id) {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` },
     })
-    console.log(response)
     return response
 }
 

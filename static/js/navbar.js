@@ -1,5 +1,3 @@
-console.log('navbar 연결')
-
 import { frontendBaseURL, payload, payloadParse } from "./api.js";
 
 async function injectNavbar() {

@@ -1,5 +1,3 @@
-console.log('my-page 연결')
-
 import { getUserInfoAPI, payloadParse, payload, frontendBaseURL, deleteUserInfoAPI, postExhibitionLikeAPI, backendBaseURL, postSignInAPI } from "./api.js";
 
 
@@ -10,7 +8,6 @@ window.onload = function loadUserInfo() {
         if (response.status == 404) {
             window.location.replace("/templates/page_not_found.html")
         }
-        console.log(response, responseJson)
         const userInfo = responseJson
 
         // 프로필 이미지
@@ -72,7 +69,6 @@ window.onload = function loadUserInfo() {
 
                     // 전시회 이미지
                     const exhibitionImg = document.createElement("img");
-                    console.log(exhibition.image)
                     exhibitionImg.setAttribute("class", "card-img-top");
                     // 이미지를 못찾을 경우 대체 이미지 
                     exhibitionImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
@@ -156,7 +152,6 @@ window.onload = function loadUserInfo() {
 }
 
 function profileEdit(user_id) {
-    console.log('프로필 수정', payloadParse)
     // 일반 로그인만 비밀번호 확인하기 
     if (payloadParse.signin_type == 'normal') {
         let data = {
@@ -176,7 +171,6 @@ function profileEdit(user_id) {
 }
 
 function withdrawal(user_id) {
-    console.log('회원 탈퇴', user_id)
     if (confirm("정말 탈퇴하시겠습니까?")) {
         deleteUserInfoAPI(user_id).then(({ response, responseJson }) => {
             if (response.status == 200) {

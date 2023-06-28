@@ -1,10 +1,8 @@
-console.log('index 연결')
 import { frontendBaseURL, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, payload, payloadParse, backendBaseURL } from "./api.js";
 
 window.onload = function loadExhibitions() {
     getExhibitionsAPI().then(({ response, responseJson }) => {
         const exhibitionsDATA = responseJson.results
-        console.log(responseJson)
         const exhibitionList = document.getElementById("exhibitionList")
         exhibitionsDATA.forEach(exhibition => {
             const exhibitionSet = document.createElement("div");
@@ -155,12 +153,10 @@ function handleNextPage(page) {
 
 // 전시회 상세 페이지
 function exhibitionDetail(exhibition_id) {
-    console.log('전시회 디테일', exhibition_id)
     window.location.href = `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`
 }
 
 function checkAdmin() {
-    console.log('checkAdmin 연결 확인')
     if (payloadParse && payloadParse.is_admin) {
         window.location.replace(`${frontendBaseURL}/templates/backoffice-main.html`)
     }

@@ -50,7 +50,6 @@ export function getAccompany(exhibition_id){
             if (!isAccompaniesRendered) {
                 getAccompanyAPI(exhibition_id).then(({ responseJson }) => {
                     const accompaniesDATA = responseJson.accompanies
-                    console.log(accompaniesDATA)
                     const accompanyList = document.getElementById("accompanyList")
 
                     // 동행 구하기 목록
@@ -173,7 +172,6 @@ export function getAccompany(exhibition_id){
                         grayBox.appendChild(purpleBox)       
 
                         // 동행 신청하기 댓글
-                        console.log(accompany.applies)
                         if (accompany.applies) {
                             accompany.applies.forEach(apply => {
                                 const applierAll = document.createElement("div")
