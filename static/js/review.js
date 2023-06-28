@@ -1,4 +1,4 @@
-import { backendBaseURL, payload, payloadParse, getReviewAPI, postReviewAPI, putReviewAPI, deleteReviewAPI } from "./api.js";
+import { frontendBaseURL, backendBaseURL, payload, payloadParse, getReviewAPI, deleteReviewAPI } from "./api.js";
 import { postReview } from "./review-posting.js"
 import { isEditingReview, updateReview } from "./review-editing.js"
 import { isEditingAccompany } from "./accompany-editing.js";
@@ -80,6 +80,9 @@ export function getReview(exhibition_id) {
                         // 닉네임
                         const nicknameBox = document.createElement("div")
                         nicknameBox.setAttribute("class", "rv-nickname-box")
+                        nicknameBox.addEventListener("click", function() {
+                            location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${review.user}`;
+                        });
                         nicknameBox.innerText = review.nickname
                         row1InPurple.appendChild(nicknameBox)
 

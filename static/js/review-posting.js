@@ -1,4 +1,4 @@
-import { backendBaseURL, payload, payloadParse, postReviewAPI } from "./api.js";
+import { frontendBaseURL, backendBaseURL, payload, payloadParse, postReviewAPI } from "./api.js";
 import { getReview, deleteReview } from "./review.js";
 import { isEditingReview, updateReview } from "./review-editing.js"
 
@@ -197,6 +197,9 @@ function addNewReview(reviewData) {
     // 닉네임
     const nicknameBox = document.createElement("div")
     nicknameBox.setAttribute("class", "rv-nickname-box")
+    nicknameBox.addEventListener("click", function() {
+        location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${reviewData.user}`;
+    });
     nicknameBox.innerText = reviewData.nickname
     row1InPurple.appendChild(nicknameBox)
 
