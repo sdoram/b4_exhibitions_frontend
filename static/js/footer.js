@@ -1,5 +1,3 @@
-console.log('footer 연결')
-
 document.getElementById("footer").innerHTML = `
     <span class="copyright">ⓒExhibition Now</span>
     <span class="name-links">
