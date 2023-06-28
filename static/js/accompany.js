@@ -1,4 +1,4 @@
-import { payload, payloadParse, getAccompanyAPI, deleteAccompanyAPI, deleteApplyAPI } from "./api.js";
+import { frontendBaseURL, payload, payloadParse, getAccompanyAPI, deleteAccompanyAPI, deleteApplyAPI } from "./api.js";
 import { accompanyPosting } from "./accompany-posting.js";
 import { isEditingAccompany, updateAccompany } from "./accompany-editing.js";
 import { isEditingReview } from "./review-editing.js";
@@ -68,6 +68,9 @@ export function getAccompany(exhibition_id){
                         // 닉네임
                         const nicknameBox = document.createElement("div")
                         nicknameBox.setAttribute("class", "ac-nickname-box")
+                        nicknameBox.addEventListener("click", function() {
+                            location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${accompany.user}`;
+                        });
                         nicknameBox.innerText = accompany.nickname
                         row1InPurple.appendChild(nicknameBox)
 
@@ -193,6 +196,9 @@ export function getAccompany(exhibition_id){
                                 // 동행 신청자 닉네임
                                 const applierNickname = document.createElement("div")
                                 applierNickname.setAttribute("class", "applier-nickname")
+                                applierNickname.addEventListener("click", function() {
+                                    location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${accompany.user}`;
+                                });
                                 applierNickname.innerText = apply.nickname
                                 applierRow1InPurple.appendChild(applierNickname)
                                 applierPurpleBox.appendChild(applierRow1InPurple)
