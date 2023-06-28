@@ -157,7 +157,7 @@
     margin-top: 5px;
 }
 .heart {
-    background-image: url('../img/filled-heart.png');
+    background-image: url('../img/empty-heart.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
