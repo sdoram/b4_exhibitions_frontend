@@ -5,9 +5,6 @@
     align-items: center;
     justify-content: center;
 }
-body:last-child {
-    margin-bottom: 50vmin;
-}
 /* 구간 타이틀: 동행글 목록 */
 .welcome-title {
     color: #6358DC;

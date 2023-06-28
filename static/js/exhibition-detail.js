@@ -18,12 +18,13 @@ window.onload = function loadExhibition() {
         // 전시회 이미지
         const exhibitionImg = document.getElementById("posterImg")
         // 이미지를 못찾을 경우 대체 이미지 
-        exhibitionImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
+        exhibitionImg.setAttribute("onerror", "src='/static/img/default-img.jpg'")
         if (exhibitionDATA.image) {
             if (exhibitionDATA.image.includes('https%3A')) {
                 // 대체 url 코드로 인코딩된 url 디코딩 하기    
-                exhibitionImg.setAttribute("src", decodeURIComponent(exhibitionDATA.image.split("media/")[1]));
-            } else {
+                exhibitionImg.setAttribute("src", `https://${decodeURIComponent(exhibitionDATA.image.split("https%3A")[1])}`)
+            }
+            else {
                 exhibitionImg.setAttribute("src", exhibitionDATA.image)
             }
         } else {
@@ -87,15 +88,17 @@ window.onload = function loadExhibition() {
             if (recommend.image) {
                 if (recommend.image.includes('https%3A')) {
                     // 대체 url 코드로 인코딩된 url 디코딩 하기    
-                    recommendImg.setAttribute("src", decodeURIComponent(recommend.image.split("media/")[1]));
-                } else if (recommend.image.includes('media')) {
-                    recommendImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${recommend.image}`)
-                } else {
+                    recommendImg.setAttribute("src", `https://${decodeURIComponent(recommend.image.split("https%3A")[1])}`)
+                }
+                else if (recommend.image.includes('https:')) {
                     recommendImg.setAttribute("src", recommend.image)
+                } else {
+                    recommendImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${recommend.image}`)
                 }
             } else {
                 recommendImg.setAttribute("src", "/static/img/default-img.jpg")
             }
+
 
             // 제목
             let recommendTitle = document.getElementById(`${i}-rec-title`)
@@ -130,7 +133,6 @@ window.onload = function loadExhibition() {
             })  
         }
     })
-
 }
 
 // 좋아요 하트 관련 코드
