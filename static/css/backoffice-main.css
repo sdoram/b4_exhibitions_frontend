@@ -71,6 +71,7 @@
     margin:0 auto;
     border: 1px solid #6358DC;
     border-radius: 10px;
+    cursor: pointer;
 }
 .exhibition-img {
     width:100%;
