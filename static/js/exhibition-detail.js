@@ -17,12 +17,14 @@ window.onload = function loadExhibition() {
 
         // 전시회 이미지
         const exhibitionImg = document.getElementById("posterImg")
+        exhibitionImg.setAttribute("onerror", "src='/static/img/default-img.jpg'")
         if (exhibitionDATA.image) {
-            if (exhibitionDATA.image.includes('https:')) {
-                exhibitionImg.setAttribute("src", exhibitionDATA.image)
-            } else {
+            if (exhibitionDATA.image.includes('https%3A')) {
                 // 대체 url 코드로 인코딩된 url 디코딩 하기    
-                exhibitionImg.setAttribute("src", decodeURIComponent(exhibitionDATA.image.split("media/")[1]))
+                exhibitionImg.setAttribute("src", `https://${decodeURIComponent(exhibitionDATA.image.split("https%3A")[1])}`)
+            }
+            else {
+                exhibitionImg.setAttribute("src", exhibitionDATA.image)
             }
         }
 
@@ -79,13 +81,19 @@ window.onload = function loadExhibition() {
             // 이미지
             let recommendImg = document.getElementById(`${i}-rec-img`)
             if (recommend.image) {
-                if (recommend.image.includes('https:')) {
-                    recommendImg.setAttribute("src", recommend.image)
-                } else {
+                console.log(recommend.image)
+                if (recommend.image.includes('https%3A')) {
                     // 대체 url 코드로 인코딩된 url 디코딩 하기    
-                    recommendImg.setAttribute("src", decodeURIComponent(recommend.image.split("media/")[1]))
+                    recommendImg.setAttribute("src", `https://${decodeURIComponent(recommend.image.split("https%3A")[1])}`)
+                }
+                else if (recommend.image.includes('https:')) {
+                    recommendImg.setAttribute("src", recommend.image)
+
+                } else {
+                    recommendImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${recommend.image}`)
                 }
             }
+
 
             // 제목
             let recommendTitle = document.getElementById(`${i}-rec-title`)
@@ -112,7 +120,7 @@ window.onload = function loadExhibition() {
             } else {
                 exhibitionReserve(exhibitionDATA.direct_url)
             }
-            
+
         })
     })
 

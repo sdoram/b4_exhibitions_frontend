@@ -6,89 +6,101 @@ let isPostingApply = 0;
 
 // 동행 신청 버튼 눌렀을 때 실행되는 함수
 export function postApply(accompany){
-    // 동행 구하는 글 박스
-    const accompanyBox = document.getElementById(`accompany${accompany.id}`)
-    // 동행 신청 버튼
-    const accApplyBtn = document.getElementById(`accPostingBtn${accompany.id}`)
-    // 동행 신청 작성창 있으면 삭제, 없으면 렌더하기
-    const applyPostBox = document.getElementById("applyPostBox")
-    if (applyPostBox) {
-        if (isPostingApply == accompany.id) {
-            accApplyBtn.innerText = "동행신청"
-            accompanyBox.parentNode.removeChild(applyPostBox)
-        } else {
-            alert("작성 중인 다른 글을 등록 또는 닫은 후 다시 클릭해 주십시오.")
-        }
+    if (!payload) {
+        alert("로그인 후 글을 작성할 수 있습니다.")
     } else {
-        isPostingApply = accompany.id
-        accApplyBtn.innerText = "닫기"
-
-        const applierAll = document.createElement("div")
-        applierAll.setAttribute("class", "app-applier-all")
-        applierAll.setAttribute("id", "applyPostBox")
-    
-        const arrowMark = document.createElement("span")
-        arrowMark.setAttribute("class", "app-arrow-mark")
-        arrowMark.innerText = "↳"
-        applierAll.appendChild(arrowMark)
-
-        const applierPurpleBox = document.createElement("form")
-        applierPurpleBox.setAttribute("class", "app-applier-purple-box")
-
-        const applierRow1InPurple = document.createElement("div")
-        applierRow1InPurple.setAttribute("class", "app-applier-row1-in-purple")
-
-        // 동행 신청자 닉네임
-        const applierNickname = document.createElement("div")
-        applierNickname.setAttribute("class", "app-applier-nickname")
-        applierNickname.innerText = payloadParse.nickname
-        applierRow1InPurple.appendChild(applierNickname)
-        applierPurpleBox.appendChild(applierRow1InPurple)
-
-        const applierRow2InPurple = document.createElement("div")
-        applierRow2InPurple.setAttribute("class", "app-applier-row2-in-purple")
-
-        // 저도 같이 갈래요!
-        const applierAccompanyContent = document.createElement("div")
-        applierAccompanyContent.setAttribute("class", "app-applier-accompany-content")
-
-        const applierContentHeader = document.createElement("p")
-        applierContentHeader.setAttribute("class", "app-applier-content-header")
-        applierContentHeader.innerText = "저도 같이 갈래요!"
-        applierAccompanyContent.appendChild(applierContentHeader)
-
-        const applierContent = document.createElement("textarea")
-        applierContent.setAttribute("class", "app-applier-content")
-        applierContent.setAttribute("id", "appContent")
-        applierContent.setAttribute("placeholder", "내용을 입력하세요.")
-        applierAccompanyContent.appendChild(applierContent)
-
-        applierRow2InPurple.appendChild(applierAccompanyContent)
-        applierPurpleBox.appendChild(applierRow2InPurple)
-
-        const applierRow3InPurple = document.createElement("div")
-        applierRow3InPurple.setAttribute("class", "app-applier-row3-in-purple")
-
-        // 신청댓글 등록 버튼
-        const applierAccPostingBtn = document.createElement("button")
-        applierAccPostingBtn.setAttribute("type", "button")
-        applierAccPostingBtn.setAttribute("class", "app-applier-acc-posing-btn")
-        applierAccPostingBtn.addEventListener("click", function () {
-            postApplyAPI(accompany.id, applyInputInfo()).then(({ response, responseJson }) => {
-                if (response.status == 201) {
-                    addNewApply(responseJson.data)
-                    alert("글이 등록되었습니다.")
-                } else {
-                    alert(responseJson.content && "내용없이 글을 작성할 수 없습니다.")
+        // 동행 구하는 글 박스
+        const accompanyBox = document.getElementById(`accompany${accompany.id}`)
+        // 동행 신청 버튼
+        const accApplyBtn = document.getElementById(`accPostingBtn${accompany.id}`)
+        // 동행 신청 작성창 있으면 삭제, 없으면 렌더하기
+        const applyPostBox = document.getElementById("applyPostBox")
+        if (applyPostBox) {
+            if (isPostingApply == accompany.id) {
+                if (payloadParse.user_id == accompany.user) {
+                    accApplyBtn.innerText = "답글달기"
+                } else {            
+                    accApplyBtn.innerText = "동행신청"
                 }
-            })
-        })
-        applierAccPostingBtn.innerText = "등록"
-        applierRow3InPurple.appendChild(applierAccPostingBtn)
+                accompanyBox.parentNode.removeChild(applyPostBox)
+            } else {
+                alert("작성 중인 다른 글을 등록 또는 닫은 후 다시 클릭해 주십시오.")
+            }
+        } else {
+            isPostingApply = accompany.id
+            accApplyBtn.innerText = "닫기"
 
-        applierPurpleBox.appendChild(applierRow3InPurple)
-        applierAll.appendChild(applierPurpleBox)
-        accompanyBox.after(applierAll)
+            const applierAll = document.createElement("div")
+            applierAll.setAttribute("class", "app-applier-all")
+            applierAll.setAttribute("id", "applyPostBox")
+        
+            const arrowMark = document.createElement("span")
+            arrowMark.setAttribute("class", "app-arrow-mark")
+            arrowMark.innerText = "↳"
+            applierAll.appendChild(arrowMark)
+
+            const applierPurpleBox = document.createElement("form")
+            applierPurpleBox.setAttribute("class", "app-applier-purple-box")
+
+            const applierRow1InPurple = document.createElement("div")
+            applierRow1InPurple.setAttribute("class", "app-applier-row1-in-purple")
+
+            // 동행 신청자 닉네임
+            const applierNickname = document.createElement("div")
+            applierNickname.setAttribute("class", "app-applier-nickname")
+            applierNickname.innerText = payloadParse.nickname
+            applierRow1InPurple.appendChild(applierNickname)
+            applierPurpleBox.appendChild(applierRow1InPurple)
+
+            const applierRow2InPurple = document.createElement("div")
+            applierRow2InPurple.setAttribute("class", "app-applier-row2-in-purple")
+
+            // 저도 같이 갈래요!
+            const applierAccompanyContent = document.createElement("div")
+            applierAccompanyContent.setAttribute("class", "app-applier-accompany-content")
+
+            const applierContentHeader = document.createElement("p")
+            applierContentHeader.setAttribute("class", "app-applier-content-header")
+            if (payloadParse.user_id == accompany.user) {
+                applierContentHeader.innerText = "이런 분을 구합니다!"
+            } else {
+                applierContentHeader.innerText = "저도 같이 갈래요!"
+            }      
+            applierAccompanyContent.appendChild(applierContentHeader)
+
+            const applierContent = document.createElement("textarea")
+            applierContent.setAttribute("class", "app-applier-content")
+            applierContent.setAttribute("id", "appContent")
+            applierContent.setAttribute("placeholder", "내용을 입력하세요.")
+            applierAccompanyContent.appendChild(applierContent)
+
+            applierRow2InPurple.appendChild(applierAccompanyContent)
+            applierPurpleBox.appendChild(applierRow2InPurple)
+
+            const applierRow3InPurple = document.createElement("div")
+            applierRow3InPurple.setAttribute("class", "app-applier-row3-in-purple")
+
+            // 신청댓글 등록 버튼
+            const applierAccPostingBtn = document.createElement("button")
+            applierAccPostingBtn.setAttribute("type", "button")
+            applierAccPostingBtn.setAttribute("class", "app-applier-acc-posing-btn")
+            applierAccPostingBtn.addEventListener("click", function () {
+                postApplyAPI(accompany.id, applyInputInfo()).then(({ response, responseJson }) => {
+                    if (response.status == 201) {
+                        addNewApply(responseJson.data)
+                        alert("글이 등록되었습니다.")
+                    } else {
+                        alert(responseJson.content && "내용없이 글을 작성할 수 없습니다.")
+                    }
+                })
+            })
+            applierAccPostingBtn.innerText = "등록"
+            applierRow3InPurple.appendChild(applierAccPostingBtn)
+
+            applierPurpleBox.appendChild(applierRow3InPurple)
+            applierAll.appendChild(applierPurpleBox)
+            accompanyBox.after(applierAll)
+        }
     }
 }
 

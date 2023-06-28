@@ -1,118 +1,123 @@
 import { payload, payloadParse, postAccompanyAPI } from "./api.js";
 import { getAccompany, deleteAccompany } from "./accompany.js";
 import { isEditingAccompany, updateAccompany } from "./accompany-editing.js";
+import { postApply } from "./apply-posting.js";
 
 //----------------------------------------------------------------작성----------------------------------------------------------------
 // 동행 구하기 버튼 눌렀을 때 실행되는 함수
 export function accompanyPosting(exhibition_id){
-    if (isEditingAccompany) {
-        alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
+    if (!payload) {
+        alert("로그인 후 글을 작성할 수 있습니다.")
     } else {
-        // 동행구하기 버튼 안 보이게 하기
-        const showAcPosting = document.querySelector(".show-ac-posting")
-        showAcPosting.style.display = "none"
+        if (isEditingAccompany) {
+            alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
+        } else {
+            // 동행구하기 버튼 안 보이게 하기
+            const showAcPosting = document.querySelector(".show-ac-posting")
+            showAcPosting.style.display = "none"
 
-        // 동행구하기 작성창이 없을 때 렌더하기
-        let accompanyPostBox = document.getElementById("accompanyPostBox")
-        if (!accompanyPostBox) {
-            const accompanyList = document.getElementById("accompanyList")
+            // 동행구하기 작성창이 없을 때 렌더하기
+            let accompanyPostBox = document.getElementById("accompanyPostBox")
+            if (!accompanyPostBox) {
+                const accompanyList = document.getElementById("accompanyList")
 
-            const grayBox = document.createElement("form")
-            grayBox.setAttribute("class", "ap-gray-box")
-            grayBox.setAttribute("id", "accompanyPostBox")
-            
-            const purpleBox = document.createElement("div")
-            purpleBox.setAttribute("class", "ap-purple-box")
+                const grayBox = document.createElement("form")
+                grayBox.setAttribute("class", "ap-gray-box")
+                grayBox.setAttribute("id", "accompanyPostBox")
+                
+                const purpleBox = document.createElement("div")
+                purpleBox.setAttribute("class", "ap-purple-box")
 
-            const row1InPurple = document.createElement("div")
-            row1InPurple.setAttribute("class", "ap-row1-in-purple")
+                const row1InPurple = document.createElement("div")
+                row1InPurple.setAttribute("class", "ap-row1-in-purple")
 
-            // 닉네임
-            const nicknameBox = document.createElement("div")
-            nicknameBox.setAttribute("class", "ap-nickname")
-            nicknameBox.innerText = payloadParse.nickname
-            row1InPurple.appendChild(nicknameBox)
+                // 닉네임
+                const nicknameBox = document.createElement("div")
+                nicknameBox.setAttribute("class", "ap-nickname")
+                nicknameBox.innerText = payloadParse.nickname
+                row1InPurple.appendChild(nicknameBox)
 
-            // 목표 인원
-            const goalNumber = document.createElement("div")
-            goalNumber.setAttribute("class", "ap-goal-number")
-            goalNumber.innerText = "목표인원"
-            const personnel = document.createElement("input")
-            personnel.setAttribute("type", "number")
-            personnel.setAttribute("class", "ap-goal-num")
-            personnel.setAttribute("id", "apPersonnel")
-            goalNumber.appendChild(personnel)
-            const myeong = document.createElement("span")
-            myeong.innerText = "명"
-            goalNumber.appendChild(myeong)
-            row1InPurple.appendChild(goalNumber)
-            
-            // 동행시간
-            const setDate = document.createElement("div")
-            setDate.setAttribute("class", "ap-set-date")
-            setDate.innerText = "동행시간 "
-            const startTime = document.createElement("input")
-            startTime.setAttribute("type", "datetime-local")
-            startTime.setAttribute("id", "apStartTime")
-            setDate.appendChild(startTime)
-            const wave = document.createElement("span")
-            wave.innerText = " ~ "
-            setDate.appendChild(wave)
-            const endTime = document.createElement("input")
-            endTime.setAttribute("type", "datetime-local")
-            endTime.setAttribute("id", "apEndTime")
-            setDate.appendChild(endTime)
-            row1InPurple.appendChild(setDate)
-            purpleBox.appendChild(row1InPurple)
+                // 목표 인원
+                const goalNumber = document.createElement("div")
+                goalNumber.setAttribute("class", "ap-goal-number")
+                goalNumber.innerText = "목표인원"
+                const personnel = document.createElement("input")
+                personnel.setAttribute("type", "number")
+                personnel.setAttribute("class", "ap-goal-num")
+                personnel.setAttribute("id", "apPersonnel")
+                goalNumber.appendChild(personnel)
+                const myeong = document.createElement("span")
+                myeong.innerText = "명"
+                goalNumber.appendChild(myeong)
+                row1InPurple.appendChild(goalNumber)
+                
+                // 동행시간
+                const setDate = document.createElement("div")
+                setDate.setAttribute("class", "ap-set-date")
+                setDate.innerText = "동행시간 "
+                const startTime = document.createElement("input")
+                startTime.setAttribute("type", "datetime-local")
+                startTime.setAttribute("id", "apStartTime")
+                setDate.appendChild(startTime)
+                const wave = document.createElement("span")
+                wave.innerText = " ~ "
+                setDate.appendChild(wave)
+                const endTime = document.createElement("input")
+                endTime.setAttribute("type", "datetime-local")
+                endTime.setAttribute("id", "apEndTime")
+                setDate.appendChild(endTime)
+                row1InPurple.appendChild(setDate)
+                purpleBox.appendChild(row1InPurple)
 
-            const row2InPurple = document.createElement("div")
-            row2InPurple.setAttribute("class", "ap-row2-in-purple")
+                const row2InPurple = document.createElement("div")
+                row2InPurple.setAttribute("class", "ap-row2-in-purple")
 
-            // 이런 분을 구합니다!
-            const accompanyContent = document.createElement("div")
-            accompanyContent.setAttribute("class", "ap-accompany-content")
-            const contentHeader = document.createElement("p")
-            contentHeader.setAttribute("class", "ap-content-header")
-            contentHeader.innerText = "이런 분을 구합니다!"
-            accompanyContent.appendChild(contentHeader)
-            const accContent = document.createElement("textarea")
-            accContent.setAttribute("class", "ap-acc-content")
-            accContent.setAttribute("id", "apContent")
-            accContent.setAttribute("placeholder", "내용을 입력하세요")
-            accompanyContent.appendChild(accContent)
-            row2InPurple.appendChild(accompanyContent)
-            purpleBox.appendChild(row2InPurple)
+                // 이런 분을 구합니다!
+                const accompanyContent = document.createElement("div")
+                accompanyContent.setAttribute("class", "ap-accompany-content")
+                const contentHeader = document.createElement("p")
+                contentHeader.setAttribute("class", "ap-content-header")
+                contentHeader.innerText = "이런 분을 구합니다!"
+                accompanyContent.appendChild(contentHeader)
+                const accContent = document.createElement("textarea")
+                accContent.setAttribute("class", "ap-acc-content")
+                accContent.setAttribute("id", "apContent")
+                accContent.setAttribute("placeholder", "내용을 입력하세요")
+                accompanyContent.appendChild(accContent)
+                row2InPurple.appendChild(accompanyContent)
+                purpleBox.appendChild(row2InPurple)
 
-            const row3InPurple = document.createElement("div")
-            row3InPurple.setAttribute("class", "ap-row3-in-purple")
+                const row3InPurple = document.createElement("div")
+                row3InPurple.setAttribute("class", "ap-row3-in-purple")
 
-            // 동행구하기 입력완료 버튼
-            const accPostingBtn = document.createElement("button")
-            accPostingBtn.setAttribute("type", "button")
-            accPostingBtn.setAttribute("class", "ap-acc-posting-btn")
-            accPostingBtn.addEventListener("click", function () {
-                postAccompanyAPI(exhibition_id, accompanyInputInfo()).then(({ response, responseJson }) => {
-                    if (response.status == 201) {
-                        addNewAccompany(responseJson.data)
-                        getAccompany(exhibition_id)
-                        getAccompany(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
-                        alert("글이 등록되었습니다.")
-                    } else {
-                        alert(responseJson.content && "내용없이 글을 작성할 수 없습니다."
-                            || responseJson.personnel && "목표인원을 1명 이상 선택하십시오."
-                            || responseJson.start_time && "시작 시간을 설정하십시오."
-                            || responseJson.end_time && "종료 시간을 설정하십시오."
-                            || responseJson.non_field_errors)
-                    }
+                // 동행구하기 입력완료 버튼
+                const accPostingBtn = document.createElement("button")
+                accPostingBtn.setAttribute("type", "button")
+                accPostingBtn.setAttribute("class", "ap-acc-posting-btn")
+                accPostingBtn.addEventListener("click", function () {
+                    postAccompanyAPI(exhibition_id, accompanyInputInfo()).then(({ response, responseJson }) => {
+                        if (response.status == 201) {
+                            addNewAccompany(responseJson.data)
+                            getAccompany(exhibition_id)
+                            getAccompany(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
+                            alert("글이 등록되었습니다.")
+                        } else {
+                            alert(responseJson.content && "내용없이 글을 작성할 수 없습니다."
+                                || responseJson.personnel && "목표인원을 1명 이상 선택하십시오."
+                                || responseJson.start_time && "시작 시간을 설정하십시오."
+                                || responseJson.end_time && "종료 시간을 설정하십시오."
+                                || responseJson.non_field_errors)
+                        }
+                    })
                 })
-            })
-            accPostingBtn.innerText = "입력완료"
-            row3InPurple.appendChild(accPostingBtn)
-            purpleBox.appendChild(row3InPurple)
-            grayBox.appendChild(purpleBox)
-            accompanyList.prepend(grayBox)
+                accPostingBtn.innerText = "입력완료"
+                row3InPurple.appendChild(accPostingBtn)
+                purpleBox.appendChild(row3InPurple)
+                grayBox.appendChild(purpleBox)
+                accompanyList.prepend(grayBox)
+            }
         }
-    }    
+    }
 }
 
 //--------------------위에서 실행시킨 함수가 선언되는 부분--------------------
@@ -143,6 +148,7 @@ function addNewAccompany(accompanyData) {
     
     const purpleBox = document.createElement("div")
     purpleBox.setAttribute("class", "ac-purple-box")
+    purpleBox.setAttribute("id", `accompany${accompanyData.id}`)
 
     const row1InPurple = document.createElement("div")
     row1InPurple.setAttribute("class", "ac-row1-in-purple")
@@ -206,14 +212,18 @@ function addNewAccompany(accompanyData) {
     dateInfo.appendChild(span2)
     row3InPurple.appendChild(dateInfo)
 
-    // 동행신청, 수정, 삭제 버튼
+    // 답글달기, 수정, 삭제 버튼
     const btngroup = document.createElement("div")
     btngroup.setAttribute("class", "ac-btn-group")
-    // 동행신청 버튼
+    // 답글달기 버튼
     const accApplyBtn = document.createElement("button")
     accApplyBtn.setAttribute("type", "button")
     accApplyBtn.setAttribute("class", "acc-apply-btn")
-    accApplyBtn.innerText = "동행신청"
+    accApplyBtn.setAttribute("id", `accPostingBtn${accompanyData.id}`)
+    accApplyBtn.addEventListener("click", function () {
+        postApply(accompanyData)                       
+    })
+    accApplyBtn.innerText = "답글달기"
     btngroup.appendChild(accApplyBtn)
     if (payload) {
         if (payloadParse.user_id == accompanyData.user){

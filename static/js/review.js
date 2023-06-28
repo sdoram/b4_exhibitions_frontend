@@ -30,23 +30,21 @@ export function getReview(exhibition_id) {
                 accompanyPostBox.parentElement.removeChild(accompanyPostBox)
             }
             // 후기 작성하기 버튼 생성
-            if (payload) {
-                if (!isRpBtnRendered) {
-                    const reviewList = document.getElementById("reviewList")
-                    const reviewPostingBtn = document.createElement("button")
-                    reviewPostingBtn.setAttribute("class", "show-rv-posting")
-                    reviewPostingBtn.setAttribute("id", "reviewPostingBtn")
-                    reviewPostingBtn.innerText = "후기 작성하기"
-                    reviewList.before(reviewPostingBtn)
-                    reviewPostingBtn.addEventListener("click", function () {
-                        postReview(exhibition_id)
-                    })
-                    isRpBtnRendered = true
-                }
-                // 사라졌던 후기 작성하기 버튼 다시 보이게 하기
-                const showRvPosting = document.querySelector(".show-rv-posting")
-                showRvPosting.style.display = "block"
+            if (!isRpBtnRendered) {
+                const reviewList = document.getElementById("reviewList")
+                const reviewPostingBtn = document.createElement("button")
+                reviewPostingBtn.setAttribute("class", "show-rv-posting")
+                reviewPostingBtn.setAttribute("id", "reviewPostingBtn")
+                reviewPostingBtn.innerText = "후기 작성하기"
+                reviewList.before(reviewPostingBtn)
+                reviewPostingBtn.addEventListener("click", function () {
+                    postReview(exhibition_id)
+                })
+                isRpBtnRendered = true
             }
+            // 사라졌던 후기 작성하기 버튼 다시 보이게 하기
+            const showRvPosting = document.querySelector(".show-rv-posting")
+            showRvPosting.style.display = "block"
             if (!isReviewsRendered) {
                 getReviewAPI(exhibition_id).then(({ responseJson }) => {
                     const reviewsDATA = responseJson.reviews         
@@ -170,7 +168,9 @@ export function getReview(exhibition_id) {
             rvAllItemsOrganizer.style.display = "none"
             // 이용후기 버튼 다시 눌렀을 때 후기 작성하기 버튼 안 보이게 하기
             const showRvPosting = document.querySelector(".show-rv-posting")
-            showRvPosting.style.display = "none"
+            if (showRvPosting) {
+                showRvPosting.style.display = "none"
+            }
             // 후기 작성창 연 채로 이용후기 버튼 다시 눌렀을 때 작성창 닫아주는 코드
             const reviewPostBox = document.getElementById("reviewPostBox")
             if (reviewPostBox) {
