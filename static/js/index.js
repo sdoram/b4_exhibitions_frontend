@@ -70,7 +70,9 @@ window.onload = function loadExhibitions() {
             exhibitionHeartNum.innerText = exhibition.likes
             exhibitionHeartSet.appendChild(exhibitionHeartNum)
 
+            // 좋아요 여부에 따른 하트색 세팅
             if (payload) {
+                exhibitionHeart.setAttribute("style", "cursor: pointer;")
                 getUserInfoAPI(payloadParse.user_id).then(({ responseJson }) => {
                     responseJson.exhibition_likes.forEach((obj) => {
                         if (exhibition.id == obj.id) {
