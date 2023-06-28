@@ -1,8 +1,5 @@
-console.log('updated-user 연결')
-
 import { getUserInfoAPI, payloadParse, frontendBaseURL, patchUserInfoAPI } from "./api.js";
 
-console.log()
 window.onload = function () {
     const user_id = new URLSearchParams(window.location.search).get("user_id")
 
@@ -27,7 +24,6 @@ window.onload = function () {
 }
 
 function userInfoEdit() {
-    console.log('프로필 수정 버튼')
     const user_id = payloadParse.user_id
     const nickname = document.getElementById('nickname').value;
     const password = document.getElementById('password').value;

@@ -1,8 +1,6 @@
-console.log('signup 연결')
 import { postSignUpAPI, frontendBaseURL, payload } from "./api.js";
 
 function handleSignUp() {
-    console.log('회원가입 버튼')
     const email = document.getElementById("email").value;
     const nickname = document.getElementById('nickname').value;
     const password = document.getElementById('password').value;
@@ -27,7 +25,6 @@ function handleSignUp() {
                 window.location.replace(`${frontendBaseURL}/templates/signin.html`);
             } else {
                 alert(responseJson.message);
-                console.log(response.status);
             }
         });
     } else {
@@ -41,7 +38,6 @@ document.getElementById("signUpButton").addEventListener("click", handleSignUp);
 
 // 로그인 확인
 function checkSignIn() {
-    console.log('checkSignIn 연결 확인')
     if (payload) {
         window.location.replace(`${frontendBaseURL}/`)
     }

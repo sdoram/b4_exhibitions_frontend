@@ -13,7 +13,6 @@ window.onload = function loadExhibition() {
             window.location.replace("/templates/page_not_found.html")
         }
         const exhibitionDATA = responseJson
-        console.log(exhibitionDATA)
 
         // 전시회 이미지
         const exhibitionImg = document.getElementById("posterImg")

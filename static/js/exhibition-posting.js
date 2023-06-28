@@ -1,5 +1,3 @@
-console.log('exhibition-posting 연결')
-
 import { postExhibitionAPI, frontendBaseURL, putExhibitionAPI, getExhibitionAPI } from "./api.js";
 
 // 게시글 작성 정보 가져오기
@@ -34,12 +32,10 @@ function exhibitionInPutInfo() {
 function handleExhibitionPosting() {
     postExhibitionAPI(exhibitionInPutInfo()).then(({ response, responseJson }) => {
         if (response.status == 201) {
-            console.log(responseJson.data)
             alert(responseJson.message);
             window.location.replace(`${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${responseJson.data.id}`)
         } else {
             alert(responseJson.message);
-            console.log(response.status);
         }
     });
 
@@ -65,7 +61,6 @@ if (URLParams.get('exhibition_id')) {
 
         getExhibitionAPI(exhibition_id).then(({ response, responseJson }) => {
             const exhibitionInfo = responseJson
-            console.log(exhibitionInfo)
             document.getElementById("exhibitionCategory").value = exhibitionInfo.category
             document.getElementById('exhibitionTitle').value = exhibitionInfo.info_name
             document.getElementById('exhibitionLocation').value = exhibitionInfo.location
@@ -80,7 +75,6 @@ if (URLParams.get('exhibition_id')) {
         })
     }
     document.getElementById("exhibitionPutButton").addEventListener("click", function () {
-        console.log(URLParams.get('exhibition_id'))
         handleExhibitionPut(URLParams.get('exhibition_id'))
     }
     );
