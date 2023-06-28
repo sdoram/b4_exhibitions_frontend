@@ -1,0 +1,28 @@
+/* 푸터 */
+.footer {
+    margin-top: 15vmin;
+    background-color: #6358DC;
+    height: 15vmin;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-weight: bold;
+    padding: 0px 7vmin 0px 7vmin
+}
+.copyright {
+    font-size: 3.5vmin;
+}
+.name-links {
+    font-size: 2vmin;
+}
+.name-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.name-link:hover {
+    color: rgb(255, 138, 29);
+}

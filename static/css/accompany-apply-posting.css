@@ -149,7 +149,7 @@ body:last-child {
 /* ==================================================================================================================================== */
 /* 동행 신청글 구간 시작 */
 /* 신청댓글 정렬 */
-.applier-all {
+.app-applier-all {
     margin-top: 5vmin;
     display: flex;
     width: 100%;
@@ -157,7 +157,7 @@ body:last-child {
     justify-content: space-between;
 }
 /* 신청댓글 화살표 */
-.arrow-mark {
+.app-arrow-mark {
     color: #6358DC;
     font-size: 15vmin;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -165,10 +165,10 @@ body:last-child {
     margin-left: 8vmin;
 }
 /* 보라색 내용 부분*/
-.applier-purple-box {
+.app-applier-purple-box {
     background-color: #a39fd8;
     width: 85vmin;
-    height: fit-content;
+    height: 37.2vmin;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -177,31 +177,31 @@ body:last-child {
     border-radius: 1vmin;
 }
 /* 보라색 안의 상단: 닉네임 */
-.applier-row1-in-purple {
+.app-applier-row1-in-purple {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
     height: fit-content;
 }
-.applier-nickname {
+.app-applier-nickname {
     background-color: white;
     width: 20%;
-    height: 3.3333vmin;
+    height: 3.5vmin;
     overflow: auto;
     text-align: center;
     font-weight: bold;
     font-size: 2vmin;
-    padding-top: 0.6667vmin;
+    padding-top: 0.3vmin;
     border-radius: 0.5556vmin;
 }
 /* 보라색 안의 중앙: 동행글 본문 */
-.applier-row2-in-purple {
+.app-applier-row2-in-purple {
     margin-top: 2.2222vmin;
     width: 100%;
     height: fit-content;
 }
-.applier-accompany-content {
+.app-applier-accompany-content {
     height: 20vmin;
     background-color: white;
     overflow: auto;
@@ -211,24 +211,24 @@ body:last-child {
     font-size: 1.8vmin;
     border-radius: 0.5556vmin;
 }
-.applier-content {
+.app-applier-content {
     width: 100%;
-    height: 10vmin;
-    color: #6358DC;
+    height: 9vmin;
+    color: black;
     font-size: 2vmin;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     border: 0px solid;
 }
-.applier-content-header {
+.app-applier-content-header {
     color: #6358DC;
     font-weight: bold;
     font-size: 3vmin;
     margin-top: -0.5vmin;
     font-family:Arial, Helvetica, sans-serif;
 }
-/* 보라색 안의 하단: 리뷰최종수정일자 ,수정 버튼, 삭제 버튼 */
-.applier-row3-in-purple {
+/* 보라색 안의 하단: 등록 버튼 */
+.app-applier-row3-in-purple {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -237,7 +237,7 @@ body:last-child {
     width: 100%;
     height: fit-content;
 }
-.applier-row3-in-purple > button {
+.app-applier-row3-in-purple > button {
     border: 0vmin solid;
     background-color: #FF9700;
     color: white;
@@ -247,10 +247,10 @@ body:last-child {
     height: 4.4444vmin;
     border-radius: 1.1111vmin;
 }
-.applier-row3-in-purple > button:hover {
+.app-applier-row3-in-purple > button:hover {
     background-color: silver;
 }
-.applier-acc-posting-btn {
+.app-applier-acc-posting-btn {
     margin-left: auto;
     margin-right: 1.1111vmin;
 }

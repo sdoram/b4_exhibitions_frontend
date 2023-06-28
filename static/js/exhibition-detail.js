@@ -1,6 +1,6 @@
 import { getExhibitionAPI, postExhibitionLikeAPI, payload, payloadParse, getUserInfoAPI, frontendBaseURL } from "./api.js";
-import { review } from "./review.js";
-import { accompany } from "./accompany.js";
+import { getReview } from "./review.js";
+import { getAccompany } from "./accompany.js";
 import { isEditingReview } from "./review-editing.js";
 import { isEditingAccompany } from "./accompany-editing.js";
 
@@ -9,6 +9,9 @@ window.onload = function loadExhibition() {
     // url 객체 생성 후 exhibition_id 값 추출 
     const exhibition_id = new URLSearchParams(window.location.search).get("exhibition_id")
     getExhibitionAPI(exhibition_id).then(({ response, responseJson }) => {
+        if (response.status == 404) {
+            window.location.replace("/templates/page_not_found.html")
+        }
         const exhibitionDATA = responseJson
         console.log(exhibitionDATA)
 
@@ -25,7 +28,7 @@ window.onload = function loadExhibition() {
             }
         }
 
-        // // 전시회 좋아요 
+        // 전시회 좋아요 
         const exhibitionHeart = document.getElementById("heart")
         exhibitionHeart.addEventListener("click", function () {
             heart(exhibitionDATA.id)
@@ -100,13 +103,13 @@ window.onload = function loadExhibition() {
         // 리뷰 버튼
         const reviewButton = document.getElementById("reviewBtn")
         reviewButton.addEventListener("click", function () {
-            review(exhibition_id)
+            getReview(exhibition_id)
         })
 
         // 동행 버튼
         const accompanyButton = document.getElementById("accompanyBtn")
         accompanyButton.addEventListener("click", function () {
-            accompany(exhibition_id)
+            getAccompany(exhibition_id)
         })
 
         // 예약하기 버튼
@@ -125,19 +128,21 @@ window.onload = function loadExhibition() {
 
 // 좋아요 하트 관련 코드
 function heart(exhibition_id) {
-    let fullHeart = false
-    postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-        const heartElement = document.getElementById("heart")
-        const heartNum = document.getElementById("heartNum")
-        if (response.status == 201) {
-            heartElement.style.backgroundImage = 'url("/static/img/filled-heart.png")'
-            heartNum.innerText = responseJson.likes
-        } else {
-            heartElement.style.backgroundImage = 'url("/static/img/empty-heart.png")'
-            heartNum.innerText = responseJson.likes
-        }
-        fullHeart = !fullHeart
-    })
+    let fullHeart = false;
+    if (payload) {
+        postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+            const heartElement = document.getElementById(exhibition_id);
+            const heartNum = document.getElementById(`heartNum${exhibition_id}`)
+            if (response.status == 201) {
+                heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+                heartNum.innerText = responseJson.likes
+            } else {
+                heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
+                heartNum.innerText = responseJson.likes
+            }
+            fullHeart = !fullHeart;
+        })
+    }
 }
 
 // 전시회 예약 페이지
