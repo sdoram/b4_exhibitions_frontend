@@ -1,7 +1,7 @@
 console.log('api 연결')
 
 // 배포용 URL
-export const frontendBaseURL = "https://b4-exhibitions-front.netlify.app";
+export const frontendBaseURL = "https://b4-exhibitions-now.netlify.app";
 export const backendBaseURL = "https://www.b4-exhibitions.shop/api";
 
 // 로컬용 URL
