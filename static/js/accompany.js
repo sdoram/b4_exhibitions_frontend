@@ -210,7 +210,12 @@ export function getAccompany(exhibition_id){
 
                                 const applierContentHeader = document.createElement("p")
                                 applierContentHeader.setAttribute("class", "applier-content-header")
-                                applierContentHeader.innerText = "저도 같이 갈래요!"
+                                applierContentHeader.setAttribute("class", "app-applier-content-header")
+                                if (apply.user == accompany.user) {
+                                    applierContentHeader.innerText = "이런 분을 구합니다!"
+                                } else {
+                                    applierContentHeader.innerText = "저도 같이 갈래요!"
+                                }
                                 applierAccompanyContent.appendChild(applierContentHeader)
 
                                 const applierContent = document.createElement("p")
