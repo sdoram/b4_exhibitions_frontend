@@ -32,23 +32,21 @@ export function getAccompany(exhibition_id){
                 reviewPostBox.parentElement.removeChild(reviewPostBox)
             }
             // 동행구하기 버튼 생성
-            if (payload) {
-                if (!isApBtnRenderd) {
-                    const accompanyList = document.getElementById("accompanyList")
-                    const accompanyPostingBtn = document.createElement("button")
-                    accompanyPostingBtn.setAttribute("class", "show-ac-posting")
-                    accompanyPostingBtn.setAttribute("id", "accompanyPostingBtn")
-                    accompanyPostingBtn.innerText = "동행 구하기"
-                    accompanyList.before(accompanyPostingBtn)
-                    accompanyPostingBtn.addEventListener("click", function () {
-                        accompanyPosting(exhibition_id)
-                    })
-                    isApBtnRenderd = true
-                }
-                // 사라졌던 동행구하기 작성 버튼 다시 보이게 하기
-                const showAcPosting = document.querySelector(".show-ac-posting")
-                showAcPosting.style.display = "block"
+            if (!isApBtnRenderd) {
+                const accompanyList = document.getElementById("accompanyList")
+                const accompanyPostingBtn = document.createElement("button")
+                accompanyPostingBtn.setAttribute("class", "show-ac-posting")
+                accompanyPostingBtn.setAttribute("id", "accompanyPostingBtn")
+                accompanyPostingBtn.innerText = "동행 구하기"
+                accompanyList.before(accompanyPostingBtn)
+                accompanyPostingBtn.addEventListener("click", function () {
+                    accompanyPosting(exhibition_id)
+                })
+                isApBtnRenderd = true
             }
+            // 사라졌던 동행구하기 작성 버튼 다시 보이게 하기
+            const showAcPosting = document.querySelector(".show-ac-posting")
+            showAcPosting.style.display = "block"
             if (!isAccompaniesRendered) {
                 getAccompanyAPI(exhibition_id).then(({ responseJson }) => {
                     const accompaniesDATA = responseJson.accompanies
@@ -140,8 +138,11 @@ export function getAccompany(exhibition_id){
                         })
                         accApplyBtn.innerText = "동행신청"
                         btngroup.appendChild(accApplyBtn)
+                        
                         if (payload) {
                             if (payloadParse.user_id == accompany.user){
+                                accApplyBtn.innerText = "답글달기"  // 동행구하기 작성자는 동행신청 대신 답글달기로 보임
+
                                 // 수정 버튼
                                 const accUpdateBtn = document.createElement("button")
                                 accUpdateBtn.setAttribute("type", "button")
@@ -267,7 +268,9 @@ export function getAccompany(exhibition_id){
             acAllItemsOrganizer.style.display = "none"
             // 동행구하기 버튼 다시 눌렀을 때 동행구하기 작성 버튼 안 보이게 하기
             const showAcPosting = document.querySelector(".show-ac-posting")
-            showAcPosting.style.display = "none"
+            if (showAcPosting) {
+                showAcPosting.style.display = "none"
+            }
             // 동행구하기 작성창 연 채로 동행글 보기 다시 눌렀을 때 작성창 닫아주는 코드
             const accompanyPostBox = document.getElementById("accompanyPostBox")
             if (accompanyPostBox) {
