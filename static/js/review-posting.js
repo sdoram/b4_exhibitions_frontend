@@ -1,5 +1,5 @@
 import { backendBaseURL, payload, payloadParse, postReviewAPI } from "./api.js";
-import { review, deleteReview } from "./review.js";
+import { getReview, deleteReview } from "./review.js";
 import { isEditingReview, updateReview } from "./review-editing.js"
 
 let starValue = 0;
@@ -7,125 +7,129 @@ let starValue = 0;
 //----------------------------------------------------------------작성----------------------------------------------------------------
 // 후기 작성하기 버튼 눌렀을 때 실행되는 함수
 export function postReview(exhibition_id) {
-    if (isEditingReview) {
-        alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
+    if (!payload) {
+        alert("로그인 후 글을 작성할 수 있습니다.")
     } else {
-        // 후기 작성하기 버튼 안 보이게 하기
-        const showRvPosting = document.querySelector(".show-rv-posting")
-        showRvPosting.style.display = "none"
+        if (isEditingReview) {
+            alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
+        } else {
+            // 후기 작성하기 버튼 안 보이게 하기
+            const showRvPosting = document.querySelector(".show-rv-posting")
+            showRvPosting.style.display = "none"
 
-        // 후기 작성창이 없을 때 렌더하기
-        let reviewPostBox = document.getElementById("reviewPostBox")
-        if (!reviewPostBox) {
-            const reviewList = document.getElementById("reviewList")
+            // 후기 작성창이 없을 때 렌더하기
+            let reviewPostBox = document.getElementById("reviewPostBox")
+            if (!reviewPostBox) {
+                const reviewList = document.getElementById("reviewList")
 
-            const grayBox = document.createElement("form")
-            grayBox.setAttribute("class", "rp-gray-box")
-            grayBox.setAttribute("id", "reviewPostBox")
+                const grayBox = document.createElement("form")
+                grayBox.setAttribute("class", "rp-gray-box")
+                grayBox.setAttribute("id", "reviewPostBox")
 
-            // 이미지 업로드
-            const imgBox = document.createElement("div")
-            imgBox.setAttribute("class", "rp-img-box")
+                // 이미지 업로드
+                const imgBox = document.createElement("div")
+                imgBox.setAttribute("class", "rp-img-box")
 
-            const fileBox = document.createElement("div")
-            fileBox.setAttribute("class", "rp-filebox")
+                const fileBox = document.createElement("div")
+                fileBox.setAttribute("class", "rp-filebox")
 
-            const uploadName = document.createElement("input")
-            uploadName.setAttribute("class", "rp-upload-name")
-            uploadName.setAttribute("value", "후기 이미지 업로드")
-            uploadName.setAttribute("placeholder", "후기 이미지 업로드")
-            uploadName.setAttribute("disabled", "disabled")
-            fileBox.appendChild(uploadName)
+                const uploadName = document.createElement("input")
+                uploadName.setAttribute("class", "rp-upload-name")
+                uploadName.setAttribute("value", "후기 이미지 업로드")
+                uploadName.setAttribute("placeholder", "후기 이미지 업로드")
+                uploadName.setAttribute("disabled", "disabled")
+                fileBox.appendChild(uploadName)
 
-            const file = document.createElement("label")
-            file.setAttribute("for", "rvImage")
-            file.innerText = "파일찾기"
-            fileBox.appendChild(file)
-            
-            const inputFile = document.createElement("input")
-            inputFile.setAttribute("type", "file")
-            inputFile.setAttribute("id", "rvImage")
-            inputFile.setAttribute("accept", ".jpg,.jpeg,.png,.gif,.bmp")
-            inputFile.setAttribute("capture", "camera")
-            inputFile.setAttribute("class", "rp-upload-hidden")
-            fileBox.appendChild(inputFile)
-            imgBox.appendChild(fileBox)
-            grayBox.appendChild(imgBox)
+                const file = document.createElement("label")
+                file.setAttribute("for", "rvImage")
+                file.innerText = "파일찾기"
+                fileBox.appendChild(file)
+                
+                const inputFile = document.createElement("input")
+                inputFile.setAttribute("type", "file")
+                inputFile.setAttribute("id", "rvImage")
+                inputFile.setAttribute("accept", ".jpg,.jpeg,.png,.gif,.bmp")
+                inputFile.setAttribute("capture", "camera")
+                inputFile.setAttribute("class", "rp-upload-hidden")
+                fileBox.appendChild(inputFile)
+                imgBox.appendChild(fileBox)
+                grayBox.appendChild(imgBox)
 
-            // 이미지 업로드 시 후기 이미지 업로드 글자를 이미지 이름으로 바꾸는 코드
-            inputFile.addEventListener('input', function (event) {
-                const fileName = event.target.files[0].name;
-                uploadName.value = fileName
-            })
-
-            const purpleBox = document.createElement("div")
-            purpleBox.setAttribute("class", "rp-purple-box")
-
-            const row1InPurple = document.createElement("div")
-            row1InPurple.setAttribute("class", "rp-row1-in-purple")
-
-            // 닉네임
-            const nicknameBox = document.createElement("div")
-            nicknameBox.setAttribute("class", "rp-nickname-box")
-            nicknameBox.innerText = payloadParse.nickname
-            row1InPurple.appendChild(nicknameBox)
-
-            // 별점
-            const stars = document.createElement("div")
-            stars.setAttribute("class", "rp-stars")
-            stars.setAttribute("id", "rvStar")
-            
-            for (let i = 1; i <= 5; i++) { 
-                let star = document.createElement("img")
-                star.setAttribute("class", "rp-star")              
-                star.setAttribute("src", "/static/img/empty-star.png")
-                star.setAttribute("id", `star${i}`)
-                star.setAttribute("value", `${i}`)
-                star.addEventListener("click", function () {
-                    fillStars(i)
+                // 이미지 업로드 시 후기 이미지 업로드 글자를 이미지 이름으로 바꾸는 코드
+                inputFile.addEventListener('input', function (event) {
+                    const fileName = event.target.files[0].name;
+                    uploadName.value = fileName
                 })
-                stars.appendChild(star)
+
+                const purpleBox = document.createElement("div")
+                purpleBox.setAttribute("class", "rp-purple-box")
+
+                const row1InPurple = document.createElement("div")
+                row1InPurple.setAttribute("class", "rp-row1-in-purple")
+
+                // 닉네임
+                const nicknameBox = document.createElement("div")
+                nicknameBox.setAttribute("class", "rp-nickname-box")
+                nicknameBox.innerText = payloadParse.nickname
+                row1InPurple.appendChild(nicknameBox)
+
+                // 별점
+                const stars = document.createElement("div")
+                stars.setAttribute("class", "rp-stars")
+                stars.setAttribute("id", "rvStar")
+                
+                for (let i = 1; i <= 5; i++) { 
+                    let star = document.createElement("img")
+                    star.setAttribute("class", "rp-star")              
+                    star.setAttribute("src", "/static/img/empty-star.png")
+                    star.setAttribute("id", `star${i}`)
+                    star.setAttribute("value", `${i}`)
+                    star.addEventListener("click", function () {
+                        fillStars(i)
+                    })
+                    stars.appendChild(star)
+                }
+                row1InPurple.appendChild(stars)
+                purpleBox.appendChild(row1InPurple)
+
+                const row2InPurple = document.createElement("div")
+                row2InPurple.setAttribute("class", "rv-row2-in-purple")
+
+                // 후기 내용
+                const reviewContent = document.createElement("textarea")
+                reviewContent.setAttribute("class", "rp-review-content")
+                reviewContent.setAttribute("id", "rvContent")
+                reviewContent.setAttribute("placeholder", "후기 내용을 입력해주세요.")
+                row2InPurple.appendChild(reviewContent)
+                purpleBox.appendChild(row2InPurple)
+
+                const row3InPurple = document.createElement("div")
+                row3InPurple.setAttribute("class", "rp-row3-in-purple")
+
+                // 후기 입력완료 버튼
+                const rvPostingBtn = document.createElement("button")
+                rvPostingBtn.setAttribute("type", "button")
+                rvPostingBtn.setAttribute("class", "rp-review-posting-btn")
+                rvPostingBtn.setAttribute("id", "rvPostingBtn")
+                rvPostingBtn.addEventListener("click", function () {
+                    postReviewAPI(exhibition_id, reviewInputInfo()).then(({ response, responseJson }) => {
+                        if (response.status == 201) {
+                            addNewReview(responseJson.data)
+                            getReview(exhibition_id)
+                            getReview(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
+                            alert("글이 등록되었습니다.")
+                        } else {
+                            alert(responseJson.content && "내용없이 글을 작성할 수 없습니다."
+                                || responseJson.rating && "별점을 선택하십시오.")
+                        }
+                    })
+                })
+                rvPostingBtn.innerText = "입력완료"
+                row3InPurple.appendChild(rvPostingBtn)
+                purpleBox.appendChild(row3InPurple)
+                grayBox.appendChild(purpleBox)
+                reviewList.prepend(grayBox)
             }
-            row1InPurple.appendChild(stars)
-            purpleBox.appendChild(row1InPurple)
-
-            const row2InPurple = document.createElement("div")
-            row2InPurple.setAttribute("class", "rv-row2-in-purple")
-
-            // 후기 내용
-            const reviewContent = document.createElement("textarea")
-            reviewContent.setAttribute("class", "rp-review-content")
-            reviewContent.setAttribute("id", "rvContent")
-            reviewContent.setAttribute("placeholder", "후기 내용을 입력해주세요.")
-            row2InPurple.appendChild(reviewContent)
-            purpleBox.appendChild(row2InPurple)
-
-            const row3InPurple = document.createElement("div")
-            row3InPurple.setAttribute("class", "rp-row3-in-purple")
-
-            // 후기 입력완료 버튼
-            const rvPostingBtn = document.createElement("button")
-            rvPostingBtn.setAttribute("type", "button")
-            rvPostingBtn.setAttribute("class", "rp-review-posting-btn")
-            rvPostingBtn.setAttribute("id", "rvPostingBtn")
-            rvPostingBtn.addEventListener("click", function () {
-                postReviewAPI(exhibition_id, reviewInputInfo()).then(({ response, responseJson }) => {
-                    if (response.status == 201) {
-                        addNewReview(responseJson.data)
-                        review(exhibition_id)
-                        review(exhibition_id)   // 두 번 실행해야 새로고침 없이 조회 가능
-                        alert("글이 등록되었습니다.")
-                    } else {
-                        alert(responseJson.content && "내용없이 글을 작성할 수 없습니다."
-                            || responseJson.rating && "별점을 선택하십시오.")
-                    }
-                })
-            })
-            rvPostingBtn.innerText = "입력완료"
-            row3InPurple.appendChild(rvPostingBtn)
-            purpleBox.appendChild(row3InPurple)
-            grayBox.appendChild(purpleBox)
-            reviewList.prepend(grayBox)
         }
     }
 }

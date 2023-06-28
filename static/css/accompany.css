@@ -220,6 +220,17 @@
     font-size: 1.8vmin;
     border-radius: 0.5556vmin;
 }
+.applier-accompany-content-textarea {
+    width: 100%;
+    height: 20vmin;
+    background-color: white;
+    overflow: auto;
+    padding: 2.2222vmin;
+    color: black;
+    font-weight: bold;
+    font-size: 1.8vmin;
+    border-radius: 0.5556vmin;
+}
 .applier-content-header {
     color: #6358DC;
     font-weight: bold;
@@ -265,8 +276,3 @@
     margin-right: 1.1111vmin;
 }
 /* 동행 신청글 구간 끝 */
-
-/* 페이지 바닥 여백주기 */
-body:last-child {
-    margin-bottom: 20vmin;
-}

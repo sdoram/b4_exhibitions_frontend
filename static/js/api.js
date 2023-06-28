@@ -1,7 +1,12 @@
 console.log('api 연결')
 
 export const frontendBaseURL = "https://b4-exhibitions-now.netlify.app";
+// 배포용 URL
 export const backendBaseURL = "https://www.b4-exhibitions.shop/api";
+
+// 로컬용 URL
+// export const frontendBaseURL = "http://127.0.0.1:5500";
+// export const backendBaseURL = "http://127.0.0.1:8000/api";
 
 export const payload = localStorage.getItem("payload")
 export const payloadParse = JSON.parse(payload);
@@ -239,6 +244,37 @@ export async function putAccompanyAPI(accompany_id, data) {
 // 동행 삭제 API
 export async function deleteAccompanyAPI(accompany_id) {
     const response = await fetch(`${backendBaseURL}/accompanies/detail/${accompany_id}/`, {
+        method: 'DELETE',
+        headers: { "Authorization": `Bearer ${token}` },
+    })
+    return response
+}
+
+// 동행 신청 작성 API
+export async function postApplyAPI(accompany_id, data) {
+    const response = await fetch(`${backendBaseURL}/accompanies/${accompany_id}/apply/`, {
+        method: 'POST',
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    return { response, responseJson }
+}
+
+// 동행 신청 수정 API
+export async function putApplyAPI(apply_id, data) {
+    const response = await fetch(`${backendBaseURL}/accompanies/apply/${apply_id}/`, {
+        method: 'PUT',
+        headers: { "Authorization": `Bearer ${token}` },
+        body: data
+    })
+    const responseJson = await response.json();
+    return { response, responseJson }
+}
+
+// 동행 신청 삭제 API
+export async function deleteApplyAPI(apply_id) {
+    const response = await fetch(`${backendBaseURL}/accompanies/apply/${apply_id}/`, {
         method: 'DELETE',
         headers: { "Authorization": `Bearer ${token}` },
     })
