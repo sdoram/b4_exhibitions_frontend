@@ -1,4 +1,4 @@
-import { getExhibitionAPI, postExhibitionLikeAPI, payload, payloadParse, getUserInfoAPI, frontendBaseURL } from "./api.js";
+import { getExhibitionAPI, postExhibitionLikeAPI, payload, payloadParse, getUserInfoAPI, frontendBaseURL, backendBaseURL } from "./api.js";
 import { getReview } from "./review.js";
 import { getAccompany } from "./accompany.js";
 import { isEditingReview } from "./review-editing.js";
@@ -17,13 +17,17 @@ window.onload = function loadExhibition() {
 
         // 전시회 이미지
         const exhibitionImg = document.getElementById("posterImg")
+        // 이미지를 못찾을 경우 대체 이미지 
+        exhibitionImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
         if (exhibitionDATA.image) {
-            if (exhibitionDATA.image.includes('https:')) {
-                exhibitionImg.setAttribute("src", exhibitionDATA.image)
-            } else {
+            if (exhibitionDATA.image.includes('https%3A')) {
                 // 대체 url 코드로 인코딩된 url 디코딩 하기    
-                exhibitionImg.setAttribute("src", decodeURIComponent(exhibitionDATA.image.split("media/")[1]))
+                exhibitionImg.setAttribute("src", decodeURIComponent(exhibitionDATA.image.split("media/")[1]));
+            } else {
+                exhibitionImg.setAttribute("src", exhibitionDATA.image)
             }
+        } else {
+            exhibitionImg.setAttribute("src", "/static/img/default-img.jpg")
         }
 
         // 전시회 좋아요 
@@ -55,14 +59,14 @@ window.onload = function loadExhibition() {
         // 전시회 장소
         const exhibitionLocation = document.getElementById("location")
         exhibitionLocation.innerHTML = exhibitionDATA.location
-
-        // 전시회 시작일
-        const exhibitionStartDate = document.getElementById("startDate")
-        exhibitionStartDate.innerText = exhibitionDATA.start_date
-
-        // 전시회 종료일
-        const exhibitionEndDate = document.getElementById("endDate")
-        exhibitionEndDate.innerText = exhibitionDATA.end_date
+        
+        // 전시회 기간
+        const exhibitionPeriod = document.getElementById("period")
+        if (exhibitionDATA.start_date && exhibitionDATA.end_date) {
+            exhibitionPeriod.innerText = `${exhibitionDATA.start_date} ~ ${exhibitionDATA.end_date}`
+        } else {
+            exhibitionPeriod.innerText = "상시"
+        }
 
         // 전시회 설명
         const exhibitionContent = document.getElementById("content")
@@ -78,13 +82,19 @@ window.onload = function loadExhibition() {
 
             // 이미지
             let recommendImg = document.getElementById(`${i}-rec-img`)
+            // 이미지를 못찾을 경우 대체 이미지 
+            recommendImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")           
             if (recommend.image) {
-                if (recommend.image.includes('https:')) {
-                    recommendImg.setAttribute("src", recommend.image)
-                } else {
+                if (recommend.image.includes('https%3A')) {
                     // 대체 url 코드로 인코딩된 url 디코딩 하기    
-                    recommendImg.setAttribute("src", decodeURIComponent(recommend.image.split("media/")[1]))
+                    recommendImg.setAttribute("src", decodeURIComponent(recommend.image.split("media/")[1]));
+                } else if (recommend.image.includes('media')) {
+                    recommendImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${recommend.image}`)
+                } else {
+                    recommendImg.setAttribute("src", recommend.image)
                 }
+            } else {
+                recommendImg.setAttribute("src", "/static/img/default-img.jpg")
             }
 
             // 제목
@@ -106,14 +116,19 @@ window.onload = function loadExhibition() {
 
         // 예약하기 버튼
         const exhibitionReserveButton = document.getElementById("reserveBtn")
-        exhibitionReserveButton.addEventListener("click", function () {
-            if (isEditingAccompany || isEditingReview) {
-                alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
-            } else {
-                exhibitionReserve(exhibitionDATA.direct_url)
-            }
-            
-        })
+        if (exhibitionDATA.direct_url) {
+            exhibitionReserveButton.addEventListener("click", function () {
+                if (isEditingAccompany || isEditingReview) {
+                    alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
+                } else {
+                    exhibitionReserve(exhibitionDATA.direct_url)
+                }                
+            })
+        } else{
+            exhibitionReserveButton.addEventListener("click", function () {
+                alert("이 전시는 예약이 필요하지 않거나 현장예매만 가능한 전시입니다.")                
+            })  
+        }
     })
 
 }
@@ -123,8 +138,8 @@ function heart(exhibition_id) {
     let fullHeart = false;
     if (payload) {
         postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-            const heartElement = document.getElementById(exhibition_id);
-            const heartNum = document.getElementById(`heartNum${exhibition_id}`)
+            const heartElement = document.getElementById("heart")
+            const heartNum = document.getElementById("heartNum")
             if (response.status == 201) {
                 heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
                 heartNum.innerText = responseJson.likes
@@ -144,15 +159,15 @@ function exhibitionReserve(link) {
 
 // 스크롤 위치에 따른 추천바 숨기기
 let recommendOrganizer = document.querySelector(".recommend-organizer")
-let reserveBtn = document.querySelector("#reserveBtn")
-let reserveBtnHeight = window.pageYOffset + reserveBtn.getBoundingClientRect().top
+let reviewBtn = document.querySelector("#reviewBtn")
+let reviewBtnHeight = window.pageYOffset + reviewBtn.getBoundingClientRect().top
 
 let header = document.querySelector("header")
 let headerHeight = window.pageYOffset + header.getBoundingClientRect().top
 
 window.onscroll = function () {
     let windowTop = window.scrollY
-    if (windowTop >= reserveBtnHeight || windowTop <= headerHeight) {
+    if (windowTop >= reviewBtnHeight || windowTop <= headerHeight) {
         recommendOrganizer.style.display = "none"
     } else {
         recommendOrganizer.style.display = "flex"
