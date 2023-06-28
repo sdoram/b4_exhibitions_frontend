@@ -4,7 +4,6 @@ DRF를 기반으로 Machine Learning 기능을 추가한 각종 전시 및 체�
 <br>
 
 ## 🖥️ 프로젝트 소개 - <a href="https://www.notion.so/S-A-d04b7899646e45e59da17fbec7cdacfb">S.A. 바로가기!</a>
-------
 지금은 전시상황! 프로젝트는 서울 공공서비스 체험, 전시, 그리고 다양한 활동들을 한 눈에 볼 수 있는 웹사이트입니다. 추천 기능을 통해 현재 보고 있는 활동과 비슷한 활동을 추천 받을 수 있고, 해당 활동에 대한 후기를 확인할 수 있습니다. 또한 댓글을 통해 다양한 활동을 함께 할 친구를 구할 수 있는 공간이 마련되어 있습니다.
 <br>
 <br>
@@ -60,46 +59,9 @@ DRF를 기반으로 Machine Learning 기능을 추가한 각종 전시 및 체�
 ## 🔑 프로젝트 설치 및 실행 방법
 #### 깃허브 클론하기
 ```bash
-$ git init
-$ git clone <레파지토리 주소>
+$ git clone git@github.com:sdoram/b4_exhibitions_frontend.git
 ```
-#### 패키지 밎 라이브러리 설치
-```bash
-$ pip install -r requirements.txt
-```
-#### .env에 추가(DB 연동을 위한 작업)
-```.env
-$ DB_ENGINE="django.db.backends.postgresql"
-$ DB_NAME="데이터베이스 이름"
-$ DB_USER="유저 이름"
-$ DB_PASSWORD="비밀번호"
-$ DB_HOST="호스트 주소 또는 localhost"
-$ DB_PORT=포트번호
-```
-#### DB 연동
-```bash
-$ python manage.py makemigrations
-$ python manage.py migrate
-```
-#### 관리자 계정 생성
-```bash
-$ python manage.py createsuperuser
-```
-#### 필드 최대 길이 조정
-```sql
-$ ALTER TABLE exhibitions_exhibition ALTER COLUMN content TYPE VARCHAR (30000);
-$ ALTER TABLE exhibitions_exhibition ALTER COLUMN image TYPE VARCHAR (200);
-$ ALTER TABLE exhibitions_exhibition ALTER COLUMN direct_url TYPE VARCHAR (200);
-```
-#### 전시 데이터 DB에 저장
-```bash
-$ python manage.py loaddata exhibitions/utils_data.json
-```
-#### 백엔드 서버 실행
-```bash
-$ python manage.py runserver
-```
-#### 프론트엔드 라이브서버 실행
+#### 프론트엔드 라이브서버 실행(동시에 백엔드 서버도 실행해주십시오)
 ```
 $ vscode 확장팩 <Live Server> 설치
 $ index.html에서 마우스 우클릭 후 Open with Live Server 클릭(단축키 Alt+L+O)
