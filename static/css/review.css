@@ -112,6 +112,7 @@
     font-size: 2vmin;
     padding-top: 0.3vmin;
     border-radius: 0.5556vmin;
+    cursor: pointer;
 }
 .rv-stars {
     display: flex;
