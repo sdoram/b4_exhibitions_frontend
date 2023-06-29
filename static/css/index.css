@@ -62,6 +62,7 @@
     margin:0 auto;
     border: 0.0625rem solid #6358DC;
     border-radius: 0.625rem;
+    cursor: pointer;
 }
 .card-img-top {
     width: 100%;
