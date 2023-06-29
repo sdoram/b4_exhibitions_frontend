@@ -47,7 +47,11 @@ window.onload = function loadExhibitions() {
             // 전시회 기간
             const exhibitionPeriod = document.createElement("span");
             exhibitionPeriod.setAttribute("class", "exhibition-period")
-            exhibitionPeriod.innerText = `${exhibition.start_date} ~ ${exhibition.end_date}`
+            if (exhibition.start_date && exhibition.end_date) {
+                exhibitionPeriod.innerText = `${exhibition.start_date} ~ ${exhibition.end_date}`
+            } else {
+                exhibitionPeriod.innerText = '상시'
+            }
             exhibitionInfoBox.appendChild(exhibitionPeriod)
 
             // 전시회 좋아요 
