@@ -61,17 +61,23 @@ async function injectNavbar() {
 
         // 내비바 오른쪽 항목
         const navbarRight = document.getElementById("navbarRight");
-        const logOutButton = document.createElement("button");
-        logOutButton.setAttribute("class", "text-warning ms-5 me-5 btn btn-light shadow-warning material-symbols-outlined");
-        logOutButton.innerText = "person 로그아웃";
-        logOutButton.addEventListener("click", handleLogOut);
-
+        const myPageLi = document.createElement("li")
+        myPageLi.setAttribute("class", "nav-item")
         const myPage = document.createElement("a");
         myPage.setAttribute("class", "text-warning ms-5 btn btn-light shadow-warning material-symbols-outlined");
         myPage.innerText = "person 내 정보";
         myPage.setAttribute("href", `${frontendBaseURL}/templates/my-page.html?user_id=${payloadParse.user_id}`);
-        navbarRight.appendChild(myPage);
-        navbarRight.appendChild(logOutButton);
+        myPageLi.appendChild(myPage);
+        navbarRight.appendChild(myPageLi)
+
+        const logOutLi = document.createElement("li")
+        logOutLi.setAttribute("class", "nav-item")
+        const logOutButton = document.createElement("button");
+        logOutButton.setAttribute("class", "text-warning ms-5 me-5 btn btn-light shadow-warning material-symbols-outlined");
+        logOutButton.innerText = "person 로그아웃";
+        logOutButton.addEventListener("click", handleLogOut);
+        logOutLi.appendChild(logOutButton)
+        navbarRight.appendChild(logOutLi);
 
         // payload 존재시 숨길 항목
         const signInButton = document.getElementById("signInButton");
