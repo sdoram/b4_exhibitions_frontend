@@ -7,6 +7,20 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport"
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 페이지의 표준 URL -->
+    <meta property="og:url" content="https://b4-exhibitions-now.netlify.app/" />
+
+    <!-- 콘텐츠의 미디어 유형(기본값은 website) -->
+    <meta property="og:type" content="website" />
+
+    <!-- 기사의 제목 -->
+    <meta property="og:title" content="지금은 전시상황!" />
+
+    <!-- 콘텐츠의 간단한 설명 -->
+    <meta property="og:description" content="지금은 전시상황! 서울 공공서비스 체험, 전시, 그리고 다양한 활동들을 한 눈에 볼 수 있는 웹사이트입니다." />
+
+    <!-- 표시되는 이미지의 URL -->
+    <meta property="og:image" content="/templates/img/logo.png" />
     <title>지금은 전시상황! | 메인 페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -20,18 +34,12 @@
     <link rel="stylesheet" href="./static/css/navbar.css">
     <link rel="stylesheet" href="static/css/index.css">
     <link rel="stylesheet" href="static/css/footer.css">
-    <script type="module" src="./static/js/weather.js"></script>
     <script type="module" src="./static/js/navbar.js"></script>
     <script type="module" src="./static/js/index.js"></script>
 </head>
 
 <body>
     <header></header>
-    <div id="weather-info">
-        <img id="weather-icon" alt="" />
-        <h3>날씨 정보</h3>
-        <p id="weather-text">로딩 중...</p>
-    </div>
     <div class="welcome-set">
         <h3 class="welcome-greeting">Welcome!</h3>
         <h1 class="welcome-title">현재 관람 가능한 전시</h1>
