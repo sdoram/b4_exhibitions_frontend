@@ -20,12 +20,18 @@
     <link rel="stylesheet" href="./static/css/navbar.css">
     <link rel="stylesheet" href="static/css/index.css">
     <link rel="stylesheet" href="static/css/footer.css">
+    <script type="module" src="./static/js/weather.js"></script>
     <script type="module" src="./static/js/navbar.js"></script>
     <script type="module" src="./static/js/index.js"></script>
 </head>
 
 <body>
     <header></header>
+    <div id="weather-info">
+        <img id="weather-icon" alt="" />
+        <h3>날씨 정보</h3>
+        <p id="weather-text">로딩 중...</p>
+    </div>
     <div class="welcome-set">
         <h3 class="welcome-greeting">Welcome!</h3>
         <h1 class="welcome-title">현재 관람 가능한 전시</h1>
