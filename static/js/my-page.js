@@ -37,7 +37,7 @@ window.onload = function loadUserInfo() {
         bio.innerText = userInfo.bio
 
         if (payload) {
-            if (user_id == payloadParse.user_id) {
+            if (user_id == payloadParse.user_id && payloadParse.is_admin == false) {
                 const buttonPart = document.getElementById("buttonPart")
 
                 const profileEditButton = document.createElement("button")
