@@ -30,7 +30,9 @@ window.onload = function loadExhibitions() {
                     console.log(`${backendBaseURL.split('/api')[0]}${exhibition.image}`)
                 }
             }
-
+            exhibitionImg.addEventListener("click", function () {
+                exhibitionDetail(exhibition.id)
+            })
             exhibitionImgBox.appendChild(exhibitionImg)
 
             // 전시회 정보 박스 
