@@ -8,6 +8,7 @@
     margin-top: 10vmin;
     margin: 10vmin 30vmin 0vmin 30vmin;
 }
+
 /* 상단 전시회 포스터 및 인포 부분 */
 .all-items-organizer {
     display: flex;
@@ -16,6 +17,7 @@
     justify-content: center;
     padding: 10vmin;
 }
+
 .poster-n-info-organizer {
     display: flex;
     flex-direction: row;
@@ -23,16 +25,17 @@
 
 /* 전시회 포스터 이미지 */
 .poster-part {
-    height:40vmin;
+    height: 40vmin;
     width: 53vmin;
-    overflow:hidden;
+    overflow: hidden;
     border: 0.2vmin solid #6358DC;
     border-radius: 1vmin;
     /* margin-left: -400px; */
 }
+
 .poster-img {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -42,6 +45,7 @@
     flex-direction: row;
     margin-top: 5px;
 }
+
 .heart {
     background-image: url('../img/empty-heart.png');
     background-size: contain;
@@ -60,12 +64,14 @@
     margin-left: 5vmin;
     width: 50vmin;
 }
+
 .blue-words {
     color: #6358DC;
     font-weight: bold;
     font-size: 2vmin;
     margin-right: 1vmin;
 }
+
 .black-words {
     color: black;
     font-weight: bold;
@@ -81,7 +87,8 @@
     flex-direction: row;
     margin-top: 100px;
 }
-.btns > * {
+
+.btns>* {
     margin-top: 1vmin;
     margin-right: 5vmin;
     width: 25vmin;
@@ -93,12 +100,15 @@
     border: 0.8vmin solid #6358DC;
     border-radius: 2vmin;
 }
+
 .show-reviews:hover {
     background-color: silver;
 }
+
 .show-accompanies:hover {
     background-color: silver;
 }
+
 .show-reservation:hover {
     background-color: silver;
 }
@@ -120,6 +130,7 @@
     background-origin: border-box;
     background-clip: padding-box, border-box;
 }
+
 .show-rv-posting:hover {
     color: silver;
 }
@@ -141,6 +152,7 @@
     background-origin: border-box;
     background-clip: padding-box, border-box;
 }
+
 .show-ac-posting:hover {
     color: silver;
 }
@@ -151,20 +163,24 @@
     border-radius: 10px;
     width: 23vmin;
     height: 78vmin;
-    position:fixed; 
-    display:inline-block;
-    right:2%; /* 창에서 오른쪽 길이 */
-    top:15%; /* 창에서 위에서 부터의 높이 */
-    margin:0;
+    position: fixed;
+    display: inline-block;
+    right: 2%;
+    /* 창에서 오른쪽 길이 */
+    top: 15%;
+    /* 창에서 위에서 부터의 높이 */
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2vmin;
 }
+
 .rec-intro {
     color: #6358DC;
     font-weight: bold;
 }
+
 .recommend-organizer-small {
     width: 20vmin;
     margin-top: 7%;
@@ -176,6 +192,7 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
 .one-by-one {
     width: 17.5vmin;
     height: 18%;
@@ -191,6 +208,7 @@
     height: 85%;
     border-radius: 5px;
 }
+
 .rec-img {
     width: 100%;
     height: 100%;
@@ -209,4 +227,29 @@
     text-overflow: ellipsis;
     width: 100%;
     margin-left: 0.5vmin;
+}
+
+.show-less {
+    display: block;
+    overflow-y: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    max-height: 15em;
+    /* 높이를 조정하여 보여줄 행의 수를 설정 */
+}
+
+#readMoreBtn {
+    background-color: #6358DC;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    font-weight: bold;
+}
+
+#readMoreBtn:hover {
+    background-color: silver;
 }
