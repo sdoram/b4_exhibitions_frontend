@@ -3,6 +3,7 @@
     background-color: #6358DC;
     height: 3.5rem;
 }
+
 /* 로고 사이즈 조정 */
 .logo {
     width: 100%;
@@ -16,6 +17,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 .nav-home-link {
     text-decoration-line: none;
     height: 3rem;
@@ -59,4 +61,12 @@
 .navbar-toggler-container {
     margin-left: auto;
     display: flex;
+}
+
+.nav-item {
+    margin-top: 0.7vmin;
+}
+
+#weather-info {
+    color: white;
 }
