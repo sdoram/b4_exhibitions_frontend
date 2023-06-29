@@ -24,7 +24,8 @@ function handleSignUp() {
                 alert(responseJson.message);
                 window.location.replace(`${frontendBaseURL}/templates/signin.html`);
             } else {
-                alert(responseJson.message);
+                alert(responseJson.email && "이미 가입된 이메일 입니다"
+                    || responseJson.nickname && "이미 존재하는 닉네임 입니다")
             }
         });
     } else {
