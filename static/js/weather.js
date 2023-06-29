@@ -1,5 +1,5 @@
-const API_URL = "http://127.0.0.1:8000/api/exhibitions/weather/"; // Django에서 생성한 경로를 사용하세요
-
+import { backendBaseURL } from "./api.js";
+const API_URL = `${backendBaseURL}/exhibitions/weather/`
 
 async function fetchWeatherData() {
     try {
