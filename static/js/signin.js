@@ -37,8 +37,9 @@ function handleSignIn() {
             alert('로그인 성공');
             window.location.replace(`${frontendBaseURL}/`);
         } else {
-            alert(response.status);
-            window.location.replace(`${frontendBaseURL}/templates/signin.html`);
+            alert(responseJson.email && "이메일을 입력해주세요"
+                || responseJson.password && "비밀번호를 입력해주세요" ||
+                responseJson.detail && "회원 정보를 찾을 수 없습니다", window.location.reload())
         }
     })
 }
