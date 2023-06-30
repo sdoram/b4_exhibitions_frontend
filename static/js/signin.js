@@ -1,4 +1,4 @@
-import { postSignInAPI, googleAPI, frontendBaseURL, payload } from "./api.js";
+import { frontendBaseURL, payload, postSignInAPI, googleAPI } from "./api.js";
 
 // 로그인 확인
 function checkSignIn() {
@@ -6,6 +6,7 @@ function checkSignIn() {
         window.location.replace(`${frontendBaseURL}/`)
     }
 }
+
 checkSignIn()
 
 // 로컬 스토리지에 jwt 토큰 저장하는 함수
@@ -34,7 +35,7 @@ function handleSignIn() {
     postSignInAPI(data).then(({ response, responseJson }) => {
         if (response.status == 200) {
             setLocalStorage(responseJson);
-            alert('로그인 성공');
+            alert('로그인에 성공했습니다.');
             window.history.go(-1)
         } else {
             alert(responseJson.email && "이메일을 입력해주세요"
@@ -44,7 +45,22 @@ function handleSignIn() {
     })
 }
 
-// 소셜로그인 시 url에서 access_token 얻기
+// 일반 로그인 function 실행
+document.getElementById("signInButton").addEventListener("click", handleSignIn);
+
+// 엔터 기능
+document.getElementById("email").addEventListener("keydown", function (e) {
+    if (e.code === 'Enter') {
+        document.getElementById("password").focus()
+    }
+})
+document.getElementById("password").addEventListener("keydown", function (e) {
+    if (e.code === 'Enter') {
+        handleSignIn()
+    }
+})
+
+// 구글로그인 시 url에서 access_token 얻기
 if (payload) {
 } else if (window.location.hash) {
     let hashParams = new URLSearchParams(window.location.hash.substr(1));
@@ -53,7 +69,7 @@ if (payload) {
     googleAPI(google_token).then(({ response, responseJson }) => {
         if (response.status == 200) {
             setLocalStorage(responseJson)
-            alert('로그인 성공');
+            alert('구글 계정으로 로그인 되었습니다.');
             window.history.go(-3)
         } else {
             alert(responseJson.message);
@@ -72,18 +88,5 @@ async function googleSignin() {
     })
 }
 
-document.getElementById("email").addEventListener("keydown", function (e) {
-    if (e.code === 'Enter') {
-        document.getElementById("password").focus()
-    }
-})
-
-// 일반 로그인 function 실행
-document.getElementById("signInButton").addEventListener("click", handleSignIn);
-document.getElementById("password").addEventListener("keydown", function (e) {
-    if (e.code === 'Enter') {
-        handleSignIn()
-    }
-})
 // 구글 로그인 function 실행
 document.getElementById("googleSigninBtn").addEventListener("click", googleSignin);
