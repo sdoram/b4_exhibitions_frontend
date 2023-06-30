@@ -39,18 +39,21 @@ async function injectNavbar() {
     }
     // 날씨 정보 업데이트
     function updateWeather() {
-        document.getElementById("weather-text").innerHTML = "로딩 중...";
+        document.getElementById("weather-text").innerHTML = "날씨 정보 로딩 중..";
 
         fetchWeatherData()
             .then(({ data, iconUrl }) => {
                 const { main, weather } = data;
                 const img = document.createElement("img");
-                const weatherText = `${Math.round(main.temp * 10) / 10}ºC`;
                 img.src = iconUrl;
                 img.alt = weather[0].description;
+
+                const weatherText = `Seoul - ${Math.round(main.temp * 10) / 10}ºC`;
+
                 const weatherElement = document.getElementById("weather-info");
-                weatherElement.innerHTML = weatherText;
-                weatherElement.appendChild(img);
+                weatherElement.innerHTML = ''; // 기존 내용을 지우고
+                weatherElement.appendChild(img); // 아이콘 추가
+                weatherElement.innerHTML += weatherText; // 텍스트 추가
             })
     }
 
