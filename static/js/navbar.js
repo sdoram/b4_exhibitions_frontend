@@ -98,7 +98,7 @@ function handleLogOut() {
         localStorage.removeItem("refresh");
         localStorage.removeItem("payload");
         if (window.location.pathname == '/templates/my-page.html') {
-            window.location.replace = frontendBaseURL
+            window.location.replace(frontendBaseURL)
         } else {
             window.location.reload();
         }
