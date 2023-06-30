@@ -72,8 +72,18 @@ async function googleSignin() {
     })
 }
 
+document.getElementById("email").addEventListener("keydown", function (e) {
+    if (e.code === 'Enter') {
+        document.getElementById("password").focus()
+    }
+})
+
 // 일반 로그인 function 실행
 document.getElementById("signInButton").addEventListener("click", handleSignIn);
-
+document.getElementById("password").addEventListener("keydown", function (e) {
+    if (e.code === 'Enter') {
+        handleSignIn()
+    }
+})
 // 구글 로그인 function 실행
 document.getElementById("googleSigninBtn").addEventListener("click", googleSignin);
