@@ -1,24 +1,4 @@
-import { frontendBaseURL, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, payload, payloadParse, deleteExhibitionAPI, backendBaseURL } from "./api.js";
-
-// 좋아요 하트 관련 코드
-function heart(exhibition_id) {
-    let fullHeart = false;
-    if (payload) {
-        postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-            const heartElement = document.getElementById(exhibition_id);
-            const heartNum = document.getElementById(`heartNum${exhibition_id}`)
-            if (response.status == 201) {
-                heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
-                heartNum.innerText = responseJson.likes
-            } else {
-                heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
-                heartNum.innerText = responseJson.likes
-            }
-            fullHeart = !fullHeart;
-        })
-    }
-}
-
+import { frontendBaseURL, backendBaseURL, payload, payloadParse, getExhibitionsAPI, getExhibitionAPI, postExhibitionLikeAPI, getUserInfoAPI, deleteExhibitionAPI } from "./api.js";
 
 window.onload = function loadExhibitions() {
     const adminNickname = document.getElementById("adminNickname")
@@ -108,6 +88,22 @@ window.onload = function loadExhibitions() {
                     })
                 })
             }
+
+                getExhibitionAPI(exhibition.id).then(({ responseJson }) => {
+                // 리뷰 개수
+                const reviewNum = document.createElement("span")
+                reviewNum.setAttribute("class", "review-num")
+                reviewNum.setAttribute("style", "margin-left: 5vmin;")
+                reviewNum.innerText = `리뷰 ${responseJson.review_count}개`
+                exhibitionHeartSet.appendChild(reviewNum)
+
+                // 동행글 개수
+                const accompanyNum = document.createElement("span")
+                accompanyNum.setAttribute("class", "review-num")
+                accompanyNum.setAttribute("style", "margin-left: 1vmin;")
+                accompanyNum.innerText = `동행모집 ${responseJson.accompany_count}개`
+                reviewNum.after(accompanyNum)
+            })        
 
             // 상세 & 예약 박스
             const exhibitionSignSet = document.createElement('div')
@@ -211,4 +207,23 @@ document.getElementById("searchButton").addEventListener("click", function () {
 
 function exhibitionSearch(search) {
     window.location.href = `${frontendBaseURL}${window.location.pathname}?search=${search.value}`
+}
+
+// 좋아요 하트 관련 코드
+function heart(exhibition_id) {
+    let fullHeart = false;
+    if (payload) {
+        postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
+            const heartElement = document.getElementById(exhibition_id);
+            const heartNum = document.getElementById(`heartNum${exhibition_id}`)
+            if (response.status == 201) {
+                heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
+                heartNum.innerText = responseJson.likes
+            } else {
+                heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
+                heartNum.innerText = responseJson.likes
+            }
+            fullHeart = !fullHeart;
+        })
+    }
 }
