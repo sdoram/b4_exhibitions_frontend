@@ -52,7 +52,6 @@
     background-repeat: no-repeat;
     background-position: center;
     width: 50px;
-    margin-right: 30px;
     filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
 }
 
