@@ -175,23 +175,65 @@ window.onscroll = function () {
     }
 }
 
-// 더보기 버튼
-const readMoreBtn = document.getElementById('readMoreBtn');
-let isShowingMore = false; // 더 보기 상태 플래그
+function readMoreBtn() {
+    const readMoreBtn = document.getElementById('readMoreBtn');
+    let isShowingMore = false; // 더 보기 상태 플래그
 
-// 초기 상태 설정
-document.getElementById('content').classList.add('show-less');
+    // 초기 상태 설정
+    document.getElementById('content').classList.add('show-less');
 
-readMoreBtn.addEventListener('click', function () {
-    const contentElement = document.getElementById('content');
+    readMoreBtn.addEventListener('click', function () {
+        const contentElement = document.getElementById('content');
 
-    if (!isShowingMore) {
-        contentElement.classList.remove('show-less');
-        readMoreBtn.textContent = '접기';
-    } else {
-        contentElement.classList.add('show-less');
-        readMoreBtn.textContent = '더 보기';
+        if (!isShowingMore) {
+            contentElement.classList.remove('show-less');
+            readMoreBtn.textContent = '접기';
+        } else {
+            contentElement.classList.add('show-less');
+            readMoreBtn.textContent = '더 보기';
+        }
+
+        isShowingMore = !isShowingMore;
+    });
+}
+
+
+function loadMap() {
+    const exhibitionId = new URLSearchParams(window.location.search).get("exhibition_id");
+
+    fetch(`${backendBaseURL}/exhibitions/${exhibitionId}/`)
+        .then((response) => response.json())
+        .then((item) => {
+            console.log(item);
+
+            // 만든 후 여기서 `map` 객체를 직접 만들기
+            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+            var mapOption = {
+                center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+            // 지도에 마커를 표시하는 함수 호출
+            displaySingleMarker(map, item);
+        });
+}
+
+// 지도에 마커를 표시하는 함수
+function displaySingleMarker(map, item) {
+    if (item.latitude !== undefined && item.longitude !== undefined) { // 위도, 경도 값이 없을때는 지도에 표시하지 않음
+        var markerPosition = new kakao.maps.LatLng(item.latitude, item.longitude);
+
+        var marker = new kakao.maps.Marker({
+            position: markerPosition,
+        });
+
+        marker.setMap(map);
+
+        // 지도의 중심 좌표를 마커의 위치로 업데이트
+        map.setCenter(markerPosition);
     }
-
-    isShowingMore = !isShowingMore;
-});
+}
+readMoreBtn();
+loadMap(); 
