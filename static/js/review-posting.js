@@ -167,6 +167,12 @@ function reviewInputInfo() {
 
 // 방금 작성한 리뷰 목록에 추가하기
 function addNewReview(reviewData) {
+    // 게시글 없다는 안내문구 삭제하기
+    const rvNotice = document.getElementById("rvNotice")
+    if (rvNotice) {
+        rvNotice.parentNode.removeChild(rvNotice)
+    }
+
     const reviewList = document.getElementById("reviewList")
 
     const grayBox = document.createElement("div")
