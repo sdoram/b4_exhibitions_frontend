@@ -1,7 +1,9 @@
-import { frontendBaseURL, backendBaseURL, payload, payloadParse, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, getExhibitionAPI  } from "./api.js";
+import { frontendBaseURL, backendBaseURL, payload, payloadParse, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, getExhibitionAPI } from "./api.js";
 
 window.onload = function loadExhibitions() {
-    popup()
+    if (window.location.href == `${frontendBaseURL}/`) {
+        popup()
+    }
     getExhibitionsAPI().then(({ response, responseJson }) => {
         const exhibitionsDATA = responseJson.results
         const exhibitionList = document.getElementById("exhibitionList")
@@ -105,7 +107,7 @@ window.onload = function loadExhibitions() {
                 accompanyNum.innerText = `동행모집 ${responseJson.accompany_count}개`
                 reviewNum.after(accompanyNum)
             })
-            
+
 
             // 상세 & 예약 박스
             const exhibitionSignSet = document.createElement('div')
@@ -211,7 +213,7 @@ function exhibitionSearch(search) {
 }
 
 // 팝업창 띄우기
-function popup(){
+function popup() {
     let url = "/templates/popup.html"
     let name = "공지사항"
     let option = "width = 600, height = 240, top = 200, left = 200, location = no"
