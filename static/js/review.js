@@ -47,7 +47,16 @@ export function getReview(exhibition_id) {
             showRvPosting.style.display = "block"
             if (!isReviewsRendered) {
                 getReviewAPI(exhibition_id).then(({ responseJson }) => {
-                    const reviewsDATA = responseJson.reviews         
+                    const reviewsDATA = responseJson.reviews
+                    const reviewList = document.getElementById("reviewList")
+
+                    if (reviewsDATA.length == 0) {
+                        const rvNotice = document.createElement("div")
+                        rvNotice.setAttribute("class", "rv-gray-box")
+                        rvNotice.setAttribute("id", "rvNotice")
+                        rvNotice.innerText = "작성된 이용후기 글이 아직 없습니다. 첫 번째 게시글을 작성해 보세요!"
+                        reviewList.prepend(rvNotice)
+                    }
 
                     // 후기 목록
                     reviewsDATA.forEach(review => {      
