@@ -183,6 +183,7 @@ document.getElementById("search").addEventListener("keydown", function (e) {
         exhibitionSearch(this)
     }
 })
+document.getElementById("searchButton").setAttribute("style", "cursor: pointer;")
 document.getElementById("searchButton").addEventListener("click", function () {
     exhibitionSearch(document.getElementById("search"))
 })
