@@ -141,6 +141,12 @@ function accompanyInputInfo() {
 
 // 방금 작성한 동행구하기 글 목록에 추가하기
 function addNewAccompany(accompanyData) {
+    // 게시글 없다는 안내문구 삭제하기
+    const acNotice = document.getElementById("acNotice")
+    if (acNotice) {
+        acNotice.parentNode.removeChild(acNotice)
+    }
+    
     const accompanyList = document.getElementById("accompanyList")
 
     const grayBox = document.createElement("div")
