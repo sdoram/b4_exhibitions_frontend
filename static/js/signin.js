@@ -35,7 +35,7 @@ function handleSignIn() {
         if (response.status == 200) {
             setLocalStorage(responseJson);
             alert('로그인 성공');
-            window.location.replace(`${frontendBaseURL}/`);
+            window.history.go(-1)
         } else {
             alert(responseJson.email && "이메일을 입력해주세요"
                 || responseJson.password && "비밀번호를 입력해주세요" ||
@@ -54,7 +54,7 @@ if (payload) {
         if (response.status == 200) {
             setLocalStorage(responseJson)
             alert('로그인 성공');
-            window.location.replace(`${frontendBaseURL}/`);
+            window.history.go(-3)
         } else {
             alert(responseJson.message);
             window.location.replace(`${frontendBaseURL}/templates/signin.html`);
