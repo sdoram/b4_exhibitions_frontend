@@ -59,7 +59,7 @@ window.onload = function loadExhibition() {
         // 전시회 장소
         const exhibitionLocation = document.getElementById("location")
         exhibitionLocation.innerHTML = exhibitionDATA.location
-        
+
         // 전시회 기간
         const exhibitionPeriod = document.getElementById("period")
         if (exhibitionDATA.start_date && exhibitionDATA.end_date) {
@@ -83,7 +83,7 @@ window.onload = function loadExhibition() {
             // 이미지
             let recommendImg = document.getElementById(`${i}-rec-img`)
             // 이미지를 못찾을 경우 대체 이미지 
-            recommendImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")           
+            recommendImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
             if (recommend.image) {
                 if (recommend.image.includes('https%3A')) {
                     // 대체 url 코드로 인코딩된 url 디코딩 하기    
@@ -124,12 +124,12 @@ window.onload = function loadExhibition() {
                     alert("수정하고 있는 글을 저장 또는 취소 후 클릭하십시오.")
                 } else {
                     exhibitionReserve(exhibitionDATA.direct_url)
-                }                
+                }
             })
-        } else{
+        } else {
             exhibitionReserveButton.addEventListener("click", function () {
-                alert("이 전시는 예약이 필요하지 않거나 현장예매만 가능한 전시입니다.")                
-            })  
+                alert("이 전시는 예약이 필요하지 않거나 현장예매만 가능한 전시입니다.")
+            })
         }
     })
 }
@@ -174,3 +174,24 @@ window.onscroll = function () {
         recommendOrganizer.style.display = "flex"
     }
 }
+
+// 더보기 버튼
+const readMoreBtn = document.getElementById('readMoreBtn');
+let isShowingMore = false; // 더 보기 상태 플래그
+
+// 초기 상태 설정
+document.getElementById('content').classList.add('show-less');
+
+readMoreBtn.addEventListener('click', function () {
+    const contentElement = document.getElementById('content');
+
+    if (!isShowingMore) {
+        contentElement.classList.remove('show-less');
+        readMoreBtn.textContent = '접기';
+    } else {
+        contentElement.classList.add('show-less');
+        readMoreBtn.textContent = '더 보기';
+    }
+
+    isShowingMore = !isShowingMore;
+});
