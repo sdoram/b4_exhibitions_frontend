@@ -84,10 +84,16 @@ async function injectNavbar() {
 
 // 로그아웃 함수 
 function handleLogOut() {
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");
-    localStorage.removeItem("payload");
-    location.reload();
+    if (confirm("정말 로그아웃 하시겠습니까?")) {
+        localStorage.removeItem("access");
+        localStorage.removeItem("refresh");
+        localStorage.removeItem("payload");
+        if (window.location.pathname == '/templates/my-page.html') {
+            window.location.replace = frontendBaseURL
+        } else {
+            window.location.reload();
+        }
+    }
 }
 function selectCategory(category) {
     if (payloadParse && payloadParse.is_admin) {
