@@ -1,6 +1,7 @@
-import { frontendBaseURL, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, payload, payloadParse, backendBaseURL } from "./api.js";
+import { frontendBaseURL, backendBaseURL, payload, payloadParse, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, getExhibitionAPI  } from "./api.js";
 
 window.onload = function loadExhibitions() {
+    popup()
     getExhibitionsAPI().then(({ response, responseJson }) => {
         const exhibitionsDATA = responseJson.results
         const exhibitionList = document.getElementById("exhibitionList")
@@ -88,6 +89,23 @@ window.onload = function loadExhibitions() {
                     })
                 })
             }
+
+            getExhibitionAPI(exhibition.id).then(({ responseJson }) => {
+                // 리뷰 개수
+                const reviewNum = document.createElement("span")
+                reviewNum.setAttribute("class", "review-num")
+                reviewNum.setAttribute("style", "margin-left: 5vmin;")
+                reviewNum.innerText = `리뷰 ${responseJson.review_count}개`
+                exhibitionHeartSet.appendChild(reviewNum)
+
+                // 동행글 개수
+                const accompanyNum = document.createElement("span")
+                accompanyNum.setAttribute("class", "review-num")
+                accompanyNum.setAttribute("style", "margin-left: 1vmin;")
+                accompanyNum.innerText = `동행모집 ${responseJson.accompany_count}개`
+                reviewNum.after(accompanyNum)
+            })
+            
 
             // 상세 & 예약 박스
             const exhibitionSignSet = document.createElement('div')
@@ -190,4 +208,12 @@ document.getElementById("searchButton").addEventListener("click", function () {
 
 function exhibitionSearch(search) {
     window.location.href = `${frontendBaseURL}${window.location.pathname}?search=${search.value}`
+}
+
+// 팝업창 띄우기
+function popup(){
+    let url = "/templates/popup.html"
+    let name = "공지사항"
+    let option = "width = 600, height = 240, top = 200, left = 200, location = no"
+    window.open(url, name, option)
 }
