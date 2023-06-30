@@ -42,6 +42,7 @@ window.onload = function loadExhibition() {
 
         // 좋아요 하트색 세팅
         if (payload) {
+            exhibitionHeart.setAttribute("style", "cursor: pointer;")
             getUserInfoAPI(payloadParse.user_id).then(({ responseJson }) => {
                 responseJson.exhibition_likes.forEach((obj) => {
                     if (exhibitionDATA.id == obj.id) {
@@ -159,21 +160,24 @@ function exhibitionReserve(link) {
 }
 
 // 스크롤 위치에 따른 추천바 숨기기
-let recommendOrganizer = document.querySelector(".recommend-organizer")
-let reviewBtn = document.querySelector("#reviewBtn")
-let reviewBtnHeight = window.pageYOffset + reviewBtn.getBoundingClientRect().top
+document.addEventListener("DOMContentLoaded", function() {
+  const recommendOrganizer = document.querySelector(".recommend-organizer")
 
-let header = document.querySelector("header")
-let headerHeight = window.pageYOffset + header.getBoundingClientRect().top
+  function showHideRecommendOrganizer() {
+    const reviewBtn = document.getElementById("reviewBtn")
+    const reviewBtnTop = reviewBtn.getBoundingClientRect().top
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
 
-window.onscroll = function () {
-    let windowTop = window.scrollY
-    if (windowTop >= reviewBtnHeight || windowTop <= headerHeight) {
-        recommendOrganizer.style.display = "none"
+    if (reviewBtnTop >= window.innerHeight || scrollTop === 0) {
+      recommendOrganizer.style.display = "block"
     } else {
-        recommendOrganizer.style.display = "flex"
+      recommendOrganizer.style.display = "none"
     }
-}
+  }
+
+  // 스크롤 이벤트에서 실행
+  window.addEventListener("scroll", showHideRecommendOrganizer)
+});
 
 function readMoreBtn() {
     const readMoreBtn = document.getElementById('readMoreBtn');
