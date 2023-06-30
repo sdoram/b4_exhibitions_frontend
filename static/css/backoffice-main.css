@@ -168,3 +168,33 @@
     font-size: 1.8vmin;
     color: #6358DC;  
 }
+
+/* 설문조사아이콘 */
+.wrap-questionnaire-box {
+    position: fixed;
+    display: inline-block;
+    right: 2%;
+    /* 창에서 오른쪽 길이 */
+    top: 60%;
+    /* 창에서 위에서 부터의 높이 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #6358DC;
+    font-weight: bold;
+}
+.questionnaire-box {
+    margin-top: 1vmin;
+    width: 10vmin;
+    height: 10vmin;
+    border: 0.5vmin solid #6358DC;
+    border-radius: 5vmin;
+    padding: 2vmin;
+}
+.questionnaire-link {
+
+}
+.questionnaire-img {
+    height: 100%;
+    width: 100%;
+}
