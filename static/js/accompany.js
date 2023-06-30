@@ -52,6 +52,14 @@ export function getAccompany(exhibition_id){
                     const accompaniesDATA = responseJson.accompanies
                     const accompanyList = document.getElementById("accompanyList")
 
+                    if (accompaniesDATA.length == 0) {
+                        const acNotice = document.createElement("div")
+                        acNotice.setAttribute("class", "ac-gray-box")
+                        acNotice.setAttribute("id", "acNotice")
+                        acNotice.innerText = "작성된 동행 구하기 글이 아직 없습니다. 첫 번째 게시글을 작성해 보세요!"
+                        accompanyList.prepend(acNotice)
+                    }
+
                     // 동행 구하기 목록
                     accompaniesDATA.forEach(accompany => {          
                         const grayBox = document.createElement("div")
