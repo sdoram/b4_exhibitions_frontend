@@ -48,7 +48,7 @@ async function injectNavbar() {
                 img.src = iconUrl;
                 img.alt = weather[0].description;
 
-                const weatherText = `Seoul - ${Math.round(main.temp * 10) / 10}ºC`;
+                const weatherText = `Seoul ${Math.round(main.temp * 10) / 10}ºC`;
 
                 const weatherElement = document.getElementById("weather-info");
                 weatherElement.innerHTML = ''; // 기존 내용을 지우고
