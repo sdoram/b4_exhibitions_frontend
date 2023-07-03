@@ -116,7 +116,7 @@ export function updateAccompany(accompanyBox, accompanyData) {
             if (response.status == 200) {
                 alert(responseJson.message)
                 // 수정된 목표인원 보이게 하고 인풋박스는 없애기
-                personnel.innerText = `${responseJson.data.personnel}명`
+                personnel.innerText = personnel.innerText = `${responseJson.data.picks_count}/${responseJson.data.personnel}명`
                 personnel.style.display = ""
                 goalNumberElement.removeChild(personnelInputBox)
                 goalNumberElement.removeChild(nameElement)

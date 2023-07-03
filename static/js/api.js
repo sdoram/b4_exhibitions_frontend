@@ -268,3 +268,13 @@ export async function deleteApplyAPI(apply_id) {
     })
     return response
 }
+
+// 동행 수락 API
+export async function postAccompanyPickAPI(accompany_id, apply_id) {
+    const response = await fetch(`${backendBaseURL}/accompanies/${accompany_id}/pick/${apply_id}/`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` }
+    })
+    const responseJson = await response.json()
+    return { response, responseJson }
+}
