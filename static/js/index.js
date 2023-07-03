@@ -1,9 +1,12 @@
-import { frontendBaseURL, backendBaseURL, payload, payloadParse, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, getExhibitionAPI } from "./api.js";
+import { frontendBaseURL, backendBaseURL, payload, payloadParse, getPopularAPI, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, getExhibitionAPI } from "./api.js";
 
 window.onload = function loadExhibitions() {
     if (window.location.href == `${frontendBaseURL}/`) {
         popup()
     }
+    getPopularAPI().then(({ response, responseJson }) => {
+        console.log(responseJson)
+    })
     getExhibitionsAPI().then(({ response, responseJson }) => {
         const exhibitionsDATA = responseJson.results
         const exhibitionList = document.getElementById("exhibitionList")
@@ -30,7 +33,6 @@ window.onload = function loadExhibitions() {
                     exhibitionImg.setAttribute("src", exhibition.image)
                 } else {
                     exhibitionImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${exhibition.image}`)
-                    console.log(`${backendBaseURL.split('/api')[0]}${exhibition.image}`)
                 }
             }
             exhibitionImg.addEventListener("click", function () {
