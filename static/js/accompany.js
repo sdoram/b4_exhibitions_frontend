@@ -249,7 +249,18 @@ export function getAccompany(exhibition_id){
 
                                 // 수정, 삭제 버튼
                                 if (payload) {
-                                    if (payloadParse.user_id == apply.user){
+                                    // if (payloadParse.user_id == accompany.user){
+                                    //     // 동행수락 버튼
+                                    //     const applierAccAdmissionBtn = document.createElement("button")
+                                    //     applierAccUpdateBtn.setAttribute("type", "button")
+                                    //     applierAccUpdateBtn.setAttribute("class", "applier-acc-admission-btn")
+                                    //     applierAccUpdateBtn.addEventListener("click", function () {
+                                    //         updateApply(applierAll, apply)
+                                    //     })
+                                    //     applierAccUpdateBtn.innerText = "동행 수락"
+                                    //     applierRow3InPurple.appendChild(applierAccAdmissionBtn)
+                                    // }
+                                    if (payloadParse.user_id == apply.user){                        
                                         // 수정 버튼
                                         const applierAccUpdateBtn = document.createElement("button")
                                         applierAccUpdateBtn.setAttribute("type", "button")
@@ -269,6 +280,12 @@ export function getAccompany(exhibition_id){
                                         })
                                         applierAccDeleteBtn.innerText = "삭제"
                                         applierRow3InPurple.appendChild(applierAccDeleteBtn)
+
+                                        // 도장 마크 (코드를 추가하세요)
+                                        const admissionImg = document.createElement("img");
+                                        admissionImg.setAttribute("class", "admission-mark");
+                                        admissionImg.setAttribute("src", "../static/img/admission.png");
+                                        applierRow3InPurple.appendChild(admissionImg);
                                     }
                                 }
                                 applierPurpleBox.appendChild(applierRow3InPurple)
