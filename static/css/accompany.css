@@ -188,12 +188,13 @@
     position: relative;
 }
 /* 동행수락 도장 마크 */
-.admission-mark {
+.pick-mark {
     position: absolute;
     bottom: 19%;
     left: 60%;
     width: 32vmin;
     height: 32vmin;
+    opacity: 0.7;
 }
 /* 보라색 안의 상단: 닉네임 */
 .applier-row1-in-purple {
