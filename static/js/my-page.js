@@ -32,6 +32,10 @@ window.onload = function loadUserInfo() {
         const sinceTogether = document.getElementById("sinceTogether")
         sinceTogether.innerText = `${userInfo.since_together}일`
 
+        // 성별
+        const gender = document.getElementById("gender");
+        gender.innerText = userInfo.gender
+
         // 자기소개
         const bio = document.getElementById("bio");
         bio.innerText = userInfo.bio
@@ -198,7 +202,7 @@ function withdrawal(user_id) {
                 localStorage.removeItem("access")
                 localStorage.removeItem("refresh")
                 localStorage.removeItem("payload")
-                location.reload();
+                window.location.replace(`${frontendBaseURL}/`)
             }
         })
     }

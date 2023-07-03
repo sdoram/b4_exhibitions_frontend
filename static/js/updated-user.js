@@ -18,11 +18,12 @@ window.onload = function () {
         const gender = document.getElementById('gender');
         gender.value = userInfo.gender
 
-        // const profileImage = document.getElementById('profileImage');
-        // profileImage.value = userInfo.value
+        if (payloadParse.signin_type != 'normal') {
+            document.getElementById('password').style.display = "none";
+            document.getElementById('passwordCheck').style.display = "none";
+        }
     })
 }
-
 function userInfoEdit() {
     const user_id = payloadParse.user_id
     const nickname = document.getElementById('nickname').value;
@@ -31,6 +32,7 @@ function userInfoEdit() {
     const gender = document.getElementById('gender').value;
     const profileImage = document.getElementById('profileImage').files[0]
     const bio = document.getElementById('bio').value;
+
     if (password != passwordCheck) {
         alert('비밀번호가 일치하지 않습니다')
     } else {
@@ -45,11 +47,35 @@ function userInfoEdit() {
         }
         data.append("bio", bio)
 
-
         patchUserInfoAPI(data).then(({ response, responseJson }) => {
             alert(responseJson.message)
             window.location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${user_id}`
         })
     }
 }
-document.getElementById("userInfoEditButton").addEventListener("click", userInfoEdit);
+function socialUserInfoEdit() {
+    const user_id = payloadParse.user_id
+    const nickname = document.getElementById('nickname').value;
+    const gender = document.getElementById('gender').value;
+    const profileImage = document.getElementById('profileImage').files[0]
+    const bio = document.getElementById('bio').value;
+
+    const data = new FormData();
+    data.append("nickname", nickname)
+    data.append("gender", gender || '밝히고 싶지 않음')
+    if (profileImage) {
+        data.append("profile_image", profileImage)
+    }
+    data.append("bio", bio)
+
+    patchUserInfoAPI(data).then(({ response, responseJson }) => {
+        alert(responseJson.message)
+        window.location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${user_id}`
+    })
+}
+
+if (payloadParse.signin_type == 'normal') {
+    document.getElementById("userInfoEditButton").addEventListener("click", userInfoEdit);
+} else {
+    document.getElementById("userInfoEditButton").addEventListener("click", socialUserInfoEdit);
+}

@@ -17,20 +17,23 @@
     padding: 0 35vmin 0 25vmin;
     height: 50vmin;
     width: 100%;
-    font-family:Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif
 }
+
 /* 프로필 이미지 부분 */
 .profile-part {
-    height:40vmin;
-    overflow:hidden;
+    height: 40vmin;
+    overflow: hidden;
     border: 0.5vmin solid #6358DC;
     border-radius: 1vmin;
 }
+
 .profile-img {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
+
 /* 가운데 인포메이션 부분 */
 .user-info-part {
     display: flex;
@@ -41,25 +44,34 @@
     margin-right: auto;
     margin-left: 7vmin;
 }
-.user-info-part > div {
+
+.user-info-part>div {
     border: 0.5vmin solid #6358DC;
     border-radius: 10px;
     padding: 1.5vmin;
     width: 46vmin;
     height: fit-content;
 }
-.user-info-part > div:nth-child(1) {
+
+.user-info-part>div:nth-child(1) {
     margin-bottom: 1.5vmin;
 }
-.user-info-part > div:nth-child(2) {
+
+.user-info-part>div:nth-child(2) {
     margin-bottom: 1.5vmin;
 }
+
+.user-info-part>div:nth-child(3) {
+    margin-bottom: 1.5vmin;
+}
+
 .blue-words {
     color: #6358DC;
     font-weight: bold;
     font-size: 2.5vmin;
     margin-right: 1vmin;
 }
+
 .black-words {
     color: black;
     font-weight: bold;
@@ -68,6 +80,7 @@
     overflow: hidden;
     white-space: wrap;
 }
+
 .bio-box {
     display: flex;
     flex-direction: column;
@@ -79,7 +92,8 @@
     flex-direction: column;
     align-items: center;
 }
-.btns-part > button {
+
+.btns-part>button {
     color: white;
     background-color: #6358DC;
     font-weight: bold;
@@ -90,7 +104,8 @@
     margin-bottom: 2vmin;
     font-size: 2vmin;
 }
-.btns-part > button:hover {
+
+.btns-part>button:hover {
     background-color: gray;
 }
 
@@ -105,6 +120,7 @@
     margin-top: 4vmin;
     margin-left: 25vmin;
 }
+
 .all-exhibitions-organizer {
     display: flex;
     flex-direction: row;
@@ -112,6 +128,7 @@
     padding: 0 5vmin 0 25vmin;
     justify-content: flex-start;
 }
+
 .exhibition-set {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -120,30 +137,35 @@
     flex-direction: column;
     flex-wrap: nowrap;
 }
+
 .exhibition-img-box {
-    width:350px;
-    height:350px;
-    overflow:hidden;
-    margin:0 auto;
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    margin: 0 auto;
     border: 1px solid #6358DC;
     border-radius: 10px;
 }
+
 .exhibition-img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+
 .card-img-top {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .exhibition-info-box {
     color: #6358DC;
     font-weight: bold;
     width: 350px;
 }
-.exhibition-info-box > span {
+
+.exhibition-info-box>span {
     display: flex;
     flex-direction: column;
     margin-top: 5px;
@@ -151,11 +173,13 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
 .heart-set {
     display: flex;
     flex-direction: row;
     margin-top: 5px;
 }
+
 .heart {
     background-image: url('../img/empty-heart.png');
     background-size: contain;
@@ -165,11 +189,13 @@
     margin-right: 7px;
     filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
 }
+
 .sign-set {
     display: flex;
     flex-direction: row;
 }
-.sign-set > * {
+
+.sign-set>* {
     margin-top: 10px;
     margin-right: 7px;
     width: 147px;
@@ -179,9 +205,11 @@
     border: 0px solid;
     border-radius: 10px;
 }
+
 .detail-button:hover {
     background-color: gray;
 }
+
 .reserve-button:hover {
     background-color: gray;
 }
