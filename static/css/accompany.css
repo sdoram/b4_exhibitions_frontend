@@ -185,6 +185,15 @@
     justify-content: flex-start;
     padding: 2.2222vmin;
     border-radius: 1vmin;
+    position: relative;
+}
+/* 동행수락 도장 마크 */
+.admission-mark {
+    position: absolute;
+    bottom: 19%;
+    left: 60%;
+    width: 32vmin;
+    height: 32vmin;
 }
 /* 보라색 안의 상단: 닉네임 */
 .applier-row1-in-purple {
