@@ -198,7 +198,7 @@ function withdrawal(user_id) {
                 localStorage.removeItem("access")
                 localStorage.removeItem("refresh")
                 localStorage.removeItem("payload")
-                location.reload();
+                window.location.replace(`${frontendBaseURL}/`)
             }
         })
     }
