@@ -88,7 +88,6 @@ window.onload = function loadUserInfo() {
                     exhibitionImg.setAttribute("src", exhibition.image)
                 } else {
                     exhibitionImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${exhibition.image}`)
-                    console.log(`${backendBaseURL.split('/api')[0]}${exhibition.image}`)
                 }
             }
 
@@ -182,7 +181,6 @@ function profileEdit(user_id) {
             "password": prompt('비밀번호를 입력해주세요')
         }
         postSignInAPI(data).then(({ response, responseJson }) => {
-            console.log(response.status)
             if (response.status == 200) {
                 window.location.href = `${frontendBaseURL}/templates/updated-user.html?user_id=${user_id}`
             } else {
