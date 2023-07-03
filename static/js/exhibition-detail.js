@@ -208,8 +208,6 @@ function loadMap() {
     fetch(`${backendBaseURL}/exhibitions/${exhibitionId}/`)
         .then((response) => response.json())
         .then((item) => {
-            console.log(item);
-
             // 만든 후 여기서 `map` 객체를 직접 만들기
             var mapContainer = document.getElementById('map'); // 지도를 표시할 div
             var mapOption = {
