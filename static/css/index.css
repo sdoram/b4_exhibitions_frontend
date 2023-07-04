@@ -63,7 +63,6 @@
     right: 85%;
     top: 5%;
     filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
-    /* opacity: 0.5; */
 }
 .rank-heart-number {
     position: absolute;
@@ -73,7 +72,6 @@
     color: red;
     font-weight: bold;
     font-size: 1.3rem;
-    /* opacity: 0.5; */
 }
 .cards-row-organizer > div:hover {
     transform: scale(1.2);
@@ -264,8 +262,6 @@
     border-radius: 5vmin;
     padding: 2vmin;
 }
-
-.questionnaire-link {}
 
 .questionnaire-img {
     height: 100%;

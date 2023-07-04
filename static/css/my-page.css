@@ -229,6 +229,7 @@
     color: #6358DC;
     font-weight: bold;
 }
+
 .questionnaire-box {
     margin-top: 1vmin;
     width: 10vmin;
@@ -237,9 +238,7 @@
     border-radius: 5vmin;
     padding: 2vmin;
 }
-.questionnaire-link {
 
-}
 .questionnaire-img {
     height: 100%;
     width: 100%;
