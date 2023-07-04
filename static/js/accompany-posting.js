@@ -173,7 +173,7 @@ function addNewAccompany(accompanyData) {
     goalNumber.setAttribute("class", "ac-goal-number")
     goalNumber.innerText = "목표인원 "
     const personnel = document.createElement("span")
-    personnel.setAttribute("id", "personnel")
+    personnel.setAttribute("id", `personnel${accompanyData.id}`)
     personnel.innerText = `${accompanyData.personnel}명`
     goalNumber.appendChild(personnel)
     row1InPurple.appendChild(goalNumber)

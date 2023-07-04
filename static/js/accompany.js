@@ -86,8 +86,9 @@ export function getAccompany(exhibition_id){
                         goalNumber.setAttribute("class", "ac-goal-number")
                         goalNumber.innerText = "목표인원 "
                         const personnel = document.createElement("span")
-                        personnel.setAttribute("id", "personnel")
+                        personnel.setAttribute("id", `personnel${accompany.id}`)
                         personnel.innerText = `${accompany.picks_count}/${accompany.personnel}명`
+                        console.log(accompany.picks_count)
                         goalNumber.appendChild(personnel)
                         row1InPurple.appendChild(goalNumber)
                         
@@ -356,7 +357,7 @@ function pickApply(accompany, apply) {
     postAccompanyPickAPI(accompany.id, apply.id).then(({ response, responseJson }) => {
         if (response.status == 201) {
             if (confirm("정말 수락하시겠습니까?")) {
-                let personnel = document.getElementById("personnel")
+                let personnel = document.getElementById(`personnel${accompany.id}`)
                 personnel.innerText = `${responseJson.picks_count}/${responseJson.personnel}명`
 
                 let pickImgs = document.getElementsByClassName(`pick-mark ${apply.user}`)
@@ -372,7 +373,7 @@ function pickApply(accompany, apply) {
             }
         } else if (response.status == 200) {
             if (confirm("정말 취소하시겠습니까?")) {
-                let personnel = document.getElementById("personnel")
+                let personnel = document.getElementById(`personnel${accompany.id}`)
                 personnel.innerText = `${responseJson.picks_count}/${responseJson.personnel}명`
 
                 let pickImgs = document.getElementsByClassName(`pick-mark ${apply.user}`)

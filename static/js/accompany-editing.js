@@ -26,7 +26,7 @@ export function updateAccompany(accompanyBox, accompanyData) {
     // 목표 인원
     let goalNumberElement = accompanyBox.querySelector(".ac-goal-number")
     const originPersonnel = accompanyData.personnel
-    let personnel = accompanyBox.querySelector("#personnel")
+    let personnel = accompanyBox.querySelector(`#personnel${accompanyData.id}`)
     let personnelInputBox = accompanyBox.querySelector(".ap-goal-num")
 
     if (!personnelInputBox) {
