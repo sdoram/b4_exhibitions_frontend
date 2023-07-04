@@ -1,6 +1,7 @@
 /* 웰컴세트 */
 .welcome-set {
     margin-left: 3.75rem;
+    position: relative;
 }
 .welcome-greeting {
     font-weight: bold;
@@ -9,6 +10,75 @@
     font-weight: bold;
     color: #6358DC;
 }
+/* 인기전시 */
+.top5-set {
+    position: absolute;
+    width: 69rem;
+    height: 10rem;
+    left: 29.5rem;
+    top: 0%;
+    background-color: #ccc7ff;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.words {
+    font-size: 1rem;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+    color: #6358DC;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cards-row-organizer {
+    background-color: white;
+    width: 64.5rem;
+    height: 8.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.cards-row-organizer > div {
+    width: 20%;
+    height: 100%;
+    position: relative;
+    border: 0px solid black;
+    transition: all 0.2s linear;
+}
+.rank-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.rank-heart {
+    position: absolute;
+    width: 1.5rem;
+    right: 85%;
+    top: 5%;
+    filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
+    opacity: 0.5;
+}
+.rank-heart-number {
+    position: absolute;
+    width: 1.5rem;
+    right: 72%;
+    top: 2.2%;
+    color: red;
+    font-weight: bold;
+    font-size: 1.3rem;
+    opacity: 0.5;
+}
+.cards-row-organizer > div:hover {
+    transform: scale(1.2);
+    z-index: 1;
+    opacity: 0.8;
+}
+
 
 /* 돋보기와 검색창 */
 .searching-set {
