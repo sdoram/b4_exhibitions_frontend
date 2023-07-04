@@ -268,3 +268,21 @@ export async function deleteApplyAPI(apply_id) {
     })
     return response
 }
+
+// 동행 수락 API
+export async function postAccompanyPickAPI(accompany_id, apply_id) {
+    const response = await fetch(`${backendBaseURL}/accompanies/${accompany_id}/pick/${apply_id}/`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` }
+    })
+    const responseJson = await response.json()
+    return { response, responseJson }
+}
+
+// 좋아요순 전시 인기 랭킹 API
+export async function getPopularAPI() {
+    const response = await fetch(`${backendBaseURL}/exhibitions/popular/`, { method: 'GET' })
+    const responseJson = await response.json();
+
+    return { response, responseJson }
+}

@@ -1,4 +1,4 @@
-import { frontendBaseURL, payload, payloadParse, getAccompanyAPI, deleteAccompanyAPI, deleteApplyAPI } from "./api.js";
+import { frontendBaseURL, payload, payloadParse, getAccompanyAPI, deleteAccompanyAPI, deleteApplyAPI, postAccompanyPickAPI } from "./api.js";
 import { accompanyPosting } from "./accompany-posting.js";
 import { isEditingAccompany, updateAccompany } from "./accompany-editing.js";
 import { isEditingReview } from "./review-editing.js";
@@ -87,7 +87,7 @@ export function getAccompany(exhibition_id){
                         goalNumber.innerText = "목표인원 "
                         const personnel = document.createElement("span")
                         personnel.setAttribute("id", "personnel")
-                        personnel.innerText = `${accompany.personnel}명`
+                        personnel.innerText = `${accompany.picks_count}/${accompany.personnel}명`
                         goalNumber.appendChild(personnel)
                         row1InPurple.appendChild(goalNumber)
                         
@@ -247,20 +247,43 @@ export function getAccompany(exhibition_id){
                                 applierDateInfo.appendChild(applierSpan2)
                                 applierRow3InPurple.appendChild(applierDateInfo)
 
+                                // 도장 마크
+                                const pickImg = document.createElement("img")
+                                pickImg.setAttribute("class", `pick-mark ${apply.user}`)
+                                pickImg.setAttribute("style", "display: none;")
+                                pickImg.setAttribute("src", "/static/img/pick.png")
+                                
+                                // 채택 유무에 따른 도장 마크 유무
+                                if (accompany.picks.includes(apply.user)){
+                                    pickImg.setAttribute("style", "display: block;")
+                                }
+                                applierRow3InPurple.appendChild(pickImg)
+
+                                applierPurpleBox.appendChild(applierRow3InPurple)
+                                applierAll.appendChild(applierPurpleBox)
+                                grayBox.appendChild(applierAll)
+
                                 // 수정, 삭제 버튼
                                 if (payload) {
-                                    // if (payloadParse.user_id == accompany.user){
-                                    //     // 동행수락 버튼
-                                    //     const applierAccAdmissionBtn = document.createElement("button")
-                                    //     applierAccUpdateBtn.setAttribute("type", "button")
-                                    //     applierAccUpdateBtn.setAttribute("class", "applier-acc-admission-btn")
-                                    //     applierAccUpdateBtn.addEventListener("click", function () {
-                                    //         updateApply(applierAll, apply)
-                                    //     })
-                                    //     applierAccUpdateBtn.innerText = "동행 수락"
-                                    //     applierRow3InPurple.appendChild(applierAccAdmissionBtn)
-                                    // }
-                                    if (payloadParse.user_id == apply.user){                        
+                                    if (payloadParse.user_id == accompany.user  && accompany.user != apply.user){
+                                        // 동행 수락 버튼
+                                        const applierAccPickBtn = document.createElement("button")
+                                        applierAccPickBtn.setAttribute("type", "button")
+                                        applierAccPickBtn.setAttribute("class", `applier-acc-pick-btn ${apply.user}`)
+                                        applierAccPickBtn.addEventListener("click", function () {
+                                            pickApply(accompany, apply)
+                                        })
+
+                                        // 채택 유무에 따른 동행 수락/취소 버튼 모양
+                                        if (accompany.picks.includes(apply.user)){
+                                            applierAccPickBtn.innerText = "동행 취소"
+                                            applierAccPickBtn.setAttribute("style", "background-color: silver;")
+                                        } else {
+                                            applierAccPickBtn.innerText = "동행 수락"
+                                        }
+
+                                        applierRow3InPurple.appendChild(applierAccPickBtn)
+                                    } else if (payloadParse.user_id == apply.user){                    
                                         // 수정 버튼
                                         const applierAccUpdateBtn = document.createElement("button")
                                         applierAccUpdateBtn.setAttribute("type", "button")
@@ -280,17 +303,8 @@ export function getAccompany(exhibition_id){
                                         })
                                         applierAccDeleteBtn.innerText = "삭제"
                                         applierRow3InPurple.appendChild(applierAccDeleteBtn)
-
-                                        // 도장 마크 (코드를 추가하세요)
-                                        const admissionImg = document.createElement("img");
-                                        admissionImg.setAttribute("class", "admission-mark");
-                                        admissionImg.setAttribute("src", "../static/img/admission.png");
-                                        applierRow3InPurple.appendChild(admissionImg);
                                     }
                                 }
-                                applierPurpleBox.appendChild(applierRow3InPurple)
-                                applierAll.appendChild(applierPurpleBox)
-                                grayBox.appendChild(applierAll)
                             })                
                         }            
                         accompanyList.appendChild(grayBox)
@@ -336,4 +350,46 @@ export function deleteApply(applyBox, apply) {
             }            
         })
     }
+}
+
+function pickApply(accompany, apply) {
+    postAccompanyPickAPI(accompany.id, apply.id).then(({ response, responseJson }) => {
+        if (response.status == 201) {
+            if (confirm("정말 수락하시겠습니까?")) {
+                let personnel = document.getElementById("personnel")
+                personnel.innerText = `${responseJson.picks_count}/${responseJson.personnel}명`
+
+                let pickImgs = document.getElementsByClassName(`pick-mark ${apply.user}`)
+                Array.prototype.forEach.call(pickImgs, function(eachPickImg) {
+                    eachPickImg.setAttribute("style", "display: block;")
+                })
+
+                let pickBtns = document.getElementsByClassName(`applier-acc-pick-btn ${apply.user}`)
+                Array.prototype.forEach.call(pickBtns, function(eachPickBtn) {
+                    eachPickBtn.setAttribute("style", "background-color: silver;")
+                    eachPickBtn.innerText = "동행 취소"
+                })
+            }
+        } else if (response.status == 200) {
+            if (confirm("정말 취소하시겠습니까?")) {
+                let personnel = document.getElementById("personnel")
+                personnel.innerText = `${responseJson.picks_count}/${responseJson.personnel}명`
+
+                let pickImgs = document.getElementsByClassName(`pick-mark ${apply.user}`)
+                Array.prototype.forEach.call(pickImgs, function(eachPickImg) {
+                    eachPickImg.setAttribute("style", "display: none;")
+                })
+
+                let pickBtns = document.getElementsByClassName(`applier-acc-pick-btn ${apply.user}`)
+                Array.prototype.forEach.call(pickBtns, function(eachPickBtn) {
+                    eachPickBtn.setAttribute("style", "")
+                    eachPickBtn.innerText = "동행 수락"
+                })
+            }
+        } else if (response.status == 406) {
+            alert(responseJson.message)
+        } else {
+            alert("권한이 없습니다.")
+        }
+    })
 }

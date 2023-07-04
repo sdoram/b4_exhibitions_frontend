@@ -1,8 +1,42 @@
-import { frontendBaseURL, backendBaseURL, payload, payloadParse, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, getExhibitionAPI } from "./api.js";
+
+import { frontendBaseURL, backendBaseURL, payload, payloadParse, getPopularAPI, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, getExhibitionAPI } from "./api.js";
+
 window.onload = function loadExhibitions() {
     if (window.location.href == `${frontendBaseURL}/`) {
         popup()
     }
+    getPopularAPI().then(({ response, responseJson }) => {
+        // 전시 인기 랭킹 Top5
+        for (let i = 1; i <= 5; i++) {
+            let popular = responseJson[i - 1]
+
+            // 상세페이지 링크
+            let linkedPopular = document.getElementById(`rank${i}Link`)
+            linkedPopular.setAttribute("href", `${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${popular.id}`)
+
+            // 이미지
+            let popularImg = document.getElementById(`rank${i}Img`)
+            // 이미지를 못찾을 경우 대체 이미지 
+            popularImg.setAttribute("onerror", "this.src='/static/img/default-img.jpg'")
+            if (popular.image) {
+                if (popular.image.includes('https%3A')) {
+                    // 대체 url 코드로 인코딩된 url 디코딩 하기    
+                    popularImg.setAttribute("src", `https://${decodeURIComponent(popular.image.split("https%3A")[1])}`)
+                }
+                else if (popular.image.includes('https:')) {
+                    popularImg.setAttribute("src", popular.image)
+                } else {
+                    popularImg.setAttribute("src", `${backendBaseURL.split('/api')[0]}${popular.image}`)
+                }
+            } else {
+                popularImg.setAttribute("src", "/static/img/default-img.jpg")
+            }
+
+            // 하트 개수
+            let heartNumber = document.getElementById(`${i}rankHeartNumber`)
+            heartNumber.innerHTML = popular.likes
+        }
+    })
     getExhibitionsAPI().then(({ response, responseJson }) => {
         const exhibitionsDATA = responseJson.results
         const exhibitionList = document.getElementById("exhibitionList")

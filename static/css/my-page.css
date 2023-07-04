@@ -22,6 +22,7 @@
 
 /* 프로필 이미지 부분 */
 .profile-part {
+    width: 50vmin;
     height: 40vmin;
     overflow: hidden;
     border: 0.5vmin solid #6358DC;
@@ -41,7 +42,7 @@
     align-items: flex-start;
     width: 50vmin;
     height: 100%;
-    margin-right: auto;
+    margin-right: 7vmin;
     margin-left: 7vmin;
 }
 
@@ -49,7 +50,7 @@
     border: 0.5vmin solid #6358DC;
     border-radius: 10px;
     padding: 1.5vmin;
-    width: 46vmin;
+    width: 50vmin;
     height: fit-content;
 }
 
