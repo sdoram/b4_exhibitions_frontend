@@ -277,6 +277,7 @@ export async function postAccompanyPickAPI(accompany_id, apply_id) {
     })
     const responseJson = await response.json()
     return { response, responseJson }
+}
 
 // 좋아요순 전시 인기 랭킹 API
 export async function getPopularAPI() {
