@@ -235,7 +235,6 @@ export function getAccompany(exhibition_id){
 
                                 const applierRow3InPurple = document.createElement("div")
                                 applierRow3InPurple.setAttribute("class", "applier-row3-in-purple")
-                                applierRow3InPurple.setAttribute("id", `applierRow3InPurple${apply.id}`)
 
                                 // 신청댓글 최종 수정일
                                 const applierDateInfo = document.createElement("div")
@@ -255,10 +254,8 @@ export function getAccompany(exhibition_id){
                                 pickImg.setAttribute("src", "/static/img/pick.png")
                                 
                                 // 채택 유무에 따른 도장 마크 유무
-                                for (let pick of accompany.picks) {
-                                    if (pick == apply.user){
-                                        pickImg.setAttribute("style", "display: block;")
-                                    }
+                                if (accompany.picks.includes(apply.user)){
+                                    pickImg.setAttribute("style", "display: block;")
                                 }
                                 applierRow3InPurple.appendChild(pickImg)
 
