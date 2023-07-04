@@ -1,3 +1,4 @@
+
 import { frontendBaseURL, backendBaseURL, payload, payloadParse, getPopularAPI, getExhibitionsAPI, postExhibitionLikeAPI, getUserInfoAPI, getExhibitionAPI } from "./api.js";
 
 window.onload = function loadExhibitions() {
@@ -39,6 +40,70 @@ window.onload = function loadExhibitions() {
     getExhibitionsAPI().then(({ response, responseJson }) => {
         const exhibitionsDATA = responseJson.results
         const exhibitionList = document.getElementById("exhibitionList")
+
+        // 이전 페이지 버튼 
+        const previousPageButton = document.getElementById('previousPageButton')
+        previousPageButton.addEventListener("click", function () {
+            handlePreviousPage(responseJson.previous)
+        })
+
+        function handleNumberPagination() {
+            let page
+            let currentPage
+            let searchInfo = new URL(location.href).searchParams.get('search')
+            let categoryInfo = new URL(location.href).searchParams.get('category')
+            if (location.href.includes('page')) {
+                // 소숫점 올림으로 페이지 시작점 구하기 
+                page = Math.floor(Number(new URL(location.href).searchParams.get('page')) / 10) + 1
+                currentPage = Number(new URL(location.href).searchParams.get('page'))
+            } else {
+                page = 1
+                currentPage = 1
+            }
+            const paginationButton = document.getElementById('paginationButton')
+            for (let i = (page - 1) * 10; i < page * 10; i++) {
+                if (Math.ceil(responseJson.count / 8) >= i && i != 0) {
+                    let numberPageButton = document.createElement("li");
+                    numberPageButton.setAttribute("class", "page-link")
+                    if (i == currentPage) {
+                        numberPageButton.setAttribute("class", "page-link page-select")
+                    }
+                    numberPageButton.setAttribute("id", `page=${i}`)
+                    numberPageButton.innerText = i
+                    paginationButton.appendChild(numberPageButton)
+
+                    document.getElementById(`page=${i}`).addEventListener("click", function () {
+                        if (searchInfo) {
+                            handleNumberPage(`search=${searchInfo}&${this.id}`);
+                        } else if (categoryInfo) {
+                            handleNumberPage(`category=${categoryInfo}&${this.id}`);
+                        } else {
+                            handleNumberPage(`${this.id}`);
+                        }
+                    }
+                    );
+                }
+            }
+        }
+        handleNumberPagination()
+
+
+        // 다음 페이지 버튼
+        const nextPageButtonLi = document.createElement('li');
+        nextPageButtonLi.setAttribute('class', 'page-item');
+
+        const nextPageButton = document.createElement("button");
+        nextPageButton.setAttribute('id', 'nextPageButton')
+        nextPageButton.setAttribute('class', 'page-link')
+        nextPageButton.innerText = '다음 페이지'
+        nextPageButtonLi.appendChild(nextPageButton)
+
+        document.getElementById('paginationButton').appendChild(nextPageButtonLi)
+
+        nextPageButton.addEventListener("click", function () {
+            handleNextPage(responseJson.next)
+        })
+
         exhibitionsDATA.forEach(exhibition => {
             const exhibitionSet = document.createElement("div");
             exhibitionSet.setAttribute("class", "exhibition-set");
@@ -163,17 +228,6 @@ window.onload = function loadExhibitions() {
 
             exhibitionList.appendChild(exhibitionSet)
 
-            // 다음 페이지 버튼
-            const nextPageButton = document.getElementById('nextPageButton')
-            nextPageButton.addEventListener("click", function () {
-                handleNextPage(responseJson.next)
-            })
-
-            // 이전 페이지 버튼 
-            const previousPageButton = document.getElementById('previousPageButton')
-            previousPageButton.addEventListener("click", function () {
-                handlePreviousPage(responseJson.previous)
-            })
         })
     })
 }
@@ -202,16 +256,6 @@ function exhibitionReserve(link) {
     window.open(link)
 }
 
-// 이전 페이지
-function handlePreviousPage(page) {
-    // page 변수명 변경하기 
-    window.location.href = `${frontendBaseURL}${window.location.pathname}?${page.split('?')[1]}`
-}
-
-// 다음 페이지 
-function handleNextPage(page) {
-    window.location.href = `${frontendBaseURL}${window.location.pathname}?${page.split('?')[1]}`
-}
 
 // 전시회 상세 페이지
 function exhibitionDetail(exhibition_id) {
@@ -225,7 +269,7 @@ function checkAdmin() {
 }
 checkAdmin()
 
-document.getElementById("nextPageButton").addEventListener("click", handleNextPage);
+
 document.getElementById("previousPageButton").addEventListener("click", handlePreviousPage);
 
 // enter입력시 함수 실행 
@@ -250,3 +294,21 @@ function popup() {
     let option = "width = 600, height = 240, top = 200, left = 200, location = no"
     window.open(url, name, option)
 }
+
+// 이전 페이지
+function handlePreviousPage(page) {
+    window.location.href = `${frontendBaseURL}${window.location.pathname}?${page.split('?')[1]}`
+}
+
+// 다음 페이지 
+function handleNextPage(page) {
+    window.location.href = `${frontendBaseURL}${window.location.pathname}?${page.split('?')[1]}`
+}
+
+// 번호 클릭 이동 
+function handleNumberPage(page) {
+    window.location.href = `${frontendBaseURL}${window.location.pathname}?${page}`
+}
+
+
+

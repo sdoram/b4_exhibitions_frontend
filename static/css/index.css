@@ -3,9 +3,11 @@
     margin-left: 3.75rem;
     position: relative;
 }
+
 .welcome-greeting {
     font-weight: bold;
 }
+
 .welcome-title {
     font-weight: bold;
     color: #6358DC;
@@ -87,6 +89,7 @@
     flex-direction: row;
     justify-content: flex-start;
 }
+
 .magnifier-img {
     width: 2.5rem;
     height: 2.5rem;
@@ -99,6 +102,7 @@
     margin-left: 3rem;
     margin-right: 0.625rem;
 }
+
 .searching-bar {
     border: 0.3125rem solid #6358DC;
     border-radius: 0.625rem;
@@ -117,6 +121,7 @@
     padding: 0 2rem 0 2rem;
     justify-content: flex-start;
 }
+
 .exhibition-set {
     margin-top: 3.125rem;
     margin-bottom: 3.125rem;
@@ -126,32 +131,37 @@
     flex-direction: column;
     flex-wrap: nowrap;
 }
+
 .exhibition-img-box {
     width: 21.875rem;
     height: 21.875rem;
     position: relative;
-    overflow:hidden;
-    margin:0 auto;
+    overflow: hidden;
+    margin: 0 auto;
     border: 0.0625rem solid #6358DC;
     border-radius: 0.625rem;
     cursor: pointer;
 }
+
 .card-img-top {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .exhibition-img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+
 .exhibition-info-box {
     color: #6358DC;
     font-weight: bold;
     width: 21.875rem;
 }
-.exhibition-info-box > span {
+
+.exhibition-info-box>span {
     display: flex;
     flex-direction: column;
     margin-top: 0.3125rem;
@@ -159,11 +169,13 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
 .heart-set {
     display: flex;
     flex-direction: row;
     margin-top: 0.3125rem;
 }
+
 .heart {
     background-image: url('../img/empty-heart.png');
     background-size: contain;
@@ -173,11 +185,13 @@
     margin-right: 0.4375rem;
     filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
 }
+
 .sign-set {
     display: flex;
     flex-direction: row;
 }
-.sign-set > * {
+
+.sign-set>* {
     margin-top: 0.625rem;
     margin-right: 0.4375rem;
     width: 9.1875rem;
@@ -187,9 +201,11 @@
     border: 0px solid;
     border-radius: 0.625rem;
 }
+
 .detail-button:hover {
     background-color: gray;
 }
+
 .reserve-button:hover {
     background-color: gray;
 }
@@ -201,13 +217,28 @@
     flex-direction: row;
     justify-content: center;
 }
-.page-item > button {
-    border: 0.5vmin solid #6358DC;
+
+.page-item>button {
+    border: 0;
     width: 25vmin;
     height: 5vmin;
     font-weight: bold;
     font-size: 1.8vmin;
-    color: #6358DC;  
+    color: #6358DC;
+}
+
+/* 페이지 숫자 */
+.page-link {
+    border: 0;
+    font-weight: bold;
+    font-size: 1.8vmin;
+    color: #6358DC;
+    cursor: pointer;
+
+}
+
+.page-select {
+    color: #FFB800;
 }
 
 /* 설문조사아이콘 */
@@ -224,6 +255,7 @@
     color: #6358DC;
     font-weight: bold;
 }
+
 .questionnaire-box {
     margin-top: 1vmin;
     width: 10vmin;
@@ -232,9 +264,9 @@
     border-radius: 5vmin;
     padding: 2vmin;
 }
-.questionnaire-link {
 
-}
+.questionnaire-link {}
+
 .questionnaire-img {
     height: 100%;
     width: 100%;

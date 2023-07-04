@@ -2,9 +2,11 @@
 .welcome-set {
     margin-left: 60px;
 }
+
 .welcome-greeting {
     font-weight: bold;
 }
+
 .welcome-title {
     font-weight: bold;
     color: #6358DC;
@@ -18,6 +20,7 @@
     justify-content: space-between;
     padding: 0 0 0 60px;
 }
+
 .title-show-exh {
     color: #6358DC;
     font-size: 40px;
@@ -26,6 +29,7 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
 .magnifier-img {
     width: 40px;
     height: 40px;
@@ -38,6 +42,7 @@
     margin-right: 10px;
     margin-left: auto;
 }
+
 .searching-bar {
     border: 5px solid #6358DC;
     border-radius: 10px;
@@ -57,6 +62,7 @@
     justify-content: flex-start;
     margin-top: -50px;
 }
+
 .exhibition-set {
     margin-top: 100px;
     margin-bottom: 50px;
@@ -66,31 +72,36 @@
     flex-direction: column;
     flex-wrap: nowrap;
 }
+
 .exhibition-img-box {
-    width:350px;
-    height:350px;
-    overflow:hidden;
-    margin:0 auto;
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    margin: 0 auto;
     border: 1px solid #6358DC;
     border-radius: 10px;
     cursor: pointer;
 }
+
 .exhibition-img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+
 .card-img-top {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .exhibition-info-box {
     color: #6358DC;
     font-weight: bold;
     width: 350px;
 }
-.exhibition-info-box > span {
+
+.exhibition-info-box>span {
     display: flex;
     flex-direction: column;
     margin-top: 5px;
@@ -98,11 +109,13 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
 .heart-set {
     display: flex;
     flex-direction: row;
     margin-top: 5px;
 }
+
 .heart {
     background-image: url('../img/empty-heart.png');
     background-size: contain;
@@ -112,11 +125,13 @@
     margin-right: 7px;
     filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
 }
+
 .sign-set {
     display: flex;
     flex-direction: row;
 }
-.sign-set > * {
+
+.sign-set>* {
     margin-top: 10px;
     margin-right: 7px;
     width: 147px;
@@ -126,12 +141,15 @@
     border: 0px solid;
     border-radius: 10px;
 }
+
 .detail-button:hover {
     background-color: gray;
 }
+
 .reserve-button:hover {
     background-color: gray;
 }
+
 .new-exh-button {
     width: 20%;
     height: 7%;
@@ -143,10 +161,12 @@
     font-size: 3vmin;
 
     /* 스크롤 따라다니게 하는 코드 */
-    position:fixed;
-    display:inline-block;
-    right:40%; /* 창에서 오른쪽 길이 */
-    top:90%; /* 창에서 위에서 부터의 높이 */
+    position: fixed;
+    display: inline-block;
+    right: 40%;
+    /* 창에서 오른쪽 길이 */
+    top: 90%;
+    /* 창에서 위에서 부터의 높이 */
 
     /* 모바일창 좁으면 반응형 */
     text-overflow: ellipsis;
@@ -161,13 +181,31 @@
     flex-direction: row;
     justify-content: center;
 }
-.page-item > button {
-    border: 0.5vmin solid #6358DC;
+
+.page-item>button {
+    border: 0;
     width: 25vmin;
     height: 5vmin;
     font-weight: bold;
     font-size: 1.8vmin;
-    color: #6358DC;  
+    color: #6358DC;
+}
+
+/* 페이지 숫자 */
+.page-link {
+    border: 0;
+    font-weight: bold;
+    font-size: 1.8vmin;
+    color: #6358DC;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+/* 선택된 페이지  */
+.page-select {
+    color: #FFB800;
 }
 
 /* 설문조사아이콘 */
@@ -184,6 +222,7 @@
     color: #6358DC;
     font-weight: bold;
 }
+
 .questionnaire-box {
     margin-top: 1vmin;
     width: 10vmin;
@@ -192,9 +231,9 @@
     border-radius: 5vmin;
     padding: 2vmin;
 }
-.questionnaire-link {
 
-}
+.questionnaire-link {}
+
 .questionnaire-img {
     height: 100%;
     width: 100%;
