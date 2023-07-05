@@ -291,7 +291,7 @@ function exhibitionSearch(search) {
 function popup() {
     let url = "/templates/popup.html"
     let name = "공지사항"
-    let option = "width = 750, height = 240, top = 200, left = 200, location = no"
+    let option = "width = 750, height = 350, top = 200, left = 200, location = no"
     window.open(url, name, option)
 }
 
