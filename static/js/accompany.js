@@ -77,7 +77,7 @@ export function getAccompany(exhibition_id){
                         nicknameBox.setAttribute("class", "ac-nickname-box")
                         nicknameBox.addEventListener("click", function() {
                             location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${accompany.user}`;
-                        });
+                        })
                         nicknameBox.innerText = accompany.nickname
                         row1InPurple.appendChild(nicknameBox)
 
@@ -88,7 +88,6 @@ export function getAccompany(exhibition_id){
                         const personnel = document.createElement("span")
                         personnel.setAttribute("id", `personnel${accompany.id}`)
                         personnel.innerText = `${accompany.picks_count}/${accompany.personnel}명`
-                        console.log(accompany.picks_count)
                         goalNumber.appendChild(personnel)
                         row1InPurple.appendChild(goalNumber)
                         
@@ -204,8 +203,8 @@ export function getAccompany(exhibition_id){
                                 const applierNickname = document.createElement("div")
                                 applierNickname.setAttribute("class", "applier-nickname")
                                 applierNickname.addEventListener("click", function() {
-                                    location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${accompany.user}`;
-                                });
+                                    location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${apply.user}`;
+                                })
                                 applierNickname.innerText = apply.nickname
                                 applierRow1InPurple.appendChild(applierNickname)
                                 applierPurpleBox.appendChild(applierRow1InPurple)

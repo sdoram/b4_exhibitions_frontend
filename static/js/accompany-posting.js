@@ -163,7 +163,7 @@ function addNewAccompany(accompanyData) {
     const nicknameBox = document.createElement("div")
     nicknameBox.setAttribute("class", "ac-nickname-box")
     nicknameBox.addEventListener("click", function() {
-        location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${accompany.user}`;
+        location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${accompanyData.user}`;
     });
     nicknameBox.innerText = accompanyData.nickname
     row1InPurple.appendChild(nicknameBox)
