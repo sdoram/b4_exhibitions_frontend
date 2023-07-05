@@ -1,4 +1,4 @@
-import { payload, payloadParse, postApplyAPI } from "./api.js";
+import { frontendBaseURL, payload, payloadParse, postApplyAPI } from "./api.js";
 import { deleteApply } from "./accompany.js";
 import { updateApply } from "./apply-editing.js";
 
@@ -145,6 +145,9 @@ function addNewApply(accompany, applyData) {
     // 동행 신청자 닉네임
     const applierNickname = document.createElement("div")
     applierNickname.setAttribute("class", "applier-nickname")
+    applierNickname.addEventListener("click", function() {
+        location.href = `${frontendBaseURL}/templates/my-page.html?user_id=${applyData.user}`;
+    })
     applierNickname.innerText = applyData.nickname
     applierRow1InPurple.appendChild(applierNickname)
     applierPurpleBox.appendChild(applierRow1InPurple)
