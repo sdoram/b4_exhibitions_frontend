@@ -160,23 +160,23 @@ function exhibitionReserve(link) {
 }
 
 // 스크롤 위치에 따른 추천바 숨기기
-document.addEventListener("DOMContentLoaded", function() {
-  const recommendOrganizer = document.querySelector(".recommend-organizer")
+document.addEventListener("DOMContentLoaded", function () {
+    const recommendOrganizer = document.querySelector(".recommend-organizer")
 
-  function showHideRecommendOrganizer() {
-    const reviewBtn = document.getElementById("reviewBtn")
-    const reviewBtnTop = reviewBtn.getBoundingClientRect().top
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    function showHideRecommendOrganizer() {
+        const reviewBtn = document.getElementById("reviewBtn")
+        const reviewBtnTop = reviewBtn.getBoundingClientRect().top
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
 
-    if (reviewBtnTop >= window.innerHeight || scrollTop === 0) {
-      recommendOrganizer.style.display = "block"
-    } else {
-      recommendOrganizer.style.display = "none"
+        if (reviewBtnTop >= window.innerHeight || scrollTop === 0) {
+            recommendOrganizer.style.display = "block"
+        } else {
+            recommendOrganizer.style.display = "none"
+        }
     }
-  }
 
-  // 스크롤 이벤트에서 실행
-  window.addEventListener("scroll", showHideRecommendOrganizer)
+    // 스크롤 이벤트에서 실행
+    window.addEventListener("scroll", showHideRecommendOrganizer)
 });
 
 function readMoreBtn() {
@@ -237,5 +237,11 @@ function displaySingleMarker(map, item) {
         map.setCenter(markerPosition);
     }
 }
+function checkLogin() {
+    if (document.referrer && document.referrer.includes("signin")) {
+        window.location.reload();
+    }
+}
+checkLogin();
 readMoreBtn();
 loadMap(); 
