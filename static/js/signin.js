@@ -37,6 +37,7 @@ function handleSignIn() {
             setLocalStorage(responseJson);
             alert('로그인에 성공했습니다.');
             window.history.go(-1)
+            window.reload()
         } else {
             alert(responseJson.email && "이메일을 입력해주세요"
                 || responseJson.password && "비밀번호를 입력해주세요" ||
@@ -71,6 +72,7 @@ if (payload) {
             setLocalStorage(responseJson)
             alert('구글 계정으로 로그인 되었습니다.');
             window.history.go(-3)
+            window.reload()
         } else {
             alert(responseJson.message);
             window.location.replace(`${frontendBaseURL}/templates/signin.html`);
