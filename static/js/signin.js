@@ -38,7 +38,9 @@ function handleSignIn() {
             alert('로그인에 성공했습니다.');
             window.history.go(-1)
             console.log('리로드')
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
         } else {
             alert(responseJson.email && "이메일을 입력해주세요"
                 || responseJson.password && "비밀번호를 입력해주세요" ||
