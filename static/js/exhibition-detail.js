@@ -6,6 +6,9 @@ import { isEditingAccompany } from "./accompany-editing.js";
 
 
 window.onload = function loadExhibition() {
+    if (payload) {
+        window.location.reload()
+    }
     // url 객체 생성 후 exhibition_id 값 추출 
     const exhibition_id = new URLSearchParams(window.location.search).get("exhibition_id")
     getExhibitionAPI(exhibition_id).then(({ response, responseJson }) => {
@@ -237,11 +240,12 @@ function displaySingleMarker(map, item) {
         map.setCenter(markerPosition);
     }
 }
-function checkLogin() {
-    if (document.referrer && document.referrer.includes("signin")) {
-        window.location.reload();
-    }
-}
-checkLogin();
+// function checkLogin() {
+//     if (document.referrer && document.referrer.includes("signin")) {
+//         console.log(document.referrer)
+//         // window.location.reload();
+//     }
+// }
+// checkLogin();
 readMoreBtn();
 loadMap(); 
