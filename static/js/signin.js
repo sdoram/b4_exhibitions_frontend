@@ -36,8 +36,7 @@ function handleSignIn() {
         if (response.status == 200) {
             setLocalStorage(responseJson);
             alert('로그인에 성공했습니다.');
-            console.log(document.referrer)
-            // window.history.go(-1)
+            window.location.href = document.referrer
         } else {
             alert(responseJson.email && "이메일을 입력해주세요"
                 || responseJson.password && "비밀번호를 입력해주세요" ||
