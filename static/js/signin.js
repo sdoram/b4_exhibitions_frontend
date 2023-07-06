@@ -70,8 +70,7 @@ if (payload) {
         if (response.status == 200) {
             setLocalStorage(responseJson)
             alert('구글 계정으로 로그인 되었습니다.');
-            window.history.go(-3)
-            console.log(window.history.go(-3))
+            window.location.href = window.history.go(-3)
         } else {
             alert(responseJson.message);
             window.location.replace(`${frontendBaseURL}/templates/signin.html`);
