@@ -1,4 +1,4 @@
-import { frontendBaseURL, backendBaseURL, payload, payloadParse, getExhibitionsAPI, getExhibitionAPI, postExhibitionLikeAPI, getUserInfoAPI, deleteExhibitionAPI } from "./api.js";
+import { frontendBaseURL, backendBaseURL, payloadParse, getExhibitionsAPI, getExhibitionAPI, deleteExhibitionAPI } from "./api.js";
 
 window.onload = function loadExhibitions() {
     const adminNickname = document.getElementById("adminNickname")
@@ -52,6 +52,7 @@ window.onload = function loadExhibitions() {
                 }
             }
         }
+
         handleNumberPagination()
 
 
@@ -134,7 +135,7 @@ window.onload = function loadExhibitions() {
             exhibitionHeart.setAttribute("class", "heart")
             exhibitionHeart.setAttribute("id", exhibition.id)
             exhibitionHeart.addEventListener("click", function () {
-                heart(exhibition.id)
+                alert("관리자는 좋아요를 누를 수 없습니다.")
             })
             exhibitionHeartSet.appendChild(exhibitionHeart)
 
@@ -144,17 +145,6 @@ window.onload = function loadExhibitions() {
             exhibitionHeartNum.setAttribute("id", `heartNum${exhibition.id}`)
             exhibitionHeartNum.innerText = exhibition.likes
             exhibitionHeartSet.appendChild(exhibitionHeartNum)
-
-            if (payload) {
-                getUserInfoAPI(payloadParse.user_id).then(({ response, responseJson }) => {
-                    responseJson.exhibition_likes.forEach((obj) => {
-                        if (exhibition.id == obj.id) {
-                            const heartElement = document.getElementById(exhibition.id);
-                            heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
-                        }
-                    })
-                })
-            }
 
             getExhibitionAPI(exhibition.id).then(({ responseJson }) => {
                 // 리뷰 개수
@@ -239,14 +229,12 @@ function handleNumberPage(page) {
     window.location.href = `${frontendBaseURL}${window.location.pathname}?${page}`
 }
 
-
-
-
 function checkAdminBackOffice() {
     if (!payloadParse || !payloadParse.is_admin) {
         window.location.replace(`${frontendBaseURL}/`)
     }
 }
+
 checkAdminBackOffice()
 
 document.getElementById("exhibitionPosting").addEventListener("click", handleExhibitionPosting);
@@ -268,23 +256,4 @@ document.getElementById("searchButton").addEventListener("click", function () {
 
 function exhibitionSearch(search) {
     window.location.href = `${frontendBaseURL}${window.location.pathname}?search=${search.value}`
-}
-
-// 좋아요 하트 관련 코드
-function heart(exhibition_id) {
-    let fullHeart = false;
-    if (payload) {
-        postExhibitionLikeAPI(exhibition_id).then(({ response, responseJson }) => {
-            const heartElement = document.getElementById(exhibition_id);
-            const heartNum = document.getElementById(`heartNum${exhibition_id}`)
-            if (response.status == 201) {
-                heartElement.style.backgroundImage = 'url("../static/img/filled-heart.png")';
-                heartNum.innerText = responseJson.likes
-            } else {
-                heartElement.style.backgroundImage = 'url("../static/img/empty-heart.png")';
-                heartNum.innerText = responseJson.likes
-            }
-            fullHeart = !fullHeart;
-        })
-    }
 }

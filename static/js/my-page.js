@@ -1,4 +1,4 @@
-import { getUserInfoAPI, payloadParse, payload, frontendBaseURL, deleteUserInfoAPI, postExhibitionLikeAPI, backendBaseURL, postSignInAPI } from "./api.js";
+import { frontendBaseURL, backendBaseURL, payload, payloadParse, getUserInfoAPI, deleteUserInfoAPI, postExhibitionLikeAPI, postSignInAPI } from "./api.js";
 
 
 window.onload = function loadUserInfo() {
@@ -222,6 +222,8 @@ function heart(exhibition_id) {
             }
             fullHeart = !fullHeart;
         })
+    } else {
+        alert("로그인 후 이용 가능합니다.")
     }
 }
 

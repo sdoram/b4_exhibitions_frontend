@@ -1,7 +1,14 @@
-import { getUserInfoAPI, payloadParse, frontendBaseURL, patchUserInfoAPI } from "./api.js";
+import { frontendBaseURL, payloadParse, getUserInfoAPI, patchUserInfoAPI } from "./api.js";
 
 window.onload = function () {
     const user_id = new URLSearchParams(window.location.search).get("user_id")
+    function checkNotRequestUser() {
+        if (payloadParse.user_id != user_id) {
+            alert("본인의 정보만 수정 가능합니다.")
+            window.location.replace(`${frontendBaseURL}/`)
+        }
+    }
+    checkNotRequestUser()
 
     getUserInfoAPI(user_id).then(({ response, responseJson }) => {
         const userInfo = responseJson

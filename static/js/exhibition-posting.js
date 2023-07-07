@@ -1,4 +1,13 @@
-import { postExhibitionAPI, frontendBaseURL, putExhibitionAPI, getExhibitionAPI } from "./api.js";
+import { frontendBaseURL, payloadParse, postExhibitionAPI, putExhibitionAPI, getExhibitionAPI } from "./api.js";
+
+function checkAdminBackOfficePosting() {
+    if (!payloadParse || !payloadParse.is_admin) {
+        alert("관리자만 전시를 등록할 수 있습니다.")
+        window.location.replace(`${frontendBaseURL}/`)
+    }
+}
+
+checkAdminBackOfficePosting()
 
 // 게시글 작성 정보 가져오기
 function exhibitionInPutInfo() {
@@ -35,10 +44,10 @@ function handleExhibitionPosting() {
             alert(responseJson.message);
             window.location.replace(`${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${responseJson.data.id}`)
         } else {
-            alert(responseJson.message);
+            alert(responseJson.detail && "관리자만 전시를 등록할 수 있습니다."
+                || responseJson.message);
         }
     });
-
 }
 
 function handleExhibitionPut(exhibition_id) {
@@ -47,7 +56,8 @@ function handleExhibitionPut(exhibition_id) {
             alert('수정했습니다');
             window.location.replace(`${frontendBaseURL}/templates/exhibition-detail.html?exhibition_id=${exhibition_id}`)
         } else {
-            alert('수정 실패')
+            alert(responseJson.detail && "관리자만 전시를 수정할 수 있습니다."
+                || responseJson.message);
         }
     });
 }
