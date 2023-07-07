@@ -1,4 +1,4 @@
-import { getExhibitionAPI, postExhibitionLikeAPI, payload, payloadParse, getUserInfoAPI, frontendBaseURL, backendBaseURL } from "./api.js";
+import { frontendBaseURL, backendBaseURL, payload, payloadParse, getExhibitionAPI, postExhibitionLikeAPI, getUserInfoAPI } from "./api.js";
 import { getReview } from "./review.js";
 import { getAccompany } from "./accompany.js";
 import { isEditingReview } from "./review-editing.js";
@@ -151,6 +151,8 @@ function heart(exhibition_id) {
             }
             fullHeart = !fullHeart;
         })
+    } else {
+        alert("로그인 후 이용 가능합니다.")
     }
 }
 
