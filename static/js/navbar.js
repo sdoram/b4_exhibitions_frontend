@@ -1,4 +1,4 @@
-import { frontendBaseURL, payload, payloadParse, backendBaseURL } from "./api.js";
+import { frontendBaseURL, backendBaseURL, payload, payloadParse  } from "./api.js";
 const API_URL = `${backendBaseURL}/exhibitions/weather/`
 async function injectNavbar() {
     fetch("../templates/navbar.html").then(response => {
