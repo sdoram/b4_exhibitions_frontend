@@ -5,14 +5,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../static/js/api.js"></script>
-    <script src="../static/js/navbar.js"></script>
-    <script src="../static/js/accompany-posting.js"></script>
+    <link rel="stylesheet" href="../static/css/accompany-posting.css">
+    <script type="module" src="../static/js/accompany-posting.js"></script>
     <title>Document</title>
 </head>
 
 <body>
-
+    <div class="ap-all-items-organizer">
+        <h1 class="ap-welcome-title">동행글 작성/수정 하기</h1>
+        <form class="ap-gray-box">
+            <div class="ap-purple-box">
+                <div class="ap-row1-in-purple">
+                    <div class="ap-nickname">
+                        로그인 닉네임
+                    </div>
+                    <div class="ap-goal-number">
+                        목표인원 <input type="number" class="ap-goal-num" id="apPersonnel">
+                    </div>
+                    <div class="ap-set-date">
+                        동행시간 <input type="datetime-local" id="apStartTime">~<input type="datetime-local" id="apEndTime">
+                    </div>
+                </div>
+                <div class="ap-row2-in-purple">
+                    <div class="ap-accompany-content">
+                        <p class="ap-content-header">이런 분을 구합니다!</p>
+                        <textarea class="ap-acc-content" id="" placeholder="내용을 입력하세요"></textarea>
+                    </div>
+                </div>
+                <div class="ap-row3-in-purple">
+                    <button type="button" class="ap-acc-posting-btn">입력완료</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,254 @@
+/* 전체 요소 세로로 중앙 정렬 */
+.all-items-organizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* 구간 타이틀: 동행글 목록 */
+.welcome-title {
+    color: #6358DC;
+    font-size: 4.5vmin;
+    display: flex;
+    justify-content: center;
+}
+/* 본격적인 동행글 구간 시작: 동행글 1개 마다 회색박스 1개 차지. 회색박스 안에 동행신청글도 달림. */
+.gray-box {
+    margin-top: 10vmin;
+    background-color: rgb(210, 210, 210);
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3.3333vmin;
+    border-radius: 0.7778vmin;
+    flex-wrap: wrap;
+}
+/* 보라색 내용 부분*/
+.purple-box {
+    background-color: #6358DC;
+    width: 105vmin;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2.2222vmin;
+    border-radius: 1vmin;
+}
+/* 보라색 안의 상단: 닉네임, 동행목표인원, 동행날짜시간 */
+.row1-in-purple {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+}
+.nickname {
+    background-color: white;
+    width: 20%;
+    height: 3.3333vmin;
+    overflow: auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2vmin;
+    padding-top: 0.6667vmin;
+    border-radius: 0.5556vmin;
+}
+.goal-number {
+    background-color: white;
+    width: 25%;
+    height: 3.3333vmin;
+    overflow: auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2vmin;
+    padding-top: 0.6667vmin;
+    border-radius: 0.5556vmin;
+}
+.set-date {
+    background-color: white;
+    width: 52%;
+    height: 3.3333vmin;
+    overflow: auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2vmin;
+    padding-top: 0.6667vmin;
+    border-radius: 0.5556vmin;
+}
+/* 보라색 안의 중앙: 동행글 본문 */
+.row2-in-purple {
+    margin-top: 2.2222vmin;
+    width: 100%;
+    height: fit-content;
+}
+.accompany-content {
+    height: 20vmin;
+    background-color: white;
+    overflow: auto;
+    padding: 2.2222vmin;
+    color: black;
+    font-weight: bold;
+    font-size: 1.8vmin;
+    border-radius: 0.5556vmin;
+}
+.content-header {
+    color: #6358DC;
+    font-weight: bold;
+    font-size: 3vmin;
+    margin-top: -0.5vmin;
+    font-family:Arial, Helvetica, sans-serif;
+}
+/* 보라색 안의 하단: 동행글 최종수정일자 ,수정 버튼, 삭제 버튼 */
+.row3-in-purple {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.6667vmin;
+    width: 100%;
+    height: fit-content;
+}
+.date-info {
+    margin-left: 1.6667vmin;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    color: white;
+    font-weight: bold;
+    font-size: 1.8vmin;
+}
+.btn-group {
+    display: flex;
+}
+.row3-in-purple > .btn-group > button {
+    border: 0vmin solid;
+    background-color: #FF9700;
+    color: white;
+    font-weight: bold;
+    font-size: 1.7vmin;
+    width: 11.1111vmin;
+    height: 4.4444vmin;
+    border-radius: 1.1111vmin;
+    margin-right: 1vmin;
+}
+.row3-in-purple > .btn-group > button:first-child {
+    margin-left: auto;
+}
+.row3-in-purple >.btn-group > button:hover {
+    background-color: silver;
+}
+/* 동행글 구간 끝 */
+/* ==================================================================================================================================== */
+/* 동행 신청글 구간 시작 */
+/* 신청댓글 정렬 */
+.app-applier-all {
+    margin-top: 5vmin;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* 신청댓글 화살표 */
+.app-arrow-mark {
+    color: #6358DC;
+    font-size: 15vmin;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: -5vmin;
+    margin-left: 8vmin;
+}
+/* 보라색 내용 부분*/
+.app-applier-purple-box {
+    background-color: #a39fd8;
+    width: 85vmin;
+    height: 37.2vmin;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2.2222vmin;
+    border-radius: 1vmin;
+}
+/* 보라색 안의 상단: 닉네임 */
+.app-applier-row1-in-purple {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+}
+.app-applier-nickname {
+    background-color: white;
+    width: 20%;
+    height: 3.5vmin;
+    overflow: auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2vmin;
+    padding-top: 0.3vmin;
+    border-radius: 0.5556vmin;
+}
+/* 보라색 안의 중앙: 동행글 본문 */
+.app-applier-row2-in-purple {
+    margin-top: 2.2222vmin;
+    width: 100%;
+    height: fit-content;
+}
+.app-applier-accompany-content {
+    height: 20vmin;
+    background-color: white;
+    overflow: auto;
+    padding: 2.2222vmin;
+    color: black;
+    font-weight: bold;
+    font-size: 1.8vmin;
+    border-radius: 0.5556vmin;
+}
+.app-applier-content {
+    width: 100%;
+    height: 9vmin;
+    color: black;
+    font-size: 2vmin;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0px solid;
+}
+.app-applier-content-header {
+    color: #6358DC;
+    font-weight: bold;
+    font-size: 3vmin;
+    margin-top: -0.5vmin;
+    font-family:Arial, Helvetica, sans-serif;
+}
+/* 보라색 안의 하단: 등록 버튼 */
+.app-applier-row3-in-purple {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1.6667vmin;
+    width: 100%;
+    height: fit-content;
+}
+.app-applier-row3-in-purple > button {
+    border: 0vmin solid;
+    background-color: #FF9700;
+    color: white;
+    font-weight: bold;
+    font-size: 1.7vmin;
+    width: 11.1111vmin;
+    height: 4.4444vmin;
+    border-radius: 1.1111vmin;
+}
+.app-applier-row3-in-purple > button:hover {
+    background-color: silver;
+}
+.app-applier-acc-posting-btn {
+    margin-left: auto;
+    margin-right: 1.1111vmin;
+}
+/* 동행 신청글 구간 끝 */

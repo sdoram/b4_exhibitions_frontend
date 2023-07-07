@@ -4,15 +4,131 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./static/js/api.js"></script>
-    <script src="./static/js/navbar.js"></script>
-    <script src="./static/js/index.js"></script>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 페이지의 표준 URL -->
+    <meta property="og:url" content="https://b4-exhibitions-now.netlify.app/" />
+
+    <!-- 콘텐츠의 미디어 유형(기본값은 website) -->
+    <meta property="og:type" content="website" />
+
+    <!-- 기사의 제목 -->
+    <meta property="og:title" content="지금은 전시상황!" />
+
+    <!-- 콘텐츠의 간단한 설명 -->
+    <meta property="og:description" content="지금은 전시상황! 서울 공공서비스 체험, 전시, 그리고 다양한 활동들을 한 눈에 볼 수 있는 웹사이트입니다." />
+
+    <!-- 표시되는 이미지의 URL -->
+    <meta property="og:image" content="/static/img/logo.png" />
+    <title>지금은 전시상황! | 메인 페이지</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <!-- 파비콘 -->
+    <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
+    <!--내비바 아이콘 css -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!--내비바 css  -->
+    <link rel="stylesheet" href="./static/css/navbar.css">
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <script type="module" src="./static/js/navbar.js"></script>
+    <script type="module" src="./static/js/index.js"></script>
 </head>
 
 <body>
-
+    <header></header>
+    <div class="welcome-set">
+        <h3 class="welcome-greeting">Welcome!</h3>
+        <h1 class="welcome-title">현재 관람 가능한 전시</h1>
+        <div class="top5-set">
+            <div class="words"><span>TOP5</span><span>인기</span><span>전시</span></div>
+            <div class="cards-row-organizer">
+                <div class="rank1">
+                    <a href="" id="rank1Link" class="rank1-link">
+                        <img class="rank-img" id="rank1Img" src="./static/img/default-img.jpg">
+                        <img class="rank-heart" src="./static/img/filled-heart.png">
+                        <span class="rank-heart-number" id="1rankHeartNumber"></span>
+                    </a>
+                </div>
+                <div class="rank2">
+                    <a href="" id="rank2Link" class="rank2-link">
+                        <img class="rank-img" id="rank2Img" src="./static/img/default-img.jpg">
+                        <img class="rank-heart" src="./static/img/filled-heart.png">
+                        <span class="rank-heart-number" id="2rankHeartNumber"></span>
+                    </a>
+                </div>
+                <div class="rank3">
+                    <a href="" id="rank3Link" class="rank3-link">
+                        <img class="rank-img" id="rank3Img" src="./static/img/default-img.jpg">
+                        <img class="rank-heart" src="./static/img/filled-heart.png">
+                        <span class="rank-heart-number" id="3rankHeartNumber"></span>
+                    </a>
+                </div>
+                <div class="rank4">
+                    <a href="" id="rank4Link" class="rank4-link">
+                        <img class="rank-img" id="rank4Img" src="./static/img/default-img.jpg">
+                        <img class="rank-heart" src="./static/img/filled-heart.png">
+                        <span class="rank-heart-number" id="4rankHeartNumber"></span>
+                    </a>
+                </div>
+                <div class="rank5">
+                    <a href="" id="rank5Link" class="rank5-link">
+                        <img class="rank-img" id="rank5Img" src="./static/img/default-img.jpg">
+                        <img class="rank-heart" src="./static/img/filled-heart.png">
+                        <span class="rank-heart-number" id="5rankHeartNumber"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="searching-set">
+        <div class="magnifier-img" id="searchButton"></div>
+        <input class="searching-bar" id="search" placeholder="원하는 전시를 키워드로 검색해보세요">
+    </div>
+    <div class="all-exhibitions-organizer" id="exhibitionList">
+        <!--<div class="exhibition-set">
+            <div class="exhibition-img-box">
+                <img class="exhibition-img" src="" onerror="this.src='./static/img/default-img.jpg'">
+            </div>
+            <div class="exhibition-info-box">
+                <span class="exhibition-title">전시 이름</span>
+                <span class="exhibition-period">전시 기간</span>
+                <div class="heart-set">
+                    <div class="heart" id="heart" onclick='heart()'></div>
+                    <span class="heart-num">999</span>
+                </div>
+                <div class="sign-set">
+                    <button class="detail-button">전시상세</button>
+                    <button class="reserve-button">예약하기</button>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination" id="paginationButton">
+            <li class="page-item"><button type="button" class="page-link" id="previousPageButton">이전 페이지</button>
+            </li>
+        </ul>
+    </nav>
+    <div class="wrap-questionnaire-box">
+        <span>웹사이트</span>
+        <span>만족도 설문조사</span>
+        <span>부탁드려요ㅎㅎ</span>
+        <span>▼</span>
+        <div class="questionnaire-box">
+            <a class="questionnaire-link"
+                href="https://docs.google.com/forms/d/1AeMeRTxY0YHMxJ5U0yoPp4-OgRM6iHXTAbJaqnRR9J8/edit?pli=1"
+                target="_blank"><img class="questionnaire-img" src="./static/img/questionnaire.png"></a>
+        </div>
+    </div>
+    <div class="footer" id="footer"></div>
+    <script type="module" src="./static/js/footer.js"></script>
 </body>
 
 </html>

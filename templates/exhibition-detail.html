@@ -5,14 +5,114 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../static/js/api.js"></script>
-    <script src="../static/js/navbar.js"></script>
-    <script src="../static/js/exhibition-detail.js"></script>
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <!-- 파비콘 -->
+    <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
+    <!--내비바 아이콘 css -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!--내비바 css  -->
+    <link rel="stylesheet" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="../static/css/exhibition-detail.css">
+    <link rel="stylesheet" href="../static/css/review.css">
+    <link rel="stylesheet" href="../static/css/review-posting.css">
+    <link rel="stylesheet" href="../static/css/accompany.css">
+    <link rel="stylesheet" href="../static/css/accompany-posting.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="stylesheet" href="../static/css/accompany-apply-posting.css">
+    <script type="module" src="../static/js/footer.js"></script>
+    <script type="module" src="../static/js/navbar.js"></script>
+    <script type="module" src="../static/js/exhibition-detail.js"></script>
+    <title>지금은 전시상황! | 상세보기</title>
 </head>
 
 <body>
-
+    <header></header>
+    <h1 class="welcome-title" id="title"></h1>
+    <div class="all-items-organizer" id="exhibitionDetail">
+        <div class="poster-n-info-organizer">
+            <div class="mini-organizer">
+                <div class="poster-part">
+                    <img class="poster-img" id="posterImg">
+                </div>
+                <div class="heart-set">
+                    <div class="heart" id="heart"></div>
+                    <span class="heart-num" id="heartNum"></span>
+                </div>
+                <div id="map"></div>
+                <script type="text/javascript"
+                    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9fda69fca1db09d809a6084720a2eb"></script>
+            </div>
+            <div class="info-part">
+                <span class="blue-words">장소</span><span class="black-words" id="location"></span>
+                <span class="blue-words" id="periodTitle">기간</span><span class="black-words" id="period"></span>
+                <span class="blue-words">설명</span><span class="black-words" id="content"></span>
+                <div id="content" class="show-less"></div>
+                <button id="readMoreBtn">더 보기</button>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="show-reviews" id="reviewBtn">이용 후기</button>
+            <button class="show-accompanies" id="accompanyBtn">동행 구해요!</button>
+            <button class="show-reservation" id="reserveBtn">예약하기</button>
+        </div>
+        <div class="rv-all-items-organizer" id="reviewList" style="display: none;">
+            <!--review.html 파일에 있음-->
+        </div>
+        <div class="ac-all-items-organizer" id="accompanyList" style="display: none;">
+            <!--accompany.html 파일에 있음-->
+        </div>
+    </div>
+    <div class="recommend-organizer" style="display: none;">
+        <h6 class="rec-intro">이런 전시는 어떠세요?</h6>
+        <div class="recommend-organizer-small">
+            <div class="one-by-one">
+                <div class="rec-img-box">
+                    <a href="" target="" id="1-rec-img-anchor">
+                        <img class="rec-img" id="1-rec-img">
+                    </a>
+                </div>
+                <span class="rec-title" id="1-rec-title"></span>
+            </div>
+            <div class="one-by-one">
+                <div class="rec-img-box">
+                    <a href="" target="" id="2-rec-img-anchor">
+                        <img class="rec-img" id="2-rec-img">
+                    </a>
+                </div>
+                <span class="rec-title" id="2-rec-title"></span>
+            </div>
+            <div class="one-by-one">
+                <div class="rec-img-box">
+                    <a href="" target="" id="3-rec-img-anchor">
+                        <img class="rec-img" id="3-rec-img">
+                    </a>
+                </div>
+                <span class="rec-title" id="3-rec-title"></span>
+            </div>
+            <div class="one-by-one">
+                <div class="rec-img-box">
+                    <a href="" target="" id="4-rec-img-anchor">
+                        <img class="rec-img" id="4-rec-img">
+                    </a>
+                </div>
+                <span class="rec-title" id="4-rec-title"></span>
+            </div>
+            <div class="one-by-one">
+                <div class="rec-img-box">
+                    <a href="" target="" id="5-rec-img-anchor">
+                        <img class="rec-img" id="5-rec-img">
+                    </a>
+                </div>
+                <span class="rec-title" id="5-rec-title"></span>
+            </div>
+        </div>
+    </div>
+    <div class="footer" id="footer"></div>
 </body>
 
 </html>

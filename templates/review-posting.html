@@ -5,14 +5,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../static/js/api.js"></script>
-    <script src="../static/js/navbar.js"></script>
-    <script src="../static/js/review-posting.js"></script>
+    <link rel="stylesheet" href="../static/css/review-posting.css">
+    <script type="module" src="../static/js/review-posting.js"></script>
     <title>Document</title>
 </head>
 
 <body>
-
+    <div class="rp-all-items-organizer">
+        <h1 class="welcome-title">리뷰 작성하기</h1>
+        <!-- 여기부터 카드 한 장 -->
+        <form class="rp-gray-box">
+            <div class="rp-img-box">
+                <div class="rp-filebox">
+                    <input class="rp-upload-name" value="리뷰 이미지 업로드" placeholder="리뷰 이미지 업로드" disabled="disabled">
+                    <label for="rvImage">파일찾기</label> 
+                    <input class="rp-upload-hidden" type="file" id="rvImage" accept=".jpg,.jpeg,.png,.gif,.bmp" capture="camera">
+                </div>
+            </div>
+            <div class="rp-purple-box">
+                <div class="rp-row1-in-purple">
+                    <div class="rp-nickname-box">로그인 닉네임</div>
+                    <div class="rp-stars">
+                        <img class="rp-star" src="../static/img/empty-star.png" id="star1" onclick="fill_star1()">
+                        <img class="rp-star" src="../static/img/empty-star.png" id="star2" onclick="fill_star2()">
+                        <img class="rp-star" src="../static/img/empty-star.png" id="star3" onclick="fill_star3()">
+                        <img class="rp-star" src="../static/img/empty-star.png" id="star4" onclick="fill_star4()">
+                        <img class="rp-star" src="../static/img/empty-star.png" id="star5" onclick="fill_star5()">
+                    </div>
+                </div>
+                <div class="rp-row2-in-purple">
+                    <textarea class="rp-review-content" id="" placeholder="리뷰 내용을 입력해주세요."></textarea>
+                </div>
+                <div class="rp-row3-in-purple">
+                    <button type="button" class="rp-review-posting-btn" id="">리뷰작성</button>
+                </div>
+            </div>
+        </form>
+        <!-- 여기까지 카드 한 장 -->
+    </div>
 </body>
 
 </html>

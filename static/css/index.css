@@ -1,0 +1,269 @@
+/* 웰컴세트 */
+.welcome-set {
+    margin-left: 3.75rem;
+    position: relative;
+}
+
+.welcome-greeting {
+    font-weight: bold;
+}
+
+.welcome-title {
+    font-weight: bold;
+    color: #6358DC;
+}
+/* 인기전시 */
+.top5-set {
+    position: absolute;
+    width: 69rem;
+    height: 10rem;
+    left: 29.5rem;
+    top: 0%;
+    background-color: #ccc7ff;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.words {
+    font-size: 1rem;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+    color: #6358DC;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cards-row-organizer {
+    background-color: white;
+    width: 64.5rem;
+    height: 8.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.cards-row-organizer > div {
+    width: 20%;
+    height: 100%;
+    position: relative;
+    border: 0px solid black;
+    transition: all 0.2s linear;
+}
+.rank-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.rank-heart {
+    position: absolute;
+    width: 1.5rem;
+    right: 85%;
+    top: 5%;
+    filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
+}
+.rank-heart-number {
+    position: absolute;
+    width: 1.5rem;
+    right: 72%;
+    top: 2.2%;
+    color: red;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+.cards-row-organizer > div:hover {
+    transform: scale(1.2);
+    z-index: 1;
+    opacity: 0.8;
+}
+
+
+/* 돋보기와 검색창 */
+.searching-set {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.magnifier-img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.3125rem solid #6358DC;
+    border-radius: 0.625rem;
+    background-image: url("../img/magnifier.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 3rem;
+    margin-right: 0.625rem;
+}
+
+.searching-bar {
+    border: 0.3125rem solid #6358DC;
+    border-radius: 0.625rem;
+    width: 21.875rem;
+    height: 2.5rem;
+    background-color: gainsboro;
+    margin-right: 2.5rem;
+    text-indent: 1vmin;
+}
+
+/* 전시회 부분 */
+.all-exhibitions-organizer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 2rem 0 2rem;
+    justify-content: flex-start;
+}
+
+.exhibition-set {
+    margin-top: 3.125rem;
+    margin-bottom: 3.125rem;
+    margin-right: 3.125rem;
+    margin-left: 3.125rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.exhibition-img-box {
+    width: 21.875rem;
+    height: 21.875rem;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 0.0625rem solid #6358DC;
+    border-radius: 0.625rem;
+    cursor: pointer;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.exhibition-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.exhibition-info-box {
+    color: #6358DC;
+    font-weight: bold;
+    width: 21.875rem;
+}
+
+.exhibition-info-box>span {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.3125rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.heart-set {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.3125rem;
+}
+
+.heart {
+    background-image: url('../img/empty-heart.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1.125rem;
+    margin-right: 0.4375rem;
+    filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(97%) contrast(113%);
+}
+
+.sign-set {
+    display: flex;
+    flex-direction: row;
+}
+
+.sign-set>* {
+    margin-top: 0.625rem;
+    margin-right: 0.4375rem;
+    width: 9.1875rem;
+    color: white;
+    font-weight: bold;
+    background-color: #6358DC;
+    border: 0px solid;
+    border-radius: 0.625rem;
+}
+
+.detail-button:hover {
+    background-color: gray;
+}
+
+.reserve-button:hover {
+    background-color: gray;
+}
+
+/* 페이지 네이션 */
+.pagination {
+    margin-top: 10vmin;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.page-item>button {
+    border: 0;
+    width: 25vmin;
+    height: 5vmin;
+    font-weight: bold;
+    font-size: 1.8vmin;
+    color: #6358DC;
+}
+
+/* 페이지 숫자 */
+.page-link {
+    border: 0;
+    font-weight: bold;
+    font-size: 1.8vmin;
+    color: #6358DC;
+    cursor: pointer;
+
+}
+
+.page-select {
+    color: #FFB800;
+}
+
+/* 설문조사아이콘 */
+.wrap-questionnaire-box {
+    position: fixed;
+    display: inline-block;
+    right: 2%;
+    /* 창에서 오른쪽 길이 */
+    top: 60%;
+    /* 창에서 위에서 부터의 높이 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #6358DC;
+    font-weight: bold;
+}
+
+.questionnaire-box {
+    margin-top: 1vmin;
+    width: 10vmin;
+    height: 10vmin;
+    border: 0.5vmin solid #6358DC;
+    border-radius: 5vmin;
+    padding: 2vmin;
+}
+
+.questionnaire-img {
+    height: 100%;
+    width: 100%;
+}
